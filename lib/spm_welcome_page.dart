@@ -20,9 +20,18 @@ class _SPMWelcomePageState extends State<SPMWelcomePage> {
             alignment: Alignment.topCenter,
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: Image.network(
-                'https://images.all-free-download.com/images/graphiclarge/sports_background_ball_games_icons_decor_6836428.jpg'),
+            child: Image.asset('assets/images/cover.jpg')
           ),
+          Positioned(
+            top: 300,
+            child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                // decoration: BoxDecoration(),
+              child: Image.asset('assets/images/logo.png'),
+            ),],
+          ),),
           Positioned(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
