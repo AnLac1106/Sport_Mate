@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sport_mate/common/spm_colors.dart';
+import 'package:sport_mate/common/spm_text_field.dart';
 
 import 'common/spm_button.dart';
 
@@ -17,21 +18,26 @@ class _SPMWelcomePageState extends State<SPMWelcomePage> {
       body: Stack(
         children: [
           Container(
-            alignment: Alignment.topCenter,
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Image.asset('assets/images/cover.jpg')
-          ),
+              alignment: Alignment.topCenter,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Image.asset('assets/images/cover2.png')),
           Positioned(
-            top: 300,
-            child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                // decoration: BoxDecoration(),
-              child: Image.asset('assets/images/logo.png'),
-            ),],
-          ),),
+            top: 140,
+            left: MediaQuery.of(context).size.width * 0.28,
+            child: Container(
+              alignment: Alignment.topCenter,
+              // color: Colors.white.withOpacity(0.3),
+              child: const Text(
+                'SPORT MATE',
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 32,
+                  // color: Colors.orange
+                ),
+              ),
+            ),
+          ),
           Positioned(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
@@ -72,11 +78,15 @@ class _SPMWelcomePageState extends State<SPMWelcomePage> {
                   const SizedBox(
                     height: 32,
                   ),
-                  const TextField(),
+                  const SPMTextField(
+                    labelText: 'Email Address',
+                  ),
                   const SizedBox(
                     height: 32,
                   ),
-                  const TextField(),
+                  const SPMTextField(
+                    labelText: 'Password',
+                  ),
                   const SizedBox(
                     height: 22,
                   ),
