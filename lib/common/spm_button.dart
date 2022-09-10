@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SportMateButton extends StatelessWidget {
+class SPMButton extends StatelessWidget {
   final double width;
   final double height;
   final double borderRadius;
@@ -10,7 +10,7 @@ class SportMateButton extends StatelessWidget {
   final Color borderColor;
   void Function() onPress;
 
-  SportMateButton({
+  SPMButton({
     super.key,
     this.width = 118,
     this.height = 44,

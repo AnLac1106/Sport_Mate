@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:sport_mate/spm_register_page.dart';
 import 'package:sport_mate/spm_welcome_page.dart';
 
 void main() {
