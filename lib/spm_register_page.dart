@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sport_mate/common/hide_keyboard.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
@@ -7,18 +8,19 @@ import 'package:sport_mate/spm_welcome_page.dart';
 
 import 'common/spm_button.dart';
 
-class SPMRegisterPage extends StatefulWidget {
-  const SPMRegisterPage({Key? key}) : super(key: key);
-
-  @override
-  State<SPMRegisterPage> createState() => _SPMRegisterPageState();
-}
-
-class _SPMRegisterPageState extends State<SPMRegisterPage> {
-  bool isObscure1 = true;
+class RegisterPageCtrl extends GetxController {
+  RxBool isObscure1 = true.obs;
+  RxBool isObscure2 = true.obs;
   FocusNode f1 = FocusNode();
   FocusNode f2 = FocusNode();
   FocusNode f3 = FocusNode();
+}
+
+class SPMRegisterPage extends GetView {
+  const SPMRegisterPage({Key? key}) : super(key: key);
+
+  @override
+  RegisterPageCtrl get controller => Get.put(RegisterPageCtrl());
 
   @override
   Widget build(BuildContext context) {
@@ -89,50 +91,60 @@ class _SPMRegisterPageState extends State<SPMRegisterPage> {
                             ),
                             SPMTextField(
                               // controller: TextEditingController(),
-                              focusNode: f1,
+                              focusNode: controller.f1,
                               labelText: 'Email Address',
-                              suffixIcon: f1.hasFocus? IconButton(
-                                onPressed: () {
-                                  // TextEditingController().clear();
-                                },
-                                icon: const Icon(Icons.clear),
-                              ) : null,
+                              // suffix: IconButton(
+                              //   onPressed: () {},
+                              //   icon: Icon(Icons.visibility, size: 18,),
+                              // ),
+                              suffixIcon: controller.f1.hasFocus
+                                  ? IconButton(
+                                      onPressed: () {
+                                        // TextEditingController().clear();
+                                      },
+                                      icon: const Icon(Icons.clear),
+                                    )
+                                  : null,
                             ),
                             const SizedBox(
                               height: 32,
                             ),
-                            SPMTextField(
-                              focusNode: f2,
-                              maxLine: 1,
-                              obscureText: isObscure1,
-                              labelText: 'Password',
-                              suffixIcon: f2.hasFocus? IconButton(
+                            Obx(
+                              () => SPMTextField(
+                                focusNode: controller.f2,
+                                maxLine: 1,
+                                obscureText: controller.isObscure1.value,
+                                labelText: 'Password',
+                                suffixIcon: IconButton(
                                   onPressed: () {
-                                    setState(() {
-                                      isObscure1 = !isObscure1;
-                                    });
+                                    controller.isObscure1.value =
+                                        !controller.isObscure1.value;
                                   },
-                                  icon: Icon(isObscure1
+                                  icon: Icon(controller.isObscure1.value
                                       ? Icons.visibility
-                                      : Icons.visibility_off)) : null,
+                                      : Icons.visibility_off),
+                                ),
+                              ),
                             ),
                             const SizedBox(
                               height: 32,
                             ),
-                            SPMTextField(
-                              focusNode: f3,
-                              maxLine: 1,
-                              obscureText: isObscure1,
-                              labelText: 'Confirm password',
-                              suffixIcon: f3.hasFocus? IconButton(
+                            Obx(
+                              () => SPMTextField(
+                                focusNode: controller.f3,
+                                maxLine: 1,
+                                obscureText: controller.isObscure2.value,
+                                labelText: 'Confirm Password',
+                                suffixIcon: IconButton(
                                   onPressed: () {
-                                    setState(() {
-                                      isObscure1 = !isObscure1;
-                                    });
+                                    controller.isObscure2.value =
+                                        !controller.isObscure2.value;
                                   },
-                                  icon: Icon(isObscure1
+                                  icon: Icon(controller.isObscure2.value
                                       ? Icons.visibility
-                                      : Icons.visibility_off)) : null,
+                                      : Icons.visibility_off),
+                                ),
+                              ),
                             ),
                             const SizedBox(
                               height: 32,
@@ -149,32 +161,27 @@ class _SPMRegisterPageState extends State<SPMRegisterPage> {
                                   height: 48,
                                   onPress: () {
                                     showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                              title: Text(
-                                                'Success!'.toUpperCase(),
-                                                style: textStyleHeading4,
-                                              ),
-                                              content: const Text(
-                                                "Tap 'OK' to return to Login Page",
-                                                style: textStyleNormal,
-                                              ),
-                                              actions: [
-                                                SPMButton(
-                                                    color:
-                                                        SPMColors.secondaryColor,
-                                                    text: 'OK',
-                                                    onPress: () {
-                                                      Navigator.of(context)
-                                                          .pushAndRemoveUntil(
-                                                              MaterialPageRoute(
-                                                                  builder:
-                                                                      (context) =>
-                                                                          const SPMWelcomePage()),
-                                                              (route) => false);
-                                                    })
-                                              ],
-                                            ));
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: Text(
+                                          'Success!'.toUpperCase(),
+                                          style: textStyleHeading4,
+                                        ),
+                                        content: const Text(
+                                          "Tap 'OK' to return to Login Page",
+                                          style: textStyleNormal,
+                                        ),
+                                        actions: [
+                                          SPMButton(
+                                            color: SPMColors.secondaryColor,
+                                            text: 'OK',
+                                            onPress: () {
+                                              Get.offAll(const SPMWelcomePage());
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    );
                                   },
                                 ),
                               ],

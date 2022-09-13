@@ -1,32 +1,31 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sport_mate/common/hide_keyboard.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_select_box.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
 import 'package:sport_mate/common/spm_text_style.dart';
 import 'package:sport_mate/spm_register_page.dart';
-
+import 'package:sport_mate/spm_welcome_page.dart';
 import 'common/spm_button.dart';
-
-class SPMWelcomePage extends StatefulWidget {
-  const SPMWelcomePage({Key? key}) : super(key: key);
-
-  @override
-  State<SPMWelcomePage> createState() => _SPMWelcomePageState();
-}
 
 enum SelectedBox { box1, box2, box3 }
 
-class _SPMWelcomePageState extends State<SPMWelcomePage> {
-  bool isObscure1 = true;
+class WelcomePageCtrl extends GetxController {
+  Rx<SelectedBox> selectedBox = SelectedBox.box1.obs;
+  RxBool isObscure = true.obs;
   FocusNode f1 = FocusNode();
-  FocusNode f2 = FocusNode();
-  SelectedBox? selectedBox;
+  Rx<FocusNode> f2 = FocusNode().obs;
+}
+
+class SPMWelcomePage extends GetView<WelcomePageCtrl> {
+  const SPMWelcomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  WelcomePageCtrl get controller => Get.put<WelcomePageCtrl>(WelcomePageCtrl());
+
+  @override
+  Widget build(context) {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
@@ -49,14 +48,6 @@ class _SPMWelcomePageState extends State<SPMWelcomePage> {
                 alignment: Alignment.topCenter,
                 // color: Colors.white.withOpacity(0.3),
                 child: Image.asset('assets/images/textlogo1.png'),
-                // const Text(
-                //   'SPORT MATE',
-                //   style: TextStyle(
-                //     fontWeight: FontWeight.w400,
-                //     fontSize: 32,
-                //     color: Colors.blueAccent
-                //   ),
-                // ),
               ),
             ),
             Column(
@@ -103,9 +94,9 @@ class _SPMWelcomePageState extends State<SPMWelcomePage> {
                             SPMTextField(
                               // controller: TextEditingController(),
                               maxLine: 1,
-                              focusNode: f1,
+                              focusNode: controller.f2.value,
                               labelText: 'Email Address',
-                              suffixIcon: f1.hasFocus
+                              suffixIcon: controller.f2.value.hasFocus
                                   ? IconButton(
                                       iconSize: 15,
                                       onPressed: () {
@@ -118,22 +109,19 @@ class _SPMWelcomePageState extends State<SPMWelcomePage> {
                             const SizedBox(
                               height: 32,
                             ),
-                            SPMTextField(
-                              focusNode: f2,
-                              maxLine: 1,
-                              obscureText: isObscure1,
-                              labelText: 'Password',
-                              suffixIcon: f2.hasFocus
-                                  ? IconButton(
+                            Obx(
+                              () => SPMTextField(
+                                  maxLine: 1,
+                                  obscureText: controller.isObscure.value,
+                                  labelText: 'Password',
+                                  suffixIcon: IconButton(
                                       onPressed: () {
-                                        setState(() {
-                                          isObscure1 = !isObscure1;
-                                        });
+                                        controller.isObscure.value =
+                                            !controller.isObscure.value;
                                       },
-                                      icon: Icon(isObscure1
+                                      icon: Icon(controller.isObscure.value
                                           ? Icons.visibility
-                                          : Icons.visibility_off))
-                                  : null,
+                                          : Icons.visibility_off))),
                             ),
                             const SizedBox(
                               height: 10,
@@ -174,56 +162,83 @@ class _SPMWelcomePageState extends State<SPMWelcomePage> {
                             ),
                             Row(
                               children: [
-                                SPMSelectBox(
-                                  onTap: () {
-                                    setState(() {
-                                      selectedBox = SelectedBox.box1;
-                                    });
-                                  },
-                                  color: selectedBox == SelectedBox.box1
-                                      ? SPMColors.primaryColor
-                                      : Colors.white,
-                                  borderColor: selectedBox == SelectedBox.box1
-                                      ? SPMColors.primaryColor
-                                      : Colors.grey,
-                                  width: 100,
-                                  height: 50,
-                                  borderRadius: 20,
-                                  child: Text('test1'),
+                                Obx(
+                                  () => SPMSelectBox(
+                                    onTap: () {
+                                      controller.selectedBox.value =
+                                          SelectedBox.box1;
+                                    },
+                                    color: controller.selectedBox.value
+                                                .toString() ==
+                                            SelectedBox.box1.toString()
+                                        ? SPMColors.primaryColor
+                                        : Colors.white,
+                                    borderColor: controller.selectedBox.value
+                                                .toString() ==
+                                            SelectedBox.box1.toString()
+                                        ? SPMColors.primaryColor
+                                        : Colors.grey,
+                                    width: controller.selectedBox
+                                            .toString()
+                                            .isNotEmpty
+                                        ? 100
+                                        : 100,
+                                    height: 50,
+                                    borderRadius: 20,
+                                    child: Text('test1'),
+                                  ),
                                 ),
-                                SPMSelectBox(
-                                  onTap: () {
-                                    setState(() {
-                                      selectedBox = SelectedBox.box2;
-                                    });
-                                  },
-                                  color: selectedBox == SelectedBox.box2
-                                      ? SPMColors.primaryColor
-                                      : Colors.white,
-                                  borderColor: selectedBox == SelectedBox.box2
-                                      ? SPMColors.primaryColor
-                                      : Colors.grey,
-                                  width: 100,
-                                  height: 50,
-                                  borderRadius: 20,
-                                  child: Text('test2'),
+                                Obx(
+                                  () => SPMSelectBox(
+                                    onTap: () {
+                                      controller.selectedBox.value =
+                                          SelectedBox.box2;
+                                    },
+                                    color: controller.selectedBox.value
+                                                .toString() ==
+                                            SelectedBox.box2.toString()
+                                        ? SPMColors.primaryColor
+                                        : Colors.white,
+                                    borderColor: controller.selectedBox.value
+                                                .toString() ==
+                                            SelectedBox.box2.toString()
+                                        ? SPMColors.primaryColor
+                                        : Colors.grey,
+                                    width: controller.selectedBox
+                                            .toString()
+                                            .isNotEmpty
+                                        ? 100
+                                        : 100,
+                                    height: 50,
+                                    borderRadius: 20,
+                                    child: Text('test1'),
+                                  ),
                                 ),
-                                SPMSelectBox(
-                                  onTap: () {
-                                    setState(() {
-                                      selectedBox = SelectedBox.box3;
-                                    });
-                                  },
-                                  color: selectedBox == SelectedBox.box3
-                                      ? SPMColors.primaryColor
-                                      : Colors.white,
-                                  borderColor: selectedBox == SelectedBox.box3
-                                      ? SPMColors.primaryColor
-                                      : Colors.grey,
-                                  width: 100,
-                                  height: 50,
-                                  borderRadius: 20,
-                                  child: Text('test3'),
+                                Obx(
+                                  () => SPMSelectBox(
+                                    onTap: () {
+                                      controller.selectedBox.value =
+                                          SelectedBox.box3;
+                                    },
+                                    color: controller.selectedBox.value
+                                                .toString() ==
+                                            SelectedBox.box3.toString()
+                                        ? SPMColors.primaryColor
+                                        : Colors.white,
+                                    borderColor: controller.selectedBox.value
+                                                .toString() ==
+                                            SelectedBox.box3.toString()
+                                        ? SPMColors.primaryColor
+                                        : Colors.grey,
+                                    width: controller.selectedBox
+                                            .toString()
+                                            .isNotEmpty
+                                        ? 100
+                                        : 100,
+                                    height: 50,
+                                    borderRadius: 20,
+                                    child: Text('test1'),
+                                  ),
                                 ),
                               ],
                             ),
@@ -242,10 +257,7 @@ class _SPMWelcomePageState extends State<SPMWelcomePage> {
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const SPMRegisterPage()));
+                                    Get.to(const SPMRegisterPage());
                                   },
                                   child: const Text(
                                     'Register now',
