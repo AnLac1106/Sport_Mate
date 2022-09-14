@@ -28,16 +28,12 @@ class MyApp extends GetView {
             letterSpacing: 2.0,
           ),
           headline4: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 18.0,
-          ),
+              fontWeight: FontWeight.w400, fontSize: 18.0, color: Colors.black),
           bodyText1: TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 16.0,
-          ),
+              fontWeight: FontWeight.w400, fontSize: 16.0, color: Colors.black),
         ),
       ),
-      home: MainHomePage(),
+      home: const MainHomePage(),
       // SPMWelcomePage(),
       debugShowCheckedModeBanner: false,
     );
