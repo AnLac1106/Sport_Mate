@@ -6,7 +6,6 @@ import 'package:sport_mate/common/spm_select_box.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
 import 'package:sport_mate/common/spm_text_style.dart';
 import 'package:sport_mate/spm_register_page.dart';
-import 'package:sport_mate/spm_welcome_page.dart';
 import 'common/spm_button.dart';
 
 enum SelectedBox { box1, box2, box3 }
