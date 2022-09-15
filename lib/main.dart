@@ -14,7 +14,6 @@ void main() {
 
 class MyApp extends GetView {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -37,8 +36,8 @@ class MyApp extends GetView {
               fontWeight: FontWeight.w400, fontSize: 16.0, color: Colors.black),
         ),
       ),
-// <<<<<<< HE
       home: const SPMNewFeedPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

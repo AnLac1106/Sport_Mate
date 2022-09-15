@@ -15,10 +15,12 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
+              const SizedBox(height: 8,),
               Row(
                 children: [
                   const SizedBox(
@@ -40,23 +42,27 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                     width: 16,
                   ),
                   Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              const BorderSide(color: Color(0xffeff3f7)),
+                    child: SizedBox(
+                      height: 40,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide:
+                                const BorderSide(color: Color(0xffeff3f7)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide:
+                                const BorderSide(color: Color(0xffeff3f7)),
+                          ),
+                          isDense: true,
+                          contentPadding: const EdgeInsets.all(0),
+                          filled: true,
+                          fillColor: const Color(0xffeff3f7),
+                          prefixIcon: const Icon(Icons.search),
+                          hintText: 'Search',
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              const BorderSide(color: Color(0xffeff3f7)),
-                        ),
-                        isDense: true,
-                        filled: true,
-                        fillColor: const Color(0xffeff3f7),
-                        prefixIcon: const Icon(Icons.search),
-                        hintText: 'Search',
                       ),
                     ),
                   ),
@@ -153,7 +159,8 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                   Flexible(
                     child: Text(
                         "Team văn phòng cần tìm đối đá vui vẻ, sân nước chia đôi. Đã đặt sân, tổng sân nước 700k",
-                    style: Get.textTheme.bodyText1,),
+                    style: Get.textTheme.bodyText1,
+                    ),
                   ),
                   const SizedBox(
                     width: 12,
