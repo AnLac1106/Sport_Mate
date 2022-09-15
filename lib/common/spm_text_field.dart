@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_mate/common/spm_text_style.dart';
+import 'package:get/get.dart';
 
 class SPMTextField extends StatefulWidget {
   final String? labelText;
@@ -58,7 +58,7 @@ class _SPMTextFieldState extends State<SPMTextField> {
         suffixIcon: widget.suffixIcon,
         suffix: widget.suffix,
         labelText: widget.labelText,
-        labelStyle: textStyleHeading4,
+        labelStyle: Get.textTheme.headline4,
         hintText: widget.hintText,
         // border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         // focusedBorder: OutlineInputBorder(

@@ -4,7 +4,6 @@ import 'package:sport_mate/common/hide_keyboard.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_select_box.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
-import 'package:sport_mate/common/spm_text_style.dart';
 import 'package:sport_mate/spm_register_page.dart';
 import 'common/spm_button.dart';
 
@@ -68,22 +67,18 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  'Welcome!',
-                                  style: textStyleHeading1,
-                                ),
+                              children: [
+                                Text('Welcome!',
+                                    style: Get.textTheme.headline4),
                               ],
                             ),
                             const SizedBox(
                               height: 16,
                             ),
                             Row(
-                              children: const [
-                                Text(
-                                  'Please login with your information',
-                                  style: textStyleNormal,
-                                )
+                              children: [
+                                Text('Please login with your information',
+                                    style: Get.textTheme.bodyText1)
                               ],
                             ),
                             const SizedBox(

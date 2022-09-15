@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:sport_mate/common/hide_keyboard.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
-import 'package:sport_mate/common/spm_text_style.dart';
+
 import 'package:sport_mate/spm_welcome_page.dart';
 
 import 'common/spm_button.dart';
@@ -68,22 +68,18 @@ class SPMRegisterPage extends GetView {
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  'Register!',
-                                  style: textStyleHeading1,
-                                ),
+                              children: [
+                                Text('Register!',
+                                    style: Get.textTheme.headline4),
                               ],
                             ),
                             const SizedBox(
                               height: 16,
                             ),
                             Row(
-                              children: const [
-                                Text(
-                                  'Please select the appropriate',
-                                  style: textStyleNormal,
-                                )
+                              children: [
+                                Text('Please select the appropriate',
+                                    style: Get.textTheme.bodyText1)
                               ],
                             ),
                             const SizedBox(
@@ -163,25 +159,12 @@ class SPMRegisterPage extends GetView {
                                     showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
-                                        title: Text(
-                                          'Success!'.toUpperCase(),
-                                          style: textStyleHeading4,
-                                        ),
-                                        content: Container(
-                                          height: 60,
-                                          child: Column(
-                                            children: const [
-                                              Text(
-                                                  "Your account has been created!",
-                                                style: textStyleNormal,
-                                              ),
-                                              Text(
-                                                "Tap 'OK' to return to Login Page",
-                                                style: textStyleNormal,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
+
+                                        title: Text('Success!'.toUpperCase(),
+                                            style: Get.textTheme.headline4),
+                                        content: Text(
+                                            "Tap 'OK' to return to Login Page",
+                                            style: Get.textTheme.bodyText1),
                                         actions: [
                                           SPMButton(
                                             color: SPMColors.secondaryColor,
