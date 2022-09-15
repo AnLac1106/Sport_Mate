@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sport_mate/common/spm_colors.dart';
+import 'package:sport_mate/spm_create_game.dart';
 
 class SPMHomePage extends GetView {
   const SPMHomePage({Key? key}) : super(key: key);
@@ -40,6 +41,12 @@ class SPMHomePage extends GetView {
                       GestureDetector(
                         onTap: (() {
                           debugPrint('Start Game');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SPMCreateGame(),
+                            ),
+                          );
                         }),
                         child: Container(
                           padding: const EdgeInsets.all(20),
@@ -89,18 +96,15 @@ class SPMHomePage extends GetView {
                         ),
                       ),
                     ]),
-                const SizedBox(height: 50),
+                const SizedBox(height: 30),
                 Text("Upcoming Games",
                     textAlign: TextAlign.right, style: Get.textTheme.headline4),
-                const SizedBox(height: 30),
-                // ListView.builder(
-                //   scrollDirection: Axis.vertical,
-                //   itemBuilder: (context, index) => inforCards(),
-                //   itemCount: 3,
-                // ),
-                inforCard(),
-                inforCard(),
-                inforCard(),
+                ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) => inforCard(),
+                  itemCount: 2,
+                ),
               ],
             ),
           ),
