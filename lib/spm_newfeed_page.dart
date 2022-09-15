@@ -132,11 +132,11 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                   ),
                   Column(
                     children: [
-                      const Text('Nguyễn Đức Thiện'),
+                      Text('Nguyễn Đức Thiện', style: Get.textTheme.bodyText1,),
                       Text(
                         DateFormat('dd/MM/yyyy, HH:mm')
                             .format(DateTime.now())
-                            .toString(),
+                            .toString(), style: Get.textTheme.bodyText1,
                       ),
                     ],
                   ),
@@ -146,15 +146,16 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                 height: 8,
               ),
               Row(
-                children: const [
-                  SizedBox(
+                children: [
+                  const SizedBox(
                     width: 12,
                   ),
                   Flexible(
                     child: Text(
-                        "Team văn phòng cần tìm đối đá vui vẻ, sân nước chia đôi. Đã đặt sân, tổng sân nước 700k"),
+                        "Team văn phòng cần tìm đối đá vui vẻ, sân nước chia đôi. Đã đặt sân, tổng sân nước 700k",
+                    style: Get.textTheme.bodyText1,),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 12,
                   ),
                 ],
@@ -172,13 +173,13 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                     color: Colors.blueAccent,
                     size: 16,
                   ),
-                  const Text('  7'),
+                  Text('  7', style: Get.textTheme.bodyText1,),
                   const Expanded(child: SizedBox()),
                   TextButton(
                     onPressed: () {},
-                    child: const Text(
+                    child: Text(
                       '2 comments',
-                      style: TextStyle(color: Colors.grey),
+                      style: Get.textTheme.bodyText1,
                     ),
                   ),
                   const SizedBox(
@@ -207,7 +208,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                       child: RawMaterialButton(
                         onPressed: () {},
                         child: Column(
-                          children: const [Icon(Icons.thumb_up), Text('Like')],
+                          children: [const Icon(Icons.thumb_up), Text('Like', style: Get.textTheme.bodyText1,)],
                         ),
                       ),
                     ),
@@ -215,9 +216,9 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                       child: RawMaterialButton(
                         onPressed: () {},
                         child: Column(
-                          children: const [
-                            Icon(Icons.comment),
-                            Text('Comment'),
+                          children: [
+                            const Icon(Icons.comment),
+                            Text('Comment', style: Get.textTheme.bodyText1,),
                           ],
                         ),
                       ),
@@ -227,9 +228,9 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                         // alignment: Alignment.center,
                         onPressed: () {},
                         child: Column(
-                          children: const [
-                            Icon(Icons.turn_right),
-                            Text('Share')
+                          children: [
+                            const Icon(Icons.turn_right),
+                            Text('Share', style: Get.textTheme.bodyText1,)
                           ],
                         ),
                       ),
@@ -240,10 +241,9 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                           color: SPMColors.primaryColor,
                           borderColor: SPMColors.primaryColor,
                           onPress: () {},
-                          child: const Text(
+                          child: Text(
                             'Request game',
-                            style: TextStyle( color: Colors.black87,
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                            style: Get.textTheme.bodyText1,
                           )),
                     ),
                     const SizedBox(width: 15,),
