@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sport_mate/spm_newfeed_page.dart';
 import 'package:sport_mate/spm_register_page.dart';
 import 'package:sport_mate/spm_welcome_page.dart';
 import 'package:sport_mate/test.dart';
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const SPMWelcomePage(),
+      home: const SPMNewFeedPage(),
       debugShowCheckedModeBanner: false,
     );
   }

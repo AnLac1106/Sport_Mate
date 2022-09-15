@@ -6,7 +6,6 @@ import 'package:sport_mate/common/spm_select_box.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
 import 'package:sport_mate/common/spm_text_style.dart';
 import 'package:sport_mate/spm_register_page.dart';
-import 'package:sport_mate/spm_welcome_page.dart';
 import 'common/spm_button.dart';
 
 enum SelectedBox { box1, box2, box3 }
@@ -46,7 +45,6 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                 width: 250,
                 height: 50,
                 alignment: Alignment.topCenter,
-                // color: Colors.white.withOpacity(0.3),
                 child: Image.asset('assets/images/textlogo1.png'),
               ),
             ),
@@ -152,11 +150,12 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                                 SPMButton(
                                   borderRadius: 20,
                                   color: SPMColors.secondaryColor,
-                                  text: 'Login',
+                                  // text: 'Login',
                                   textColor: Colors.white,
                                   width: 225,
                                   height: 48,
                                   onPress: () {},
+                                  child: const Text('Login'),
                                 ),
                               ],
                             ),

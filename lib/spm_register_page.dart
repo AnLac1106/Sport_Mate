@@ -155,7 +155,7 @@ class SPMRegisterPage extends GetView {
                                 SPMButton(
                                   borderRadius: 20,
                                   color: SPMColors.secondaryColor,
-                                  text: 'Register',
+                                  // text: 'Register',
                                   textColor: Colors.white,
                                   width: 225,
                                   height: 48,
@@ -167,22 +167,36 @@ class SPMRegisterPage extends GetView {
                                           'Success!'.toUpperCase(),
                                           style: textStyleHeading4,
                                         ),
-                                        content: const Text(
-                                          "Tap 'OK' to return to Login Page",
-                                          style: textStyleNormal,
+                                        content: Container(
+                                          height: 60,
+                                          child: Column(
+                                            children: const [
+                                              Text(
+                                                  "Your account has been created!",
+                                                style: textStyleNormal,
+                                              ),
+                                              Text(
+                                                "Tap 'OK' to return to Login Page",
+                                                style: textStyleNormal,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                         actions: [
                                           SPMButton(
                                             color: SPMColors.secondaryColor,
-                                            text: 'OK',
+                                            child: const Text('OK'),
+                                            // text: 'OK',
                                             onPress: () {
-                                              Get.offAll(const SPMWelcomePage());
+                                              Get.offAll(
+                                                  const SPMWelcomePage());
                                             },
                                           ),
                                         ],
                                       ),
                                     );
                                   },
+                                  child: const Text('Register'),
                                 ),
                               ],
                             ),
