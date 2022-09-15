@@ -23,30 +23,13 @@ class MyApp extends GetView {
     return GetMaterialApp(
       theme: ThemeData(
         brightness: Brightness.dark,
-        fontFamily: 'Scope One',
-        // primarySwatch: Colors.blue,
+        // fontFamily: 'Scope One',
+
         scaffoldBackgroundColor: Colors.black12,
         shadowColor: Colors.white,
-        textTheme: const TextTheme(
-          headline1: TextStyle(
-            fontWeight: FontWeight.w900,
-            fontSize: 30.0,
-            color: SPMColors.secondaryColor,
-            letterSpacing: 2.0,
-          ),
-          headline4: TextStyle(
-              fontWeight: FontWeight.w400, fontSize: 18.0, color: Colors.black),
-          bodyText1: TextStyle(
-              fontWeight: FontWeight.w400, fontSize: 16.0, color: Colors.black),
-        ),
       ),
-// <<<<<<< HEAD
-//       home: const SPMNewFeedPage(),
-// =======
       home: const MainHomePage(),
-      // SPMWelcomePage(),
-// >>>>>>> 048e8d054d23242ed5c2a53e64144cba1b58f99e
-//       debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
