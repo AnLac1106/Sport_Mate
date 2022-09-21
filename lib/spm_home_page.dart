@@ -96,12 +96,7 @@ class SPMHomePage extends GetView {
                 const SizedBox(height: 30),
                 const Text("Upcoming Games",
                     textAlign: TextAlign.right, style: textStyleHeading4),
-                ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) => inforCard(),
-                  itemCount: 2,
-                ),
+                inforCard(),
               ],
             ),
           ),
@@ -145,8 +140,9 @@ class SPMHomePage extends GetView {
               child: ListTile(
                 leading: const Icon(Icons.pin_drop,
                     color: SPMColors.secondaryColor, size: 32),
-                title: const Text("Hanoi University of Science and Technology",
-                    style: textStyleHeading4),
+                title: Text("Hanoi University of Science and Technology",
+                    style:
+                        textStyleNormal.copyWith(fontWeight: FontWeight.bold)),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

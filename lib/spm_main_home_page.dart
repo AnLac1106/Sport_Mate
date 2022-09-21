@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sport_mate/spm_create_game.dart';
 import 'package:sport_mate/spm_home_page.dart';
 import 'common/spm_colors.dart';
 
@@ -9,7 +10,8 @@ class MainHomePageCtrl extends GetxController {
 
 class MainHomePage extends GetView<MainHomePageCtrl> {
   final Widget _spmHomePage = const SPMHomePage();
-  final Widget _spmHomePage1 = const SPMHomePage();
+
+  final Widget _spmHomePage1 = const SPMCreateGame();
   final Widget _myHomePage = const SPMHomePage();
 
   const MainHomePage({Key? key}) : super(key: key);
@@ -18,7 +20,6 @@ class MainHomePage extends GetView<MainHomePageCtrl> {
       Get.put<MainHomePageCtrl>(MainHomePageCtrl());
 
   void _onItemTapped(int index) {
-    // Obx (controller._selectedIndex.value = index);
     controller._selectedIndex.value = index;
   }
 
@@ -28,7 +29,7 @@ class MainHomePage extends GetView<MainHomePageCtrl> {
       body: Obx(() => getBody()),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.black12,
+        backgroundColor: Colors.grey,
         elevation: 0.0,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
