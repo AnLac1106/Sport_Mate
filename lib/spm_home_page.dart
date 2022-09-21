@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sport_mate/common/spm_colors.dart';
+import 'package:sport_mate/common/spm_text_style.dart';
 import 'package:sport_mate/spm_create_game.dart';
 
 class SPMHomePage extends GetView {
@@ -26,14 +27,12 @@ class SPMHomePage extends GetView {
                     height: 100,
                     width: 100,
                     child: Image.asset('assets/images/SPM_logo.png')),
-                Text('sportmate',
-                    style:
-                        Get.textTheme.headline1?.copyWith(color: Colors.black)),
+                const Text('sportmate', style: textStyleHeading1),
                 const SizedBox(height: 30),
-                Text('Hello partners!', style: Get.textTheme.bodyText1),
+                const Text('Hello partners!', style: textStyleNormal),
                 const SizedBox(height: 30),
-                Text('What do you want to play?',
-                    style: Get.textTheme.headline4),
+                const Text('What do you want to play?',
+                    style: textStyleHeading4),
                 const SizedBox(height: 30),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -64,10 +63,9 @@ class SPMHomePage extends GetView {
                             border: Border.all(
                                 width: 4, color: const Color(0xFFF1F1F1)),
                           ),
-                          child: Text("Create Game",
+                          child: const Text("Create Game",
                               textAlign: TextAlign.center,
-                              style: Get.textTheme.headline4?.copyWith(
-                                  fontSize: 16, fontWeight: FontWeight.bold)),
+                              style: textStyleHeading4),
                         ),
                       ),
                       GestureDetector(
@@ -89,16 +87,15 @@ class SPMHomePage extends GetView {
                             border: Border.all(
                                 width: 4, color: const Color(0xFFF1F1F1)),
                           ),
-                          child: Text("Join Game",
+                          child: const Text("Join Game",
                               textAlign: TextAlign.center,
-                              style: Get.textTheme.headline4?.copyWith(
-                                  fontSize: 16, fontWeight: FontWeight.bold)),
+                              style: textStyleHeading4),
                         ),
                       ),
                     ]),
                 const SizedBox(height: 30),
-                Text("Upcoming Games",
-                    textAlign: TextAlign.right, style: Get.textTheme.headline4),
+                const Text("Upcoming Games",
+                    textAlign: TextAlign.right, style: textStyleHeading4),
                 ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
@@ -148,21 +145,16 @@ class SPMHomePage extends GetView {
               child: ListTile(
                 leading: const Icon(Icons.pin_drop,
                     color: SPMColors.secondaryColor, size: 32),
-                title: Text(
-                  "Hanoi University of Science and Technology",
-                  style: Get.textTheme.headline4?.copyWith(
-                      // overflow: TextOverflow.ellipsis,
-                      fontWeight: FontWeight.bold),
-                ),
+                title: const Text("Hanoi University of Science and Technology",
+                    style: textStyleHeading4),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("Sept 29, 2021 & 12:10",
-                        style: Get.textTheme.bodyText1),
+                    const Text("Sept 29, 2021 & 12:10", style: textStyleNormal),
                     RichText(
                       text: TextSpan(
                         text: 'with: ',
-                        style: Get.textTheme.bodyText1,
+                        style: textStyleNormal,
                         children: <TextSpan>[
                           TextSpan(
                               text: 'Sinem Kocasu',

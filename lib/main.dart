@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sport_mate/function/photo_builder.dart';
 import 'package:sport_mate/spm_newfeed_page.dart';
+import 'package:sport_mate/spm_profile_page.dart';
 import 'package:sport_mate/spm_register_page.dart';
 import 'package:sport_mate/spm_welcome_page.dart';
 import 'package:sport_mate/test.dart';
@@ -18,24 +20,13 @@ class MyApp extends GetView {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
-        brightness: Brightness.dark,
-        fontFamily: 'Scope One',
-        // primarySwatch: Colors.blue,
+        // brightness: Brightness.dark,
+        // fontFamily: 'Scope One',
+
         scaffoldBackgroundColor: Colors.black12,
         shadowColor: Colors.white,
-        textTheme: const TextTheme(
-          headline1: TextStyle(
-            fontWeight: FontWeight.w900,
-            fontSize: 30.0,
-            color: SPMColors.secondaryColor,
-            letterSpacing: 2.0,
-          ),
-          headline4: TextStyle(
-              fontWeight: FontWeight.w400, fontSize: 18.0, color: Colors.black),
-          bodyText1: TextStyle(
-              fontWeight: FontWeight.w400, fontSize: 16.0, color: Colors.black),
-        ),
       ),
+
       home: const SPMNewFeedPage(),
       debugShowCheckedModeBanner: false,
     );
