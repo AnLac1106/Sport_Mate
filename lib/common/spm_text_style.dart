@@ -26,7 +26,7 @@ const textStyleHeading4 = TextStyle(
 );
 
 const textStyleNormal = TextStyle(
-  fontFamily: 'Scope One',
+  // fontFamily: 'Scope One',
   fontWeight: FontWeight.w400,
   fontSize: 16.0,
   color: Colors.black,

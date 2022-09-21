@@ -15,23 +15,26 @@ class SPMTextField extends StatefulWidget {
   final int? maxLine;
   final int minLine;
   final FocusNode? focusNode;
+  final TextStyle? labelStyle;
+  final bool expands;
 
-  const SPMTextField({
-    super.key,
-    this.labelText,
-    this.hintText,
-    this.keyBoardType = TextInputType.text,
-    this.controller,
-    this.obscureText = false,
-    this.prefixIcon,
-    this.suffixIcon,
-    this.textCapitalization = TextCapitalization.words,
-    this.onChanged,
-    this.maxLine,
-    this.minLine = 1,
-    this.suffix,
-    this.focusNode,
-  });
+  const SPMTextField(
+      {super.key,
+      this.labelText,
+      this.hintText,
+      this.keyBoardType = TextInputType.text,
+      this.controller,
+      this.obscureText = false,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.textCapitalization = TextCapitalization.words,
+      this.onChanged,
+      this.maxLine,
+      this.minLine = 1,
+      this.suffix,
+      this.focusNode,
+      this.labelStyle,
+      this.expands = false});
 
   @override
   State<SPMTextField> createState() => _SPMTextFieldState();
