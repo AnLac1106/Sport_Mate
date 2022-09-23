@@ -1,10 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:sport_mate/common/photo_box.dart';
 import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
+import 'package:sport_mate/function/photo_builder.dart';
 
-class NewFeedPageCtrl extends GetxController {}
+import 'function/post_api.dart';
+
+class NewFeedPageCtrl extends GetxController {
+  RxMap getData = {}.obs;
+  RxBool isLoading = true.obs;
+
+  Future<void> callAPI() async {
+    isLoading(true);
+    final PostAPI postAPI = PostAPI();
+    var apiData = await postAPI.getData();
+    if (apiData != null) {
+      getData.value = apiData;
+    }
+    isLoading(false);
+  }
+  @override
+  void onInit() {
+    callAPI();
+    super.onInit();
+  }
+}
 
 class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
   const SPMNewFeedPage({Key? key}) : super(key: key);
@@ -15,10 +37,14 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue.shade100,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
+              const SizedBox(
+                height: 8,
+              ),
               Row(
                 children: [
                   const SizedBox(
@@ -40,23 +66,27 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                     width: 16,
                   ),
                   Expanded(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              const BorderSide(color: Color(0xffeff3f7)),
+                    child: SizedBox(
+                      height: 40,
+                      child: TextField(
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide:
+                            const BorderSide(color: Color(0xffeff3f7)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide:
+                            const BorderSide(color: Color(0xffeff3f7)),
+                          ),
+                          isDense: true,
+                          contentPadding: const EdgeInsets.all(0),
+                          filled: true,
+                          fillColor: const Color(0xffeff3f7),
+                          prefixIcon: const Icon(Icons.search),
+                          hintText: 'Search',
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              const BorderSide(color: Color(0xffeff3f7)),
-                        ),
-                        isDense: true,
-                        filled: true,
-                        fillColor: const Color(0xffeff3f7),
-                        prefixIcon: const Icon(Icons.search),
-                        hintText: 'Search',
                       ),
                     ),
                   ),
@@ -68,12 +98,23 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
               const SizedBox(
                 height: 8,
               ),
-              ListView.builder(
-                itemBuilder: (context, index) => buildItem(),
-                itemCount: 10,
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-              ),
+              Obx(() {
+                if (controller.isLoading.value) {
+                  return const CircularProgressIndicator();
+                }
+                else {
+                  return
+                    ListView.builder(
+                      itemBuilder: (context, index) {
+                        return buildItem(index);
+                      },
+                      itemCount: controller.getData['data'].length,
+                      scrollDirection: Axis.vertical,
+                      physics: const ScrollPhysics(),
+                      shrinkWrap: true,
+                    );
+                }
+              }),
             ],
           ),
         ),
@@ -81,7 +122,9 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
     );
   }
 
-  Widget buildItem() {
+  Widget buildItem(index) {
+    // PhotoBuilder photoBuilder = PhotoBuilder(index);
+
     return Column(
       children: [
         Container(
@@ -100,10 +143,12 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                         width: 52,
                         height: 52,
                         clipBehavior: Clip.hardEdge,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                              image: AssetImage('assets/images/avatar2.jpg'),
+                              image: NetworkImage(
+                                  '${controller
+                                      .getData['data'][index]['avatar']}'),
                               fit: BoxFit.cover),
                         ),
                       ),
@@ -117,10 +162,12 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             boxShadow: [
-                              BoxShadow(color: Colors.green, spreadRadius: 1.5)
+                              BoxShadow(
+                                  color: Colors.green, spreadRadius: 1.5)
                             ],
                             image: DecorationImage(
-                                image: AssetImage('assets/images/football.png'),
+                                image:
+                                AssetImage('assets/images/football.png'),
                                 fit: BoxFit.cover),
                           ),
                         ),
@@ -131,12 +178,17 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                     width: 8,
                   ),
                   Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Nguyễn Đức Thiện', style: Get.textTheme.bodyText1,),
+                      Text(
+                        '${controller.getData['data'][index]['name']}',
+                      ),
                       Text(
                         DateFormat('dd/MM/yyyy, HH:mm')
-                            .format(DateTime.now())
-                            .toString(), style: Get.textTheme.bodyText1,
+                            .format(DateTime.fromMillisecondsSinceEpoch(
+                            controller.getData['data'][index]
+                            ['create_at']))
+                            .toString(),
                       ),
                     ],
                   ),
@@ -145,51 +197,70 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
               const SizedBox(
                 height: 8,
               ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  Flexible(
-                    child: Text(
-                        "Team văn phòng cần tìm đối đá vui vẻ, sân nước chia đôi. Đã đặt sân, tổng sân nước 700k",
-                    style: Get.textTheme.bodyText1,),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Row(
-                children: [
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  const Icon(
-                    Icons.thumb_up,
-                    color: Colors.blueAccent,
-                    size: 16,
-                  ),
-                  Text('  7', style: Get.textTheme.bodyText1,),
-                  const Expanded(child: SizedBox()),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      '2 comments',
-                      style: Get.textTheme.bodyText1,
+              Container(
+                alignment: Alignment.centerLeft,
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Place: ',
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                ],
+                    Text(
+                      'Time: ${DateFormat('dd/MM/yyyy, HH:mm')
+                          .format(DateTime.fromMillisecondsSinceEpoch(controller
+                          .getData['data'][index]['create_at']))
+                          .toString()}',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Level: ${controller.getData['data'][index]['level']}',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Partner needed: ${controller
+                          .getData['data'][index]['partner needed']}',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(
-                height: 12,
+              Container(
+                padding:
+                const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '${controller.getData['data'][index]['last_message']}',
+                  // style: Get.textTheme.bodyText1,
+                ),
               ),
+              PhotoBuilder(controller.getData['data'][index]['photos']),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.thumb_up,
+                      color: Colors.blueAccent,
+                      size: 16,
+                    ),
+                    const Text(
+                      '  7',
+                    ),
+                    const Expanded(child: SizedBox()),
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        '2 comments',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // const SizedBox(
+              //   height: 12,
+              // ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Container(
@@ -208,7 +279,12 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                       child: RawMaterialButton(
                         onPressed: () {},
                         child: Column(
-                          children: [const Icon(Icons.thumb_up), Text('Like', style: Get.textTheme.bodyText1,)],
+                          children: const [
+                            Icon(Icons.thumb_up),
+                            Text(
+                              'Like',
+                            )
+                          ],
                         ),
                       ),
                     ),
@@ -216,9 +292,11 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                       child: RawMaterialButton(
                         onPressed: () {},
                         child: Column(
-                          children: [
-                            const Icon(Icons.comment),
-                            Text('Comment', style: Get.textTheme.bodyText1,),
+                          children: const [
+                            Icon(Icons.comment),
+                            Text(
+                              'Comment',
+                            ),
                           ],
                         ),
                       ),
@@ -228,9 +306,11 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                         // alignment: Alignment.center,
                         onPressed: () {},
                         child: Column(
-                          children: [
-                            const Icon(Icons.turn_right),
-                            Text('Share', style: Get.textTheme.bodyText1,)
+                          children: const [
+                            Icon(Icons.turn_right),
+                            Text(
+                              'Share',
+                            )
                           ],
                         ),
                       ),
@@ -246,7 +326,9 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                             style: Get.textTheme.bodyText1,
                           )),
                     ),
-                    const SizedBox(width: 15,),
+                    const SizedBox(
+                      width: 15,
+                    ),
                   ],
                 ),
               ),
@@ -260,4 +342,89 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
       ],
     );
   }
+
+// Widget buildPhoto() {
+//   if (controller.photo.isEmpty) {
+//     return Container();
+//   } else if (controller.photo.length == 1) {
+//     return SizedBox(
+//       width: Get.width,
+//       child: SPMPhotoBox(photo: controller.photo[0]),
+//     );
+//   } else if (controller.photo.length == 2) {
+//     return SizedBox(
+//       width: Get.width,
+//       child: Row(
+//         children: [
+//           Expanded(child: SPMPhotoBox(photo: controller.photo[0])),
+//           const SizedBox(
+//             width: 2,
+//           ),
+//           Expanded(child: SPMPhotoBox(photo: controller.photo[1])),
+//         ],
+//       ),
+//     );
+//   } else if (controller.photo.length == 3) {
+//     return SizedBox(
+//       width: Get.width,
+//       child: Row(
+//         children: [
+//           Expanded(child: SPMPhotoBox(photo: controller.photo[0])),
+//           const SizedBox(
+//             width: 2,
+//           ),
+//           Expanded(child: SPMPhotoBox(photo: controller.photo[1])),
+//           const SizedBox(
+//             width: 2,
+//           ),
+//           Expanded(child: SPMPhotoBox(photo: controller.photo[2])),
+//         ],
+//       ),
+//     );
+//   } else {
+//     return SizedBox(
+//       child: Column(
+//         children: [
+//           Row(
+//             children: [
+//               Expanded(
+//                   child: SPMPhotoBox(
+//                 photo: controller.photo[0],
+//                 height: Get.width / 2,
+//               )),
+//               const SizedBox(
+//                 width: 2,
+//               ),
+//               Expanded(
+//                   child: SPMPhotoBox(
+//                 photo: controller.photo[1],
+//                 height: Get.width / 2,
+//               )),
+//             ],
+//           ),
+//           const SizedBox(
+//             height: 2,
+//           ),
+//           Row(
+//             children: [
+//               Expanded(
+//                   child: SPMPhotoBox(
+//                 photo: controller.photo[2],
+//                 height: Get.width / 2,
+//               )),
+//               const SizedBox(
+//                 width: 2,
+//               ),
+//               Expanded(
+//                   child: SPMPhotoBox(
+//                 photo: controller.photo[3],
+//                 height: Get.width / 2,
+//               )),
+//             ],
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 }
