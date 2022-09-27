@@ -25,8 +25,7 @@ class SPMAvatarBox extends StatelessWidget {
         boxShadow: [
           BoxShadow(color: boxShadowColor, spreadRadius: spreadRadius)
         ],
-        image: DecorationImage(
-            image: image, fit: BoxFit.cover),
+        image: DecorationImage(image: image, fit: BoxFit.cover),
       ),
     );
   }

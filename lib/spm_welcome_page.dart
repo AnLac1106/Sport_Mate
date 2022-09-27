@@ -8,6 +8,8 @@ import 'package:sport_mate/common/spm_text_style.dart';
 import 'package:sport_mate/spm_register_page.dart';
 import 'common/spm_button.dart';
 
+//Page 1
+
 enum SelectedBox { box1, box2, box3 }
 
 class WelcomePageCtrl extends GetxController {
