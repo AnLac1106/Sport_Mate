@@ -5,14 +5,18 @@ import 'package:intl/intl.dart';
 import 'package:sport_mate/common/spm_avatar_box.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_select_box.dart';
+import 'package:sport_mate/function/spm_status_box.dart';
 
 enum Select1 { myGame, rating }
 
 enum Select2 { history, upcoming }
 
+enum Menu { online, offline, away }
+
 class SPMProfilePageCtrl extends GetxController {
   Rx<Select1> select1 = Select1.myGame.obs;
   Rx<Select2> select2 = Select2.history.obs;
+  RxString selectedItem = 'online'.obs;
 }
 
 class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
@@ -65,28 +69,32 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                   ],
                 ),
                 Positioned(
-                  top: 0,
-                  right: 0,
-                  child: Container(
-                    width: 85,
-                    height: 25,
-                    decoration: BoxDecoration(
-                      color: const Color(0xffEBEBEB),
-                      borderRadius: BorderRadius.circular(20),
+                    top: 0,
+                    right: 0,
+                    child: Obx(
+                      () => SPMStatusBox(select: controller.selectedItem.value),
+                    )
+
+                    // Container(
+                    //   width: 85,
+                    //   height: 25,
+                    //   decoration: BoxDecoration(
+                    //     color: const Color(0xffEBEBEB),
+                    //     borderRadius: BorderRadius.circular(20),
+                    //   ),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    //     children: const [
+                    //       Icon(
+                    //         Icons.circle,
+                    //         color: Colors.green,
+                    //         size: 18,
+                    //       ),
+                    //       Text('Online'),
+                    //     ],
+                    //   ),
+                    // ),
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Icon(
-                          Icons.circle,
-                          color: Colors.green,
-                          size: 18,
-                        ),
-                        Text('Online'),
-                      ],
-                    ),
-                  ),
-                ),
               ],
             ),
             const SizedBox(
@@ -198,76 +206,160 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                       height: 20,
                     ),
                     Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                            color: const Color(0xffEBEBEB), width: 3),
-                      ),
-                      clipBehavior: Clip.hardEdge,
-                      height: 200,
-                      width: Get.width,
-                      child: slt2.value == Select2.history
-                          ? SingleChildScrollView(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 8, horizontal: 12),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width: 18,
-                                        height: 18,
-                                        clipBehavior: Clip.hardEdge,
-                                        decoration: const BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          boxShadow: [
-                                            BoxShadow(
-                                                color: Colors.grey,
-                                                spreadRadius: 1)
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                              color: const Color(0xffEBEBEB), width: 3),
+                        ),
+                        clipBehavior: Clip.hardEdge,
+                        height: 200,
+                        width: Get.width,
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            transitionBuilder:
+                                (Widget child, Animation<double> animation) =>
+                                    SlideTransition(
+                              position: Tween(
+                                begin: const Offset(1.0, 0.0),
+                                end: const Offset(0.0, 0.0),
+                              ).animate(animation),
+                              child: child,
+                            ),
+                            child: slt2.value == Select2.history
+                                ? SingleChildScrollView(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 12),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 18,
+                                              height: 18,
+                                              clipBehavior: Clip.hardEdge,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color: Colors.grey,
+                                                      spreadRadius: 1)
+                                                ],
+                                                image: DecorationImage(
+                                                    image: AssetImage(
+                                                        'assets/images/football.png'),
+                                                    fit: BoxFit.cover),
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              width: 6,
+                                            ),
+                                            const Text(
+                                                'Hanoi University of Science and Technology'),
                                           ],
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                                  'assets/images/football.png'),
-                                              fit: BoxFit.cover),
                                         ),
+                                        Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 24,
+                                            ),
+                                            const Text('With: '),
+                                            TextButton(
+                                              onPressed: () {},
+                                              style: TextButton.styleFrom(
+                                                padding: EdgeInsets.zero,
+                                                minimumSize: Size.zero,
+                                                tapTargetSize:
+                                                    MaterialTapTargetSize
+                                                        .shrinkWrap,
+                                              ),
+                                              child: const Text('Quang Hải'),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 24,
+                                            ),
+                                            Text(
+                                              DateFormat('dd/MM/yyyy, HH:mm')
+                                                  .format(DateTime.now()),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                // : Container(color: Colors.green,)
+                                : Container(
+                                    child: SingleChildScrollView(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8, horizontal: 12),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 18,
+                                                height: 18,
+                                                clipBehavior: Clip.hardEdge,
+                                                decoration: const BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                        color: Colors.green,
+                                                        spreadRadius: 1)
+                                                  ],
+                                                  image: DecorationImage(
+                                                      image: AssetImage(
+                                                          'assets/images/football.png'),
+                                                      fit: BoxFit.cover),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 6,
+                                              ),
+                                              const Text('Mỹ Đình stadium'),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 24,
+                                              ),
+                                              const Text('With: '),
+                                              TextButton(
+                                                onPressed: () {},
+                                                style: TextButton.styleFrom(
+                                                  padding: EdgeInsets.zero,
+                                                  minimumSize: Size.zero,
+                                                  tapTargetSize:
+                                                      MaterialTapTargetSize
+                                                          .shrinkWrap,
+                                                ),
+                                                child: const Text('Neymar JR'),
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const SizedBox(
+                                                width: 24,
+                                              ),
+                                              Text(
+                                                DateFormat('dd/MM/yyyy, HH:mm')
+                                                    .format(DateTime.now()),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(
-                                        width: 6,
-                                      ),
-                                      const Text(
-                                          'Hanoi University of Science and Technology'),
-                                    ],
+                                    ),
                                   ),
-                                  Row(
-                                    children: [
-                                      const SizedBox(
-                                        width: 24,
-                                      ),
-                                      const Text('With:'),
-                                      TextButton(
-                                        onPressed: () {},
-                                        child: const Text('Quang Hải'),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      const SizedBox(
-                                        width: 24,
-                                      ),
-                                      Text(
-                                        DateFormat('dd/MM/yyyy, HH:mm')
-                                            .format(DateTime.now()),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            )
-                          : Container(
-                              // color: Colors.green,
-                              ),
-                    ),
+                          ),
+                        )),
                   ],
                 );
               }
@@ -288,7 +380,7 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                             const SizedBox(width: 20),
                             const SPMAvatarBox(
                               image: NetworkImage('https://i.pravatar.cc/128'),
-                              radius: 55,
+                              diameter: 55,
                             ),
                             const SizedBox(width: 20),
                             Expanded(
@@ -314,7 +406,9 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Container(
                         height: 90,
                         width: Get.width,
@@ -327,7 +421,7 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                             const SizedBox(width: 20),
                             const SPMAvatarBox(
                               image: NetworkImage('https://i.pravatar.cc/128'),
-                              radius: 55,
+                              diameter: 55,
                             ),
                             const SizedBox(width: 20),
                             Expanded(
@@ -345,15 +439,16 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                                       Icon(Icons.star, color: Colors.grey),
                                     ],
                                   ),
-                                  const Text(
-                                      'Thanks for played with me'),
+                                  const Text('Thanks for played with me'),
                                 ],
                               ),
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Container(
                         height: 90,
                         width: Get.width,
@@ -366,7 +461,7 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                             const SizedBox(width: 20),
                             const SPMAvatarBox(
                               image: NetworkImage('https://i.pravatar.cc/128'),
-                              radius: 55,
+                              diameter: 55,
                             ),
                             const SizedBox(width: 20),
                             Expanded(
@@ -384,15 +479,16 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                                       Icon(Icons.star, color: Colors.grey),
                                     ],
                                   ),
-                                  const Text(
-                                      'Thanks for played with me'),
+                                  const Text('Thanks for played with me'),
                                 ],
                               ),
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Container(
                         height: 90,
                         width: Get.width,
@@ -405,7 +501,7 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                             const SizedBox(width: 20),
                             const SPMAvatarBox(
                               image: NetworkImage('https://i.pravatar.cc/128'),
-                              radius: 55,
+                              diameter: 55,
                             ),
                             const SizedBox(width: 20),
                             Expanded(
@@ -423,8 +519,7 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                                       Icon(Icons.star, color: Colors.grey),
                                     ],
                                   ),
-                                  const Text(
-                                      'Thanks for played with me'),
+                                  const Text('Thanks for played with me'),
                                 ],
                               ),
                             ),

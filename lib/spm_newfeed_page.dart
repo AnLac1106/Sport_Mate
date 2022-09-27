@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:sport_mate/common/photo_box.dart';
 import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/function/photo_builder.dart';
-
+import 'package:sport_mate/function/spm_comment.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'function/post_api.dart';
 
 class NewFeedPageCtrl extends GetxController {
   RxMap getData = {}.obs;
   RxBool isLoading = true.obs;
+  RxInt like = 2.obs;
+  RxBool isLiked = false.obs;
 
   Future<void> callAPI() async {
     isLoading(true);
@@ -21,6 +23,7 @@ class NewFeedPageCtrl extends GetxController {
     }
     isLoading(false);
   }
+
   @override
   void onInit() {
     callAPI();
@@ -73,12 +76,12 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide:
-                            const BorderSide(color: Color(0xffeff3f7)),
+                                const BorderSide(color: Color(0xffeff3f7)),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide:
-                            const BorderSide(color: Color(0xffeff3f7)),
+                                const BorderSide(color: Color(0xffeff3f7)),
                           ),
                           isDense: true,
                           contentPadding: const EdgeInsets.all(0),
@@ -101,30 +104,27 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
               Obx(() {
                 if (controller.isLoading.value) {
                   return const CircularProgressIndicator();
-                }
-                else {
-                  return
-                    ListView.builder(
-                      itemBuilder: (context, index) {
-                        return buildItem(index);
-                      },
-                      itemCount: controller.getData['data'].length,
-                      scrollDirection: Axis.vertical,
-                      physics: const ScrollPhysics(),
-                      shrinkWrap: true,
-                    );
+                } else {
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      return buildItem(index);
+                    },
+                    itemCount: controller.getData['data'].length,
+                    scrollDirection: Axis.vertical,
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                  );
                 }
               }),
             ],
           ),
         ),
       ),
+      // bottomSheet: Container(color: Colors.black26,),
     );
   }
 
   Widget buildItem(index) {
-    // PhotoBuilder photoBuilder = PhotoBuilder(index);
-
     return Column(
       children: [
         Container(
@@ -147,8 +147,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               image: NetworkImage(
-                                  '${controller
-                                      .getData['data'][index]['avatar']}'),
+                                  '${controller.getData['data'][index]['avatar']}'),
                               fit: BoxFit.cover),
                         ),
                       ),
@@ -162,12 +161,10 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             boxShadow: [
-                              BoxShadow(
-                                  color: Colors.green, spreadRadius: 1.5)
+                              BoxShadow(color: Colors.green, spreadRadius: 1.5)
                             ],
                             image: DecorationImage(
-                                image:
-                                AssetImage('assets/images/football.png'),
+                                image: AssetImage('assets/images/football.png'),
                                 fit: BoxFit.cover),
                           ),
                         ),
@@ -186,8 +183,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                       Text(
                         DateFormat('dd/MM/yyyy, HH:mm')
                             .format(DateTime.fromMillisecondsSinceEpoch(
-                            controller.getData['data'][index]
-                            ['create_at']))
+                                controller.getData['data'][index]['create_at']))
                             .toString(),
                       ),
                     ],
@@ -200,35 +196,83 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
               Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'Place: ',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Place: ',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          'Time: ${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(controller.getData['data'][index]['create_at'])).toString()}',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          'Level: ${controller.getData['data'][index]['level']}',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          'Partner needed: ${controller.getData['data'][index]['partner needed']}',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
-                    Text(
-                      'Time: ${DateFormat('dd/MM/yyyy, HH:mm')
-                          .format(DateTime.fromMillisecondsSinceEpoch(controller
-                          .getData['data'][index]['create_at']))
-                          .toString()}',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      'Level: ${controller.getData['data'][index]['level']}',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      'Partner needed: ${controller
-                          .getData['data'][index]['partner needed']}',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                    SPMButton(
+                        width: 125,
+                        color: SPMColors.primaryColor,
+                        borderColor: SPMColors.primaryColor,
+                        onPress: () {
+                          Get.dialog(AlertDialog(
+                            content: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                Text(
+                                  'Send request?',
+                                  style: TextStyle(fontSize: 22),
+                                ),
+                              ],
+                            ),
+                            actionsAlignment: MainAxisAlignment.center,
+                            actions: [
+                              SPMButton(
+                                color: SPMColors.primaryColor,
+                                onPress: () {
+                                  Get.back();
+                                  Get.snackbar(
+                                    'Success!',
+                                    'Your request have been sent',
+                                    backgroundColor: Colors.orange.shade100,
+                                    snackPosition: SnackPosition.BOTTOM,
+                                    duration: const Duration(seconds: 2),
+                                  );
+                                },
+                                borderColor: SPMColors.primaryColor,
+                                child: const Text('OK'),
+                              ),
+                              SPMButton(
+                                color: Colors.white,
+                                onPress: () {
+                                  Get.back();
+                                },
+                                child: const Text('Cancel'),
+                              ),
+                            ],
+                          ));
+                        },
+                        child: Text(
+                          'Request game',
+                          style: Get.textTheme.bodyText1,
+                        )),
                   ],
                 ),
               ),
               Container(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 alignment: Alignment.centerLeft,
                 child: Text(
                   '${controller.getData['data'][index]['last_message']}',
@@ -245,12 +289,51 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                       color: Colors.blueAccent,
                       size: 16,
                     ),
-                    const Text(
-                      '  7',
+                    Obx(
+                      () => Text(
+                        '  ${controller.like}',
+                      ),
                     ),
                     const Expanded(child: SizedBox()),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showBarModalBottomSheet(
+                          context: Get.context!,
+                          builder: (context) => const SizedBox(
+                            height: 700,
+                            child: SPMComment(
+                                userAvatar:
+                                    'https://vcdn1-dulich.vnecdn.net/2020/09/04/1-Meo-chup-anh-dep-khi-di-bien-9310-1599219010.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=j8THd4HE31ZHWTQhSZx5tQ',
+                                userName: 'Thử Nghiệm',
+                                createAt: 1664037858,
+                                userComment:
+                                    'Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt'),
+                          ),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(10))),
+                          bounce: true,
+                        );
+                        // Get.bottomSheet(
+                        //   Container(
+                        //     height: 700,
+                        //     child: const SPMComment(
+                        //         userAvatar: 'https://vcdn1-dulich.vnecdn.net/2020/09/04/1-Meo-chup-anh-dep-khi-di-bien-9310-1599219010.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=j8THd4HE31ZHWTQhSZx5tQ',
+                        //         userName: 'Thử Nghiệm',
+                        //         createAt: 1664037858,
+                        //         userComment: 'Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt'
+                        //     ),
+                        //   ),
+                        //   shape: const RoundedRectangleBorder(
+                        //       borderRadius: BorderRadius.vertical(
+                        //           top: Radius.circular(10))),
+                        //   backgroundColor: Colors.white,
+                        //   barrierColor: Colors.blue.withOpacity(0.2),
+                        //   isScrollControlled: true,
+                        //   enableDrag: true,
+                        //   isDismissible: false,
+                        // );
+                      },
                       child: const Text(
                         '2 comments',
                       ),
@@ -258,9 +341,9 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                   ],
                 ),
               ),
-              // const SizedBox(
-              //   height: 12,
-              // ),
+              const SizedBox(
+                height: 12,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
                 child: Container(
@@ -269,28 +352,58 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                 ),
               ),
               const SizedBox(
-                height: 12,
+                height: 8,
               ),
               SizedBox(
-                height: 50,
+                height: 40,
                 child: Row(
                   children: [
-                    Expanded(
-                      child: RawMaterialButton(
-                        onPressed: () {},
+                    Expanded(child: Obx(() {
+                      return RawMaterialButton(
+                        onPressed: () {
+                          if (controller.isLiked.value) {
+                            controller.like--;
+                          } else {
+                            controller.like++;
+                          }
+                          controller.isLiked.value = !controller.isLiked.value;
+                        },
                         child: Column(
-                          children: const [
-                            Icon(Icons.thumb_up),
+                          children: [
+                            Icon(
+                              Icons.thumb_up,
+                              color: controller.isLiked.value
+                                  ? Colors.blueAccent
+                                  : Colors.black87,
+                            ),
                             Text(
                               'Like',
+                              style: TextStyle(
+                                color: controller.isLiked.value
+                                    ? Colors.blueAccent
+                                    : Colors.black87,
+                              ),
                             )
                           ],
                         ),
-                      ),
-                    ),
+                      );
+                    })),
                     Expanded(
                       child: RawMaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.bottomSheet(
+                            Container(
+                              // color: Colors.grey,
+                              height: 800,
+                            ),
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(30))),
+                            backgroundColor: Colors.white,
+                            barrierColor: Colors.blue.withOpacity(0.2),
+                            isScrollControlled: true,
+                          );
+                        },
                         child: Column(
                           children: const [
                             Icon(Icons.comment),
@@ -315,17 +428,6 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                         ),
                       ),
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: SPMButton(
-                          color: SPMColors.primaryColor,
-                          borderColor: SPMColors.primaryColor,
-                          onPress: () {},
-                          child: Text(
-                            'Request game',
-                            style: Get.textTheme.bodyText1,
-                          )),
-                    ),
                     const SizedBox(
                       width: 15,
                     ),
@@ -342,89 +444,4 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
       ],
     );
   }
-
-// Widget buildPhoto() {
-//   if (controller.photo.isEmpty) {
-//     return Container();
-//   } else if (controller.photo.length == 1) {
-//     return SizedBox(
-//       width: Get.width,
-//       child: SPMPhotoBox(photo: controller.photo[0]),
-//     );
-//   } else if (controller.photo.length == 2) {
-//     return SizedBox(
-//       width: Get.width,
-//       child: Row(
-//         children: [
-//           Expanded(child: SPMPhotoBox(photo: controller.photo[0])),
-//           const SizedBox(
-//             width: 2,
-//           ),
-//           Expanded(child: SPMPhotoBox(photo: controller.photo[1])),
-//         ],
-//       ),
-//     );
-//   } else if (controller.photo.length == 3) {
-//     return SizedBox(
-//       width: Get.width,
-//       child: Row(
-//         children: [
-//           Expanded(child: SPMPhotoBox(photo: controller.photo[0])),
-//           const SizedBox(
-//             width: 2,
-//           ),
-//           Expanded(child: SPMPhotoBox(photo: controller.photo[1])),
-//           const SizedBox(
-//             width: 2,
-//           ),
-//           Expanded(child: SPMPhotoBox(photo: controller.photo[2])),
-//         ],
-//       ),
-//     );
-//   } else {
-//     return SizedBox(
-//       child: Column(
-//         children: [
-//           Row(
-//             children: [
-//               Expanded(
-//                   child: SPMPhotoBox(
-//                 photo: controller.photo[0],
-//                 height: Get.width / 2,
-//               )),
-//               const SizedBox(
-//                 width: 2,
-//               ),
-//               Expanded(
-//                   child: SPMPhotoBox(
-//                 photo: controller.photo[1],
-//                 height: Get.width / 2,
-//               )),
-//             ],
-//           ),
-//           const SizedBox(
-//             height: 2,
-//           ),
-//           Row(
-//             children: [
-//               Expanded(
-//                   child: SPMPhotoBox(
-//                 photo: controller.photo[2],
-//                 height: Get.width / 2,
-//               )),
-//               const SizedBox(
-//                 width: 2,
-//               ),
-//               Expanded(
-//                   child: SPMPhotoBox(
-//                 photo: controller.photo[3],
-//                 height: Get.width / 2,
-//               )),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
 }

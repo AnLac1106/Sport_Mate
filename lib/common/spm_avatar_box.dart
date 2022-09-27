@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class SPMAvatarBox extends StatelessWidget {
   const SPMAvatarBox(
       {Key? key,
-      required this.radius,
+      required this.diameter,
       required this.image,
       this.boxShadowColor = Colors.transparent,
       this.spreadRadius = 0})
       : super(key: key);
 
-  final double radius;
+  final double diameter;
   final ImageProvider image;
   final Color boxShadowColor;
   final double spreadRadius;
@@ -17,8 +17,8 @@ class SPMAvatarBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: radius,
-      height: radius,
+      width: diameter,
+      height: diameter,
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
         shape: BoxShape.circle,

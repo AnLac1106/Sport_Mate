@@ -10,7 +10,6 @@ class MainHomePageCtrl extends GetxController {
 
 class MainHomePage extends GetView<MainHomePageCtrl> {
   final Widget _spmHomePage = const SPMHomePage();
-
   final Widget _spmHomePage1 = const SPMCreateGame();
   final Widget _myHomePage = const SPMHomePage();
 
