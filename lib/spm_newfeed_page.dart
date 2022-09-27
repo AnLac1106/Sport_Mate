@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:sport_mate/common/photo_box.dart';
 import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/function/photo_builder.dart';
 
 import 'function/post_api.dart';
+
 
 class NewFeedPageCtrl extends GetxController {
   RxMap getData = {}.obs;
@@ -21,6 +21,7 @@ class NewFeedPageCtrl extends GetxController {
     }
     isLoading(false);
   }
+
   @override
   void onInit() {
     callAPI();
@@ -73,12 +74,12 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide:
-                            const BorderSide(color: Color(0xffeff3f7)),
+                                const BorderSide(color: Color(0xffeff3f7)),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
                             borderSide:
-                            const BorderSide(color: Color(0xffeff3f7)),
+                                const BorderSide(color: Color(0xffeff3f7)),
                           ),
                           isDense: true,
                           contentPadding: const EdgeInsets.all(0),
@@ -101,18 +102,16 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
               Obx(() {
                 if (controller.isLoading.value) {
                   return const CircularProgressIndicator();
-                }
-                else {
-                  return
-                    ListView.builder(
-                      itemBuilder: (context, index) {
-                        return buildItem(index);
-                      },
-                      itemCount: controller.getData['data'].length,
-                      scrollDirection: Axis.vertical,
-                      physics: const ScrollPhysics(),
-                      shrinkWrap: true,
-                    );
+                } else {
+                  return ListView.builder(
+                    itemBuilder: (context, index) {
+                      return buildItem(index);
+                    },
+                    itemCount: controller.getData['data'].length,
+                    scrollDirection: Axis.vertical,
+                    physics: const ScrollPhysics(),
+                    shrinkWrap: true,
+                  );
                 }
               }),
             ],
@@ -147,8 +146,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                           shape: BoxShape.circle,
                           image: DecorationImage(
                               image: NetworkImage(
-                                  '${controller
-                                      .getData['data'][index]['avatar']}'),
+                                  '${controller.getData['data'][index]['avatar']}'),
                               fit: BoxFit.cover),
                         ),
                       ),
@@ -162,12 +160,10 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             boxShadow: [
-                              BoxShadow(
-                                  color: Colors.green, spreadRadius: 1.5)
+                              BoxShadow(color: Colors.green, spreadRadius: 1.5)
                             ],
                             image: DecorationImage(
-                                image:
-                                AssetImage('assets/images/football.png'),
+                                image: AssetImage('assets/images/football.png'),
                                 fit: BoxFit.cover),
                           ),
                         ),
@@ -186,8 +182,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                       Text(
                         DateFormat('dd/MM/yyyy, HH:mm')
                             .format(DateTime.fromMillisecondsSinceEpoch(
-                            controller.getData['data'][index]
-                            ['create_at']))
+                                controller.getData['data'][index]['create_at']))
                             .toString(),
                       ),
                     ],
@@ -208,10 +203,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'Time: ${DateFormat('dd/MM/yyyy, HH:mm')
-                          .format(DateTime.fromMillisecondsSinceEpoch(controller
-                          .getData['data'][index]['create_at']))
-                          .toString()}',
+                      'Time: ${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(controller.getData['data'][index]['create_at'])).toString()}',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
@@ -219,8 +211,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      'Partner needed: ${controller
-                          .getData['data'][index]['partner needed']}',
+                      'Partner needed: ${controller.getData['data'][index]['partner needed']}',
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -228,7 +219,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
               ),
               Container(
                 padding:
-                const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                 alignment: Alignment.centerLeft,
                 child: Text(
                   '${controller.getData['data'][index]['last_message']}',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 
-class SPMAvatar extends StatelessWidget {
+class SPMAvatar extends GetView {
   final double radius;
   final String name;
   final double height;

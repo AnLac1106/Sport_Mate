@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sport_mate/common/spm_avatar_box.dart';
@@ -314,7 +313,9 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Container(
                         height: 90,
                         width: Get.width,
@@ -345,15 +346,16 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                                       Icon(Icons.star, color: Colors.grey),
                                     ],
                                   ),
-                                  const Text(
-                                      'Thanks for played with me'),
+                                  const Text('Thanks for played with me'),
                                 ],
                               ),
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Container(
                         height: 90,
                         width: Get.width,
@@ -384,15 +386,16 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                                       Icon(Icons.star, color: Colors.grey),
                                     ],
                                   ),
-                                  const Text(
-                                      'Thanks for played with me'),
+                                  const Text('Thanks for played with me'),
                                 ],
                               ),
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Container(
                         height: 90,
                         width: Get.width,
@@ -423,8 +426,7 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                                       Icon(Icons.star, color: Colors.grey),
                                     ],
                                   ),
-                                  const Text(
-                                      'Thanks for played with me'),
+                                  const Text('Thanks for played with me'),
                                 ],
                               ),
                             ),
