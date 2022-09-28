@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sport_mate/SPM_Creat_page/spm_create_game.dart';
+import 'package:sport_mate/spm_create_page/spm_create_game.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_select_box.dart';
 
