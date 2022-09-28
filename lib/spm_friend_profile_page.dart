@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
-import 'package:sport_mate/common/spm_avatar.dart';
+import 'package:sport_mate/common/spm_avatar_box.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_select_box.dart';
 import 'package:sport_mate/common/spm_text_style.dart';
@@ -42,12 +42,8 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const SPMAvatar(
-                radius: 50,
-                height: 100,
-                width: 100,
-                name: 'assets/images/avatar1.jpg',
-              ),
+              const SPMAvatarBox(
+                  radius: 100, image: AssetImage('assets/images/avatar1.jpg')),
               const SizedBox(height: 10),
               Text(
                 'Nguyễn Đức Thiện',
@@ -145,8 +141,10 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
                         child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
-                              const SPMAvatar(
-                                  height: 60, width: 60, radius: 40),
+                              const SPMAvatarBox(
+                                  radius: 60,
+                                  image: AssetImage(
+                                      'assets/images/SPM_test_avatar.png')),
                               const SizedBox(width: 16),
                               Column(
                                   mainAxisAlignment: MainAxisAlignment.center,

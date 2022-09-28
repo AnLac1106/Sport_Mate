@@ -27,35 +27,36 @@ class MainHomePage extends GetView<MainHomePageCtrl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() => getBody()),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.grey,
-        elevation: 0.0,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+        body: Obx(() => getBody()),
+        bottomNavigationBar: Obx(
+          () => BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.grey,
+            elevation: 0.0,
+            items: const <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.notifications),
+                label: 'Notifications',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.calendar_month),
+                label: 'Calendar',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'User',
+              ),
+            ],
+            currentIndex: controller._selectedIndex.value,
+            selectedItemColor: SPMColors.primaryColor,
+            unselectedItemColor: Colors.white,
+            onTap: _onItemTapped,
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifications',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month),
-            label: 'Calendar',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'User',
-          ),
-        ],
-        currentIndex: controller._selectedIndex.value,
-        selectedItemColor: SPMColors.primaryColor,
-        unselectedItemColor: Colors.white,
-        onTap: _onItemTapped,
-      ),
-    );
+        ));
   }
 
   Widget getBody() {

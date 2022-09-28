@@ -47,7 +47,7 @@ class SPMCreateGame extends GetView<CreateGameCtrl> {
           child: Padding(
             padding: const EdgeInsets.only(top: 40),
             child: Column(
-              children: <Widget>[
+              children: <Widget>[ 
                 const SPMHeader(),
                 const SizedBox(height: 30),
                 SPMDate(controller: controller, date: date),
