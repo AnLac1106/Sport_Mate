@@ -7,6 +7,7 @@ import 'package:sport_mate/spm_newfeed_page.dart';
 import 'package:sport_mate/spm_notification_page.dart';
 import 'package:sport_mate/spm_profile_page.dart';
 import 'package:sport_mate/spm_welcome_page.dart';
+import 'package:sport_mate/sm_navigatorbar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,10 +20,10 @@ class MyApp extends GetView {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.grey,
         shadowColor: Colors.white,
       ),
-      home: const SPMNotificationPage(),
+      home: const BottomBarPage(),
       debugShowCheckedModeBanner: false,
     );
   }

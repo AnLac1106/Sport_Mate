@@ -1,10 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/spm_home_page.dart';
-import 'package:sport_mate/common/spm_page_const.dart';
-import 'package:sport_mate/spm_main_home_page.dart';
+import 'package:sport_mate/spm_newfeed_page.dart';
 
 class SelectButton extends GetView {
   const SelectButton({
@@ -25,9 +25,12 @@ class SelectButton extends GetView {
               child: TextButton(
                 onPressed: () {
                   debugPrint('Move to New Feed');
-
-                  Get.find<MainHomePageCtrl>().selectedHomeIndex.value =
-                      spmNewFeedPageIndex;
+                  // Get.find<MainHomePageCtrl>().selectedHomeIndex.value =
+                  //     spmNewFeedPageIndex;
+                  Navigator.push(
+                      context,
+                      CupertinoPageRoute(
+                          builder: (context) => const SPMNewFeedPage()));
                 },
                 child: const Text('Create',
                     style: TextStyle(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/function/photo_builder.dart';
 import 'package:sport_mate/function/spm_comment.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'function/post_api.dart';
 
 class NewFeedPageCtrl extends GetxController {

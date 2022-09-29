@@ -1,4 +1,5 @@
 // ignore_for_file: constant_identifier_names
+import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,8 +26,9 @@ class CreateGameCtrl extends GetxController {
 }
 
 class SPMCreateGame extends GetView<CreateGameCtrl> {
-  const SPMCreateGame({Key? key}) : super(key: key);
+  SPMCreateGame({Key? key}) : super(key: key);
 
+  DateTime _dateTime = DateTime.now();
   @override
   CreateGameCtrl get controller => Get.put<CreateGameCtrl>(CreateGameCtrl());
 
@@ -63,7 +65,11 @@ class SPMCreateGame extends GetView<CreateGameCtrl> {
                 const SPMDescription(),
                 const SizedBox(height: 20),
                 const SelectButton(),
-                const SizedBox(height: 30),
+                const SizedBox(height: 100),
+                // TODO: Thử ShowTimePicker Cupertino
+                CupertinoDatePicker(onDateTimeChanged: (dateTime) {
+                  _dateTime = dateTime;
+                })
               ],
             ),
           ),

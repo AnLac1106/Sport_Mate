@@ -38,13 +38,15 @@ class SPMTextField extends StatefulWidget {
 
   @override
   State<SPMTextField> createState() => _SPMTextFieldState();
+
+  copyWith() {}
 }
 
 class _SPMTextFieldState extends State<SPMTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      // textAlignVertical: TextAlignVertical.top,
+      textAlignVertical: TextAlignVertical.top,
       focusNode: widget.focusNode,
       style: const TextStyle(fontSize: 18, height: 1.5),
       onChanged: widget.onChanged,
