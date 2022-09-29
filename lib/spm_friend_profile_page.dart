@@ -22,7 +22,6 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
         elevation: 0.0,
         title: const Text('My Profile'),
         centerTitle: true,
-        leading: const Icon(Icons.arrow_back_ios_new, color: Colors.black),
         actions: [
           IconButton(
               onPressed: () {},
@@ -43,7 +42,8 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               const SPMAvatarBox(
-                  radius: 100, image: AssetImage('assets/images/avatar1.jpg')),
+                  diameter: 3.0,
+                  image: AssetImage('assets/images/avatar1.jpg')),
               const SizedBox(height: 10),
               Text(
                 'Nguyễn Đức Thiện',
@@ -142,7 +142,7 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               const SPMAvatarBox(
-                                  radius: 60,
+                                  diameter: 3.0,
                                   image: AssetImage(
                                       'assets/images/SPM_test_avatar.png')),
                               const SizedBox(width: 16),

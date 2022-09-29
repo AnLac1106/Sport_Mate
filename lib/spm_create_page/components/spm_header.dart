@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sport_mate/SPM_Creat_page/spm_create_game.dart';
 import 'package:sport_mate/common/spm_avatar_box.dart';
+import 'package:sport_mate/spm_create_page/spm_create_game.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_text_style.dart';
 
@@ -77,7 +77,7 @@ class SPMHeader extends GetView<CreateGameCtrl> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   SPMAvatarBox(
-                      radius: 60,
+                      diameter: 60.0,
                       image: AssetImage('assets/images/SPM_test_avatar.png'))
                 ]),
           ),

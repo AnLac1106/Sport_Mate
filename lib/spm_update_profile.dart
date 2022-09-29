@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sport_mate/SPM_Creat_page/spm_create_game.dart';
 import 'package:sport_mate/common/spm_avatar_box.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_text_style.dart';
+import 'package:sport_mate/spm_create_page/spm_create_game.dart';
 
 class SPMUpdateProfile extends GetView<CreateGameCtrl> {
   const SPMUpdateProfile({Key? key}) : super(key: key);
@@ -40,7 +40,7 @@ class SPMUpdateProfile extends GetView<CreateGameCtrl> {
                   child: Stack(
                     children: <Widget>[
                       const SPMAvatarBox(
-                          radius: 100,
+                          diameter: 3.0,
                           image:
                               AssetImage('assets/images/SPM_test_avatar.png'),
                           boxShadowColor: Colors.white,
