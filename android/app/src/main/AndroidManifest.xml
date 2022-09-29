@@ -3,7 +3,7 @@
    <application
         android:label="sport_mate"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/spm_appicon">
         <activity
             android:name=".MainActivity"
             android:exported="true"

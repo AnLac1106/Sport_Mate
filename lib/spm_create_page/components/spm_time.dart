@@ -74,7 +74,7 @@ class SPMTime extends GetView<CreateGameCtrl> {
                                   color: Colors.grey),
                             ),
                             Image.asset(
-                              'assets/images/SPMsort.png',
+                              'assets/images/spmsort.png',
                               scale: 4.0,
                             )
                           ],
@@ -107,7 +107,7 @@ class SPMTime extends GetView<CreateGameCtrl> {
                                   color: Colors.grey),
                             ),
                             Image.asset(
-                              'assets/images/SPMsort.png',
+                              'assets/images/spmsort.png',
                               scale: 4.0,
                             )
                           ],

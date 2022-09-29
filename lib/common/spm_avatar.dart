@@ -9,7 +9,7 @@ class SPMAvatar extends GetView {
   const SPMAvatar(
       {Key? key,
       required this.radius,
-      this.name = "assets/images/SPM_test_avatar.png",
+      this.name = "assets/images/spm_test_avatar.png",
       this.height = 60,
       this.width = 60})
       : super(key: key);

@@ -15,7 +15,7 @@ enum Menu { online, offline, away }
 class SPMProfilePageCtrl extends GetxController {
   Rx<Select1> select1 = Select1.myGame.obs;
   Rx<Select2> select2 = Select2.history.obs;
-  RxString selectedItem = 'online'.obs;
+  RxString selectedItem = ''.obs;
 }
 
 class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
@@ -31,7 +31,10 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('My Profile'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.grey,
+        elevation: 0,
+        title: const Text('My Profile', style: TextStyle(color: SPMColors.primaryColor),),
         centerTitle: true,
         leading: const Icon(Icons.arrow_back_ios_new),
         actions: [
@@ -67,32 +70,10 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                     ),
                   ],
                 ),
-                Positioned(
+                const Positioned(
                     top: 0,
                     right: 0,
-                    child: Obx(
-                      () => SPMStatusBox(select: controller.selectedItem.value),
-                    )
-
-                    // Container(
-                    //   width: 85,
-                    //   height: 25,
-                    //   decoration: BoxDecoration(
-                    //     color: const Color(0xffEBEBEB),
-                    //     borderRadius: BorderRadius.circular(20),
-                    //   ),
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    //     children: const [
-                    //       Icon(
-                    //         Icons.circle,
-                    //         color: Colors.green,
-                    //         size: 18,
-                    //       ),
-                    //       Text('Online'),
-                    //     ],
-                    //   ),
-                    // ),
+                    child: SPMStatusBox(),
                     ),
               ],
             ),

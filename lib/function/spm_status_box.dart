@@ -8,44 +8,45 @@ class SPMStatusBoxCtrl extends GetxController {
 }
 
 class SPMStatusBox extends GetView {
-   SPMStatusBox({ required this.select,
-    Key? key,
-  }) : super(key: key);
+   const SPMStatusBox({this.width = 85, this.height = 25, Key? key,}) : super(key: key);
 
-  String select;
+  @override
+  SPMStatusBoxCtrl get controller => Get.put(SPMStatusBoxCtrl());
 
-  // @override
-  // SPMStatusBoxCtrl get controller => Get.put(SPMStatusBoxCtrl());
+  final double width;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
             children: [
           Container(
-            width: 85,
-            height: 25,
+            width: width,
+            height: height,
             decoration: BoxDecoration(
               color: const Color(0xffEBEBEB),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Row(
+            child:Obx(() => Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // Obx(() => status(),),
-               Text(select)
+                 status(),
+               Text(controller.selectedItem.value)
               ],
-            ),
+            ), ),
           ),
           SizedBox(
-              width: 85,
-              height: 25,
+              width: width,
+              height: height,
               child: PopupMenuButton<Menu>(
+                padding: const EdgeInsets.all(0),
                   icon: Container(),
                   onSelected: (Menu item) {
-                      select = item.name;
+                      controller.selectedItem.value = item.name;
                   },
                   itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
                     const PopupMenuItem(
+                      padding: EdgeInsets.all(0),
                       value: Menu.online,
                       child: ListTile(
                         leading: Icon(
@@ -57,6 +58,7 @@ class SPMStatusBox extends GetView {
                       ),
                     ),
                     const PopupMenuItem(
+                      padding: EdgeInsets.all(0),
                       value: Menu.offline,
                       child: ListTile(
                         leading: Icon(
@@ -68,6 +70,7 @@ class SPMStatusBox extends GetView {
                       ),
                     ),
                     const PopupMenuItem(
+                      padding: EdgeInsets.all(0),
                       value: Menu.away,
                       child: ListTile(
                         leading: Icon(
@@ -89,16 +92,19 @@ class SPMStatusBox extends GetView {
       return const Icon(
         Icons.circle,
         color: Colors.green,
+        size: 18,
       );
     } else if (controller.selectedItem.value == 'offline') {
       return const Icon(
         Icons.circle,
         color: Colors.red,
+        size: 18,
       );
     } else {
       return const Icon(
         Icons.watch_later,
         color: Colors.yellow,
+        size: 18,
       );
     }
   }

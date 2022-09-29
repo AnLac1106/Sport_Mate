@@ -31,7 +31,7 @@ class SPMHomePage extends GetView<MainHomePageCtrl> {
                         SizedBox(
                             height: 100,
                             width: 100,
-                            child: Image.asset('assets/images/SPM_logo.png')),
+                            child: Image.asset('assets/images/spm_logo.png')),
                         const Text('sportmate', style: textStyleHeading1),
                         const SizedBox(height: 30),
                         const Text('Hello partners!', style: textStyleNormal),
@@ -64,7 +64,7 @@ class SPMHomePage extends GetView<MainHomePageCtrl> {
                                     image: const DecorationImage(
                                       scale: 4.0,
                                       image: ExactAssetImage(
-                                          'assets/images/SPM_create.png'),
+                                          'assets/images/spm_create.png'),
                                     ),
                                     color: SPMColors.primaryColor,
                                     borderRadius: BorderRadius.circular(16),
@@ -90,7 +90,7 @@ class SPMHomePage extends GetView<MainHomePageCtrl> {
                                     image: const DecorationImage(
                                       scale: 4.0,
                                       image: ExactAssetImage(
-                                          'assets/images/SPM_join.png'),
+                                          'assets/images/spm_join.png'),
                                     ),
                                     borderRadius: BorderRadius.circular(16),
                                     border: Border.all(

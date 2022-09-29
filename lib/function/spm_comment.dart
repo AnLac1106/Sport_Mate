@@ -101,7 +101,7 @@ class SPMComment extends StatelessWidget {
                   ),
                   Row(children: [
                     Text(DateFormat('dd/MM/yyyy, HH:mm')
-                        .format(DateTime.fromMillisecondsSinceEpoch(createAt)))
+                        .format(DateTime.fromMillisecondsSinceEpoch(createAt*1000)))
                   ]),
                   const SizedBox(
                     height: 8,
