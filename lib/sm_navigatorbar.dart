@@ -29,7 +29,7 @@ class _BottomBarPageState extends State<BottomBarPage> {
           case 0:
             return CupertinoTabView(
                 builder: (context) =>
-                    const CupertinoPageScaffold(child: SPMHomePage()));
+                    const CupertinoPageScaffold(child: SPMNewFeedPage()));
           case 1:
             return CupertinoTabView(
                 builder: (context) =>
