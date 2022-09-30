@@ -2,15 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sport_mate/spm_create_page/components/spm_date.dart';
-import 'package:sport_mate/spm_create_page/components/spm_description.dart';
-import 'package:sport_mate/spm_create_page/components/spm_header.dart';
-import 'package:sport_mate/spm_create_page/components/spm_level.dart';
-import 'package:sport_mate/spm_create_page/components/spm_partners.dart';
-import 'package:sport_mate/spm_create_page/components/spm_place.dart';
-import 'package:sport_mate/spm_create_page/components/spm_time.dart';
-import 'package:sport_mate/spm_create_page/spm_create_game.dart';
+
 import 'package:sport_mate/common/spm_select_button.dart';
+import 'package:sport_mate/spm_create_game_detail/components/spm_header.dart';
+import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
 
 class SPMUpdateInfor extends GetView<CreateGameCtrl> {
   const SPMUpdateInfor({Key? key}) : super(key: key);
@@ -36,22 +31,7 @@ class SPMUpdateInfor extends GetView<CreateGameCtrl> {
             padding: const EdgeInsets.only(top: 40),
             child: Column(
               children: <Widget>[
-                const SPMHeader(),
-                const SizedBox(height: 30),
-                SPMDate(controller: controller, date: date),
-                const SizedBox(height: 20),
-                SPMTime(controller: controller),
-                const SizedBox(height: 20),
-                SPMLevel(controller: controller, date: date),
-                const SizedBox(height: 20),
-                const SPMPlace(),
-                const SizedBox(height: 20),
-                SPMPartners(controller: controller),
-                const SizedBox(height: 20),
-                const SPMDescription(),
-                const SizedBox(height: 20),
-                const SelectButton(),
-                const SizedBox(height: 30),
+
               ],
             ),
           ),

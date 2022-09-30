@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_text_style.dart';
-import 'package:sport_mate/spm_create_page/spm_create_game.dart';
+import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
 import 'package:sport_mate/spm_friend_profile_page.dart';
 import 'package:sport_mate/spm_main_home_page.dart';
 import 'package:sport_mate/spm_newfeed_page.dart';
 
-class SPMHomePage extends GetView<MainHomePageCtrl> {
-  const SPMHomePage({Key? key}) : super(key: key);
+class SPMCreateGamePage extends GetView<MainHomePageCtrl> {
+  const SPMCreateGamePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +42,11 @@ class SPMHomePage extends GetView<MainHomePageCtrl> {
                   onTap: (() {
                     debugPrint('Start Game');
                     // controller.selectedHomeIndex.value = spmCreateGameIndex;
-                    Get.to(SPMCreateGame());
-                    // Navigator.push(
-                    //     context,
-                    //     CupertinoPageRoute(
-                    //         builder: (context) => SPMCreateGame()));
+                    // Get.to(SPMCreateGame());
+                    Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                            builder: (context) => SPMCreateGameDetail()));
                   }),
                   child: Container(
                     padding: const EdgeInsets.all(20),
@@ -70,12 +70,12 @@ class SPMHomePage extends GetView<MainHomePageCtrl> {
                 GestureDetector(
                   onTap: (() {
                     debugPrint('Join Game');
-                    Get.to(const SPMNewFeedPage());
-                    // Navigator.push(
-                    //     context,
-                    //     CupertinoPageRoute(
-                    //         builder: (context) =>
-                    //             const SPMFriendProfilePage()));
+                    // Get.to(const SPMNewFeedPage());
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SPMNewFeedPage()),
+                            (route) => false);
                   }),
                   child: Container(
                     padding: const EdgeInsets.all(20),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -6,6 +7,8 @@ import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/function/photo_builder.dart';
 import 'package:sport_mate/function/spm_comment.dart';
+import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
+import 'package:sport_mate/spm_create_game_page.dart';
 import 'function/post_api.dart';
 
 class NewFeedPageCtrl extends GetxController {
@@ -40,6 +43,16 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 50),
+        child: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(context,
+                  CupertinoPageRoute(builder: (context) => const SPMCreateGamePage()));
+            },
+            child: const Icon(Icons.plus_one)),
+      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
       backgroundColor: Colors.blue.shade100,
       body: SafeArea(
         child: SingleChildScrollView(

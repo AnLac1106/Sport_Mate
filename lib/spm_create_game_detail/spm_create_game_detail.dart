@@ -3,14 +3,21 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sport_mate/spm_create_page/components/spm_date.dart';
-import 'package:sport_mate/spm_create_page/components/spm_description.dart';
-import 'package:sport_mate/spm_create_page/components/spm_header.dart';
-import 'package:sport_mate/spm_create_page/components/spm_level.dart';
-import 'package:sport_mate/spm_create_page/components/spm_partners.dart';
-import 'package:sport_mate/spm_create_page/components/spm_place.dart';
-import 'package:sport_mate/spm_create_page/components/spm_time.dart';
+// import 'package:sport_mate/spm_create_page/components/spm_date.dart';
+// import 'package:sport_mate/spm_create_page/components/spm_description.dart';
+// import 'package:sport_mate/spm_create_page/components/spm_header.dart';
+// import 'package:sport_mate/spm_create_page/components/spm_level.dart';
+// import 'package:sport_mate/spm_create_page/components/spm_partners.dart';
+// import 'package:sport_mate/spm_create_page/components/spm_place.dart';
+// import 'package:sport_mate/spm_create_page/components/spm_time.dart';
 import 'package:sport_mate/common/spm_select_button.dart';
+import 'package:sport_mate/spm_create_game_detail/components/spm_date.dart';
+import 'package:sport_mate/spm_create_game_detail/components/spm_description.dart';
+import 'package:sport_mate/spm_create_game_detail/components/spm_header.dart';
+import 'package:sport_mate/spm_create_game_detail/components/spm_level.dart';
+import 'package:sport_mate/spm_create_game_detail/components/spm_partners.dart';
+import 'package:sport_mate/spm_create_game_detail/components/spm_place.dart';
+import 'package:sport_mate/spm_create_game_detail/components/spm_time.dart';
 
 enum SelectedBox { box1, box2, box3 }
 
@@ -25,10 +32,9 @@ class CreateGameCtrl extends GetxController {
   RxInt currentPartnersNeeded = 0.obs;
 }
 
-class SPMCreateGame extends GetView<CreateGameCtrl> {
-  SPMCreateGame({Key? key}) : super(key: key);
+class SPMCreateGameDetail extends GetView<CreateGameCtrl> {
+  const SPMCreateGameDetail({Key? key}) : super(key: key);
 
-  DateTime _dateTime = DateTime.now();
   @override
   CreateGameCtrl get controller => Get.put<CreateGameCtrl>(CreateGameCtrl());
 

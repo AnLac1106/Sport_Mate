@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sport_mate/spm_create_page/spm_create_game.dart';
+import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
 
 class SPMTime extends GetView<CreateGameCtrl> {
   const SPMTime({

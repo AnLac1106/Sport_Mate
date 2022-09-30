@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sport_mate/spm_create_page/spm_create_game.dart';
+import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
 
-class SPMPlace extends GetView<CreateGameCtrl> {
-  const SPMPlace({
+class SPMDescription extends GetView<CreateGameCtrl> {
+  const SPMDescription({
     Key? key,
   }) : super(key: key);
 
@@ -12,7 +12,7 @@ class SPMPlace extends GetView<CreateGameCtrl> {
   Widget build(BuildContext context) {
     return Container(
         width: 350,
-        height: 120,
+        height: 200,
         decoration: BoxDecoration(
           color: const Color(0xFFF1F1F1),
           borderRadius: BorderRadius.circular(20),
@@ -23,7 +23,7 @@ class SPMPlace extends GetView<CreateGameCtrl> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   const Text(
-                    "Place",
+                    "Description",
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -38,10 +38,10 @@ class SPMPlace extends GetView<CreateGameCtrl> {
                     ),
                   ),
                   const SPMTextField(
-                    maxLine: 1,
-                    hintText:
-                        'Football Stadium, Hanoi University, Nguyen Trai Street',
-                  ),
+                    maxLine: 4,
+                    hintText: 'Description about your game',
+                    expands: true,
+                  )
                 ])));
   }
 }

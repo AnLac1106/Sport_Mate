@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sport_mate/spm_create_page/spm_create_game.dart';
-import 'package:sport_mate/spm_home_page.dart';
+import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
+import 'package:sport_mate/spm_create_game_page.dart';
 import 'common/spm_colors.dart';
 
 class MainHomePageCtrl extends GetxController {

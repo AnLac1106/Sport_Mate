@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:numberpicker/numberpicker.dart';
-import 'package:sport_mate/spm_create_page/spm_create_game.dart';
+import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
 
 class SPMPartners extends GetView<CreateGameCtrl> {
   const SPMPartners({

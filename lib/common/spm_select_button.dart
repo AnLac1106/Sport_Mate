@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
-import 'package:sport_mate/spm_home_page.dart';
+import 'package:sport_mate/spm_create_game_page.dart';
 import 'package:sport_mate/spm_newfeed_page.dart';
 
 class SelectButton extends GetView {
@@ -27,10 +27,15 @@ class SelectButton extends GetView {
                   debugPrint('Move to New Feed');
                   // Get.find<MainHomePageCtrl>().selectedHomeIndex.value =
                   //     spmNewFeedPageIndex;
-                  Navigator.push(
+                  // Navigator.push(
+                  //     context,
+                  //     CupertinoPageRoute(
+                  //         builder: (context) => const SPMNewFeedPage()));
+                  Navigator.pushAndRemoveUntil(
                       context,
-                      CupertinoPageRoute(
-                          builder: (context) => const SPMNewFeedPage()));
+                      MaterialPageRoute(
+                          builder: (context) => const SPMNewFeedPage()),
+                      (route) => false);
                 },
                 child: const Text('Create',
                     style: TextStyle(
@@ -49,7 +54,7 @@ class SelectButton extends GetView {
                   Navigator.pop(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const SPMHomePage(),
+                      builder: (context) => const SPMCreateGamePage(),
                     ),
                   );
                 },
