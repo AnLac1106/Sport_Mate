@@ -161,9 +161,18 @@ class SPMRegisterPage extends GetView {
                                       builder: (context) => AlertDialog(
                                         title: Text('Success!'.toUpperCase(),
                                             style: textStyleHeading4),
-                                        content: const Text(
-                                            "Tap 'OK' to return to Login Page",
-                                            style: textStyleNormal),
+                                        content: SizedBox(
+                                          height: 50,
+                                          child: Column(
+                                            children: const [
+                                              Text("Your account have been created!"),
+                                              SizedBox(height: 10,),
+                                              Text(
+                                                  "Tap 'OK' to return to Login Page",
+                                                  style: textStyleNormal),
+                                            ],
+                                          ),
+                                        ),
                                         actions: [
                                           SPMButton(
                                             color: SPMColors.secondaryColor,

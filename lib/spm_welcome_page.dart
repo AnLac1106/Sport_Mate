@@ -5,6 +5,8 @@ import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_select_box.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
 import 'package:sport_mate/common/spm_text_style.dart';
+import 'package:sport_mate/spm_main_home_page.dart';
+import 'package:sport_mate/spm_newfeed_page.dart';
 import 'package:sport_mate/spm_register_page.dart';
 import 'common/spm_button.dart';
 
@@ -86,20 +88,19 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                             const SizedBox(
                               height: 32,
                             ),
-                            SPMTextField(
-                              // controller: TextEditingController(),
+                            const SPMTextField(
                               maxLine: 1,
-                              focusNode: controller.f2.value,
+                              // focusNode: controller.f2.value,
                               labelText: 'Email Address',
-                              suffixIcon: controller.f2.value.hasFocus
-                                  ? IconButton(
-                                      iconSize: 15,
-                                      onPressed: () {
-                                        // TextEditingController().clear();
-                                      },
-                                      icon: const Icon(Icons.clear),
-                                    )
-                                  : null,
+                              // suffixIcon: controller.f2.value.hasFocus
+                              //     ? IconButton(
+                              //         iconSize: 15,
+                              //         onPressed: () {
+                              //           // TextEditingController().clear();
+                              //         },
+                              //         icon: const Icon(Icons.clear),
+                              //       )
+                              //     : null,
                             ),
                             const SizedBox(
                               height: 32,
@@ -151,90 +152,10 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                                   textColor: Colors.white,
                                   width: 225,
                                   height: 48,
-                                  onPress: () {},
+                                  onPress: () {
+                                    Get.off(const SPMNewFeedPage());
+                                  },
                                   child: const Text('Login'),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Obx(
-                                  () => SPMSelectBox(
-                                    onTap: () {
-                                      controller.selectedBox.value =
-                                          SelectedBox.box1;
-                                    },
-                                    color: controller.selectedBox.value
-                                                .toString() ==
-                                            SelectedBox.box1.toString()
-                                        ? SPMColors.primaryColor
-                                        : Colors.white,
-                                    borderColor: controller.selectedBox.value
-                                                .toString() ==
-                                            SelectedBox.box1.toString()
-                                        ? SPMColors.primaryColor
-                                        : Colors.grey,
-                                    width: controller.selectedBox
-                                            .toString()
-                                            .isNotEmpty
-                                        ? 100
-                                        : 100,
-                                    height: 50,
-                                    borderRadius: 20,
-                                    child: Text('test1'),
-                                  ),
-                                ),
-                                Obx(
-                                  () => SPMSelectBox(
-                                    onTap: () {
-                                      controller.selectedBox.value =
-                                          SelectedBox.box2;
-                                    },
-                                    color: controller.selectedBox.value
-                                                .toString() ==
-                                            SelectedBox.box2.toString()
-                                        ? SPMColors.primaryColor
-                                        : Colors.white,
-                                    borderColor: controller.selectedBox.value
-                                                .toString() ==
-                                            SelectedBox.box2.toString()
-                                        ? SPMColors.primaryColor
-                                        : Colors.grey,
-                                    width: controller.selectedBox
-                                            .toString()
-                                            .isNotEmpty
-                                        ? 100
-                                        : 100,
-                                    height: 50,
-                                    borderRadius: 20,
-                                    child: Text('test1'),
-                                  ),
-                                ),
-                                Obx(
-                                  () => SPMSelectBox(
-                                    onTap: () {
-                                      controller.selectedBox.value =
-                                          SelectedBox.box3;
-                                    },
-                                    color: controller.selectedBox.value
-                                                .toString() ==
-                                            SelectedBox.box3.toString()
-                                        ? SPMColors.primaryColor
-                                        : Colors.white,
-                                    borderColor: controller.selectedBox.value
-                                                .toString() ==
-                                            SelectedBox.box3.toString()
-                                        ? SPMColors.primaryColor
-                                        : Colors.grey,
-                                    width: controller.selectedBox
-                                            .toString()
-                                            .isNotEmpty
-                                        ? 100
-                                        : 100,
-                                    height: 50,
-                                    borderRadius: 20,
-                                    child: Text('test1'),
-                                  ),
                                 ),
                               ],
                             ),

@@ -7,6 +7,7 @@ import 'package:sport_mate/common/spm_text_style.dart';
 import 'package:sport_mate/spm_create_page/spm_create_game.dart';
 import 'package:sport_mate/spm_friend_profile_page.dart';
 import 'package:sport_mate/spm_main_home_page.dart';
+import 'package:sport_mate/spm_newfeed_page.dart';
 
 class SPMHomePage extends GetView<MainHomePageCtrl> {
   const SPMHomePage({Key? key}) : super(key: key);
@@ -29,8 +30,8 @@ class SPMHomePage extends GetView<MainHomePageCtrl> {
               SizedBox(
                   height: 100,
                   width: 100,
-                  child: Image.asset('assets/images/SPM_logo.png')),
-              const Text('sportmate', style: textStyleHeading1),
+                  child: Image.asset('assets/images/spm_logo.png')),
+              const Text('SPORTMATE', style: textStyleHeading1),
               const SizedBox(height: 30),
               const Text('Hello partners!', style: textStyleNormal),
               const SizedBox(height: 30),
@@ -41,11 +42,11 @@ class SPMHomePage extends GetView<MainHomePageCtrl> {
                   onTap: (() {
                     debugPrint('Start Game');
                     // controller.selectedHomeIndex.value = spmCreateGameIndex;
-
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) => SPMCreateGame()));
+                    Get.to(SPMCreateGame());
+                    // Navigator.push(
+                    //     context,
+                    //     CupertinoPageRoute(
+                    //         builder: (context) => SPMCreateGame()));
                   }),
                   child: Container(
                     padding: const EdgeInsets.all(20),
@@ -55,7 +56,7 @@ class SPMHomePage extends GetView<MainHomePageCtrl> {
                     decoration: BoxDecoration(
                       image: const DecorationImage(
                         scale: 4.0,
-                        image: ExactAssetImage('assets/images/SPM_create.png'),
+                        image: ExactAssetImage('assets/images/spm_create.png'),
                       ),
                       color: SPMColors.primaryColor,
                       borderRadius: BorderRadius.circular(16),
@@ -69,11 +70,12 @@ class SPMHomePage extends GetView<MainHomePageCtrl> {
                 GestureDetector(
                   onTap: (() {
                     debugPrint('Join Game');
-                    Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                            builder: (context) =>
-                                const SPMFriendProfilePage()));
+                    Get.to(const SPMNewFeedPage());
+                    // Navigator.push(
+                    //     context,
+                    //     CupertinoPageRoute(
+                    //         builder: (context) =>
+                    //             const SPMFriendProfilePage()));
                   }),
                   child: Container(
                     padding: const EdgeInsets.all(20),
@@ -83,7 +85,7 @@ class SPMHomePage extends GetView<MainHomePageCtrl> {
                     decoration: BoxDecoration(
                       image: const DecorationImage(
                         scale: 4.0,
-                        image: ExactAssetImage('assets/images/SPM_join.png'),
+                        image: ExactAssetImage('assets/images/spm_join.png'),
                       ),
                       borderRadius: BorderRadius.circular(16),
                       border:

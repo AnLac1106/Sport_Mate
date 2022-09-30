@@ -78,7 +78,7 @@ class SPMHeader extends GetView<CreateGameCtrl> {
                 children: const [
                   SPMAvatarBox(
                       diameter: 60.0,
-                      image: AssetImage('assets/images/SPM_test_avatar.png'))
+                      image: AssetImage('assets/images/spm_test_avatar.png'))
                 ]),
           ),
         ),

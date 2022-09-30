@@ -66,10 +66,6 @@ class SPMCreateGame extends GetView<CreateGameCtrl> {
                 const SizedBox(height: 20),
                 const SelectButton(),
                 const SizedBox(height: 100),
-                // TODO: Thử ShowTimePicker Cupertino
-                CupertinoDatePicker(onDateTimeChanged: (dateTime) {
-                  _dateTime = dateTime;
-                })
               ],
             ),
           ),

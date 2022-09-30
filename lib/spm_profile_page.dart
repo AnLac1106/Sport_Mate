@@ -36,7 +36,7 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
         elevation: 0,
         title: const Text('My Profile', style: TextStyle(color: SPMColors.primaryColor),),
         centerTitle: true,
-        leading: const Icon(Icons.arrow_back_ios_new),
+        // leading: const Icon(Icons.arrow_back_ios_new),
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
           IconButton(onPressed: () {}, icon: const Icon(Icons.logout)),

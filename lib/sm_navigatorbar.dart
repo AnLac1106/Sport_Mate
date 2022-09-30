@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sport_mate/spm_create_page/spm_create_game.dart';
 import 'package:sport_mate/spm_home_page.dart';
 import 'package:sport_mate/spm_newfeed_page.dart';
+import 'package:sport_mate/spm_notification_page.dart';
 import 'package:sport_mate/spm_profile_page.dart';
 
 class BottomBarPage extends StatefulWidget {
@@ -29,15 +30,15 @@ class _BottomBarPageState extends State<BottomBarPage> {
           case 0:
             return CupertinoTabView(
                 builder: (context) =>
-                    const CupertinoPageScaffold(child: SPMHomePage()));
+                    const CupertinoPageScaffold(child: SPMNewFeedPage()));
           case 1:
             return CupertinoTabView(
                 builder: (context) =>
-                    CupertinoPageScaffold(child: SPMCreateGame()));
+                    const CupertinoPageScaffold(child: SPMNotificationPage()));
           case 2:
             return CupertinoTabView(
                 builder: (context) =>
-                    const CupertinoPageScaffold(child: SPMNotificationPage()));
+                    const CupertinoPageScaffold(child: SPMCalendarPage()));
           case 3:
             return CupertinoTabView(
                 builder: (context) =>
@@ -53,8 +54,8 @@ class _BottomBarPageState extends State<BottomBarPage> {
   }
 }
 
-class SPMNotificationPage extends StatelessWidget {
-  const SPMNotificationPage({Key? key}) : super(key: key);
+class SPMCalendarPage extends StatelessWidget {
+  const SPMCalendarPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

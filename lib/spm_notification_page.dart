@@ -26,7 +26,7 @@ class SPMNotificationPage extends GetView {
             style: TextStyle(color: SPMColors.primaryColor),
           ),
           centerTitle: true,
-          leading: const Icon(Icons.arrow_back_ios_new),
+          // leading: const Icon(Icons.arrow_back_ios_new),
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
             IconButton(onPressed: () {}, icon: const Icon(Icons.logout)),

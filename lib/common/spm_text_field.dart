@@ -63,7 +63,7 @@ class _SPMTextFieldState extends State<SPMTextField> {
         suffixIcon: widget.suffixIcon,
         suffix: widget.suffix,
         labelText: widget.labelText,
-        labelStyle: Get.textTheme.headline4,
+        // labelStyle: Get.textTheme.headline4,
         hintText: widget.hintText,
         // border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         // focusedBorder: OutlineInputBorder(
