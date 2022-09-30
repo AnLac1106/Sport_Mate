@@ -10,6 +10,8 @@ import 'package:sport_mate/spm_notification_page.dart';
 import 'package:sport_mate/spm_profile_page.dart';
 import 'package:sport_mate/spm_welcome_page.dart';
 import 'package:sport_mate/sm_navigatorbar.dart';
+import 'package:sport_mate/spm_create_page/components/spm_time_cuper.dart';
+import 'package:sport_mate/spm_create_page/spm_create_game.dart';
 
 void main() {
   runApp(const MyApp());
