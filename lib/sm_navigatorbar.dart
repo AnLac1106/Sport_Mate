@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sport_mate/spm_calendar_page.dart';
 import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
 import 'package:sport_mate/spm_create_game_page.dart';
 import 'package:sport_mate/spm_newfeed_page.dart';
@@ -51,22 +52,5 @@ class _BottomBarPageState extends State<BottomBarPage> {
         }
       },
     );
-  }
-}
-
-class SPMCalendarPage extends StatelessWidget {
-  const SPMCalendarPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        title: const Text('Page 3'),
-      ),
-      body: const Center(
-        child: Text('Hello from page 3'),
-      ),
-    ));
   }
 }
