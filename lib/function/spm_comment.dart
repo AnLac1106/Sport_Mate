@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sport_mate/common/spm_avatar_box.dart';
+import 'package:sport_mate/spm_newfeed_page.dart';
 
-class SPMComment extends StatelessWidget {
+class SPMComment extends GetView {
+  @override
+  NewFeedPageCtrl get controller => Get.put(NewFeedPageCtrl());
+
   const SPMComment(
       {Key? key,
-      required this.userAvatar,
-      required this.userName,
-      required this.createAt,
-      required this.userComment})
+      required this.itemCount,
+      required this.index,
+      })
       : super(key: key);
 
-  final String userAvatar;
-  final String userName;
-  final int createAt;
-  final String userComment;
+  final int itemCount;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -25,16 +27,15 @@ class SPMComment extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               itemBuilder: (buildContext, index) {
-                return buildComment();
+                return buildComment(index);
               },
-              itemCount: 5,
+              itemCount: itemCount,
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               // physics: const ScrollPhysics(),
               padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 12),
             ),
           ),
-          // const SizedBox(height: 3,),
           Container(
             alignment: Alignment.center,
             height: 60,
@@ -68,11 +69,12 @@ class SPMComment extends StatelessWidget {
     );
   }
 
-  Widget buildComment() {
+  Widget buildComment(commentIndex) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SPMAvatarBox(diameter: 32, image: NetworkImage(userAvatar)),
+        SPMAvatarBox(diameter: 32,
+            image: NetworkImage(controller.getData['data'][index]['comment'][commentIndex]['user_avatar'])),
         const SizedBox(
           width: 8,
         ),
@@ -93,7 +95,7 @@ class SPMComment extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        userName,
+                        controller.getData['data'][index]['comment'][commentIndex]['user_name'],
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
                       const Icon(Icons.more_vert),
@@ -101,7 +103,9 @@ class SPMComment extends StatelessWidget {
                   ),
                   Row(children: [
                     Text(DateFormat('dd/MM/yyyy, HH:mm')
-                        .format(DateTime.fromMillisecondsSinceEpoch(createAt*1000)))
+                        .format(DateTime.fromMillisecondsSinceEpoch(
+                      controller.getData['data'][index]['comment'][commentIndex]['create_at']*1000,
+                    )))
                   ]),
                   const SizedBox(
                     height: 8,
@@ -110,7 +114,8 @@ class SPMComment extends StatelessWidget {
                     children: [
                       Expanded(
                           child: Column(
-                        children: [Text(userComment)],
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [Text(controller.getData['data'][index]['comment'][commentIndex]['user_comment'])],
                       ))
                     ],
                   ),
