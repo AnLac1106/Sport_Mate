@@ -3,7 +3,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sport_mate/common/spm_avatar_box.dart';
-import 'package:sport_mate/function/spm_shimmer.dart';
 import 'package:sport_mate/function/spm_shimmer_notification.dart';
 import 'function/post_api.dart';
 import 'common/spm_colors.dart';
@@ -58,15 +57,17 @@ class SPMNotificationPage extends GetView {
           if (controller.isLoading.value) {
             return const SPMShimmerNotification();
           } else {
-          return SlidableAutoCloseBehavior(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return buildNotificationItem(index);
-              },
-              itemCount: controller.notificationData.length,
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-            ),
-          );}
+            return SlidableAutoCloseBehavior(
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return buildNotificationItem(index);
+                },
+                itemCount: controller.notificationData.length,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+              ),
+            );
+          }
         }));
   }
 

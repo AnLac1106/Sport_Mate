@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:sport_mate/common/spm_avatar_box.dart';
 import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/function/photo_builder.dart';
@@ -46,36 +45,18 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      floatingActionButton: Padding(
-        padding: const EdgeInsets.only(bottom: 50),
-        child: FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                      builder: (context) => const SPMCreateGamePage()));
-            },
-            backgroundColor: SPMColors.primaryColor,
-            child: const Icon(Icons.create)),
-      ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      // backgroundColor: Colors.blue.shade100,
-      body: SafeArea(
-        child: SingleChildScrollView(
-=======
       body: NestedScrollView(
         floatHeaderSlivers: true,
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) =>
-        [SliverAppBar(
+            [
+          SliverAppBar(
             backgroundColor: Colors.white,
             snap: true,
             floating: true,
-            title: appBarTest(),
+            title: buildAppBar(context),
           ),
         ],
         body: SingleChildScrollView(
->>>>>>> bb587489b42c22151dea7d7eae308a8fe6689c2e
           child: Column(
             children: [
               Obx(() {
@@ -102,13 +83,10 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
   }
 
   Widget buildItem(BuildContext context, index) {
-<<<<<<< HEAD
-=======
     RxInt likes = 0.obs;
     likes.value = controller.getData['data'][index]['like'];
     RxBool isLiked = false.obs;
     isLiked.value = controller.getData['data'][index]['isLike'];
->>>>>>> bb587489b42c22151dea7d7eae308a8fe6689c2e
     return Column(
       children: [
         Container(
@@ -178,11 +156,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                         child: Text(
                           '${controller.getData['data'][index]['name']}',
                           style: const TextStyle(
-<<<<<<< HEAD
-                              fontWeight: FontWeight.bold, color: Colors.black),
-=======
                               color: Colors.black, fontWeight: FontWeight.bold),
->>>>>>> bb587489b42c22151dea7d7eae308a8fe6689c2e
                         ),
                       ),
                       Text(
@@ -447,7 +421,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
     );
   }
 
-  Widget appBarTest() {
+  Widget buildAppBar(BuildContext context) {
     return Row(
       children: [
         const SizedBox(
@@ -506,7 +480,14 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
               // ],
               // image: DecorationImage(image: image, fit: BoxFit.cover),
               ),
-          child: IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+          child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SPMCreateGamePage()));
+              },
+              icon: const Icon(Icons.add)),
         ),
       ],
     );

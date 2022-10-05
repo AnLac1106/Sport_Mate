@@ -21,10 +21,6 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0.0,
-<<<<<<< HEAD
-        // title: const Text('Friend Profile'),
-=======
->>>>>>> bb587489b42c22151dea7d7eae308a8fe6689c2e
         centerTitle: true,
       ),
       body: Container(
@@ -169,7 +165,6 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
                                       ),
                                       const Text(
                                           'Lorem ipsum dolor Lorem ipsum dolor sit amet'),
-                                      //TODO: Chữ ko tự động xuống dòng được.
                                     ]),
                               )
                             ]),
