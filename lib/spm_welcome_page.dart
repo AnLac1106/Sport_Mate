@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sport_mate/common/hide_keyboard.dart';
 import 'package:sport_mate/common/spm_colors.dart';
-import 'package:sport_mate/common/spm_select_box.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
 import 'package:sport_mate/common/spm_text_style.dart';
 import 'package:sport_mate/sm_navigatorbar.dart';
-import 'package:sport_mate/spm_main_home_page.dart';
-import 'package:sport_mate/spm_newfeed_page.dart';
 import 'package:sport_mate/spm_register_page.dart';
+import 'package:sport_mate/transition/scale_route.dart';
 import 'common/spm_button.dart';
 
 //Page 1
@@ -157,9 +155,9 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                                     // Get.off(const BottomBarPage());
                                     Navigator.pushAndRemoveUntil(
                                         context,
-                                        MaterialPageRoute(
-                                            builder: (context) => const BottomBarPage()),
-                                            (route) => false);
+                                        ScaleRoute(page: const BottomBarPage()),
+                                        (route) => false);
+                                    // SlideRightRoute(page: const BottomBarPage());
                                   },
                                   child: const Text('Login'),
                                 ),

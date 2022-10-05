@@ -7,8 +7,9 @@ import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/function/photo_builder.dart';
 import 'package:sport_mate/function/spm_comment.dart';
-import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
+import 'package:sport_mate/function/spm_shimmer.dart';
 import 'package:sport_mate/spm_create_game_page.dart';
+import 'package:sport_mate/spm_friend_profile_page.dart';
 import 'function/post_api.dart';
 
 class NewFeedPageCtrl extends GetxController {
@@ -47,13 +48,16 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
         padding: const EdgeInsets.only(bottom: 50),
         child: FloatingActionButton(
             onPressed: () {
-              Navigator.push(context,
-                  CupertinoPageRoute(builder: (context) => const SPMCreateGamePage()));
+              Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                      builder: (context) => const SPMCreateGamePage()));
             },
-            child: const Icon(Icons.plus_one)),
+            backgroundColor: SPMColors.primaryColor,
+            child: const Icon(Icons.create)),
       ),
       // floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
-      backgroundColor: Colors.blue.shade100,
+      // backgroundColor: Colors.blue.shade100,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -116,11 +120,12 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
               ),
               Obx(() {
                 if (controller.isLoading.value) {
-                  return const CircularProgressIndicator();
+                  // return const CircularProgressIndicator();
+                  return const SPMShimmer();
                 } else {
                   return ListView.builder(
                     itemBuilder: (context, index) {
-                      return buildItem(index);
+                      return buildItem(context, index);
                     },
                     itemCount: controller.getData['data'].length,
                     scrollDirection: Axis.vertical,
@@ -137,7 +142,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
     );
   }
 
-  Widget buildItem(index) {
+  Widget buildItem(BuildContext context, index) {
     return Column(
       children: [
         Container(
@@ -190,13 +195,30 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        '${controller.getData['data'][index]['name']}',
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              CupertinoPageRoute(
+                                  builder: (context) =>
+                                      const SPMFriendProfilePage()));
+                        },
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: Size.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        child: Text(
+                          '${controller.getData['data'][index]['name']}',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, color: Colors.black),
+                        ),
                       ),
                       Text(
                         DateFormat('dd/MM/yyyy, HH:mm')
                             .format(DateTime.fromMillisecondsSinceEpoch(
-                                controller.getData['data'][index]['create_at']))
+                                controller.getData['data'][index]['create_at'] *
+                                    1000))
                             .toString(),
                       ),
                     ],
@@ -216,12 +238,12 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Place: ',
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                        Text(
+                          'Place: ${controller.getData['data'][index]['place']}',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          'Time: ${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(controller.getData['data'][index]['create_at'])).toString()}',
+                          'Time: ${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(controller.getData['data'][index]['time'] * 1000)).toString()}',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
@@ -235,17 +257,18 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                       ],
                     ),
                     SPMButton(
-                        width: 125,
+                        width: 130,
                         color: SPMColors.primaryColor,
                         borderColor: SPMColors.primaryColor,
                         onPress: () {
                           Get.dialog(AlertDialog(
+                            title: const Text('Send request?'),
                             content: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: const [
                                 Text(
-                                  'Send request?',
-                                  style: TextStyle(fontSize: 22),
+                                  'Send request to this game?',
+                                  style: TextStyle(fontSize: 16),
                                 ),
                               ],
                             ),
@@ -304,7 +327,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                     ),
                     Obx(
                       () => Text(
-                        '  ${controller.like}',
+                        '  ${controller.getData['data'][index]['like']}',
                       ),
                     ),
                     const Expanded(child: SizedBox()),
@@ -312,16 +335,12 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                       onPressed: () {
                         showBarModalBottomSheet(
                           context: Get.context!,
-                          builder: (context) => const SizedBox(
-                            height: 700,
-                            child: SPMComment(
-                                userAvatar:
-                                    'https://vcdn1-dulich.vnecdn.net/2020/09/04/1-Meo-chup-anh-dep-khi-di-bien-9310-1599219010.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=j8THd4HE31ZHWTQhSZx5tQ',
-                                userName: 'Thử Nghiệm',
-                                createAt: 1664037858,
-                                userComment:
-                                    'Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt'),
-                          ),
+                          builder: (context) => SizedBox(
+                              height: 700,
+                              child: SPMComment(
+                                  itemCount: controller
+                                      .getData['data'][index]['comment'].length,
+                                  index: index)),
                           shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
                                   top: Radius.circular(10))),
@@ -347,15 +366,12 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                         //   isDismissible: false,
                         // );
                       },
-                      child: const Text(
-                        '2 comments',
+                      child: Text(
+                        '${controller.getData['data'][index]['comment'].length} comments',
                       ),
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 12,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 18),
@@ -368,16 +384,16 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                 height: 8,
               ),
               SizedBox(
-                height: 40,
+                height: 42,
                 child: Row(
                   children: [
                     Expanded(child: Obx(() {
                       return RawMaterialButton(
                         onPressed: () {
                           if (controller.isLiked.value) {
-                            controller.like--;
+                            controller.getData['data'][index]['like']--;
                           } else {
-                            controller.like++;
+                            controller.getData['data'][index]['like']++;
                           }
                           controller.isLiked.value = !controller.isLiked.value;
                         },

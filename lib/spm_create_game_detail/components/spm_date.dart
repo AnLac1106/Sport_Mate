@@ -63,7 +63,7 @@ class SPMDate extends GetView<CreateGameCtrl> {
                                             DatePickerEntryMode.calendar,
                                         context: context,
                                         initialDate: controller.date.value,
-                                        firstDate: DateTime(2000),
+                                        firstDate: DateTime.now(),
                                         lastDate: DateTime(3000));
                                     if (newDate != null && newDate != date) {
                                       controller.date.value = newDate;

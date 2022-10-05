@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/spm_calendar_page.dart';
-import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
-import 'package:sport_mate/spm_create_game_page.dart';
 import 'package:sport_mate/spm_newfeed_page.dart';
 import 'package:sport_mate/spm_notification_page.dart';
 import 'package:sport_mate/spm_profile_page.dart';
@@ -19,6 +18,7 @@ class _BottomBarPageState extends State<BottomBarPage> {
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
+        activeColor: SPMColors.primaryColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home)),
           BottomNavigationBarItem(icon: Icon(Icons.notifications)),

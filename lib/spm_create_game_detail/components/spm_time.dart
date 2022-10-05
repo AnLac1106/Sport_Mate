@@ -55,64 +55,80 @@ class SPMTime extends GetView<CreateGameCtrl> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        alignment: Alignment.center,
-                        height: 50,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              controller.time.value.hour.toString(),
-                              style: const TextStyle(
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey),
-                            ),
-                            Image.asset(
-                              'assets/images/spmsort.png',
-                              scale: 4.0,
-                            )
-                          ],
-                        ),
-                      ),
-                      const Text(
-                        " : ",
-                        style: TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey),
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        height: 50,
-                        width: 80,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              controller.time.value.minute.toString(),
-                              style: const TextStyle(
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey),
-                            ),
-                            Image.asset(
-                              'assets/images/spmsort.png',
-                              scale: 4.0,
-                            )
-                          ],
-                        ),
-                      )
+                          alignment: Alignment.center,
+                          height: 50,
+                          width: 250,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                  '${controller.time.value.hour.toString()} : ${controller.time.value.minute.ceil()}',
+                                  style: const TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 35)),
+                              const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black,
+                                size: 35,
+                              )
+                            ],
+                          )
+                          // child: Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //   crossAxisAlignment: CrossAxisAlignment.center,
+                          //   children: <Widget>[
+                          //     Text(
+                          //       controller.time.value.hour.toString(),
+                          //       style: const TextStyle(
+                          //           fontSize: 35,
+                          //           fontWeight: FontWeight.bold,
+                          //           color: Colors.grey),
+                          //     ),
+                          //     Image.asset(
+                          //       'assets/images/spmsort.png',
+                          //       scale: 4.0,
+                          //     )
+                          //   ],
+                          // ),
+                          ),
+                      // const Text(
+                      //   " : ",
+                      //   style: TextStyle(
+                      //       fontSize: 40,
+                      //       fontWeight: FontWeight.bold,
+                      //       color: Colors.grey),
+                      // ),
+                      // Container(
+                      //   alignment: Alignment.center,
+                      //   height: 50,
+                      //   width: 80,
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.white,
+                      //     borderRadius: BorderRadius.circular(8),
+                      //   ),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      //     crossAxisAlignment: CrossAxisAlignment.center,
+                      //     children: <Widget>[
+                      //       Text(
+                      //         (controller.time.value.minute.toString()),
+                      //         style: const TextStyle(
+                      //             fontSize: 35,
+                      //             fontWeight: FontWeight.bold,
+                      //             color: Colors.grey),
+                      //       ),
+                      //       Image.asset(
+                      //         'assets/images/spmsort.png',
+                      //         scale: 4.0,
+                      //       )
+                      //     ],
+                      //   ),
+                      // )
                     ],
                   ),
                 ))

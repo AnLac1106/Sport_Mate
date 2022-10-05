@@ -19,17 +19,10 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         elevation: 0.0,
-        title: const Text('My Profile'),
+        // title: const Text('Friend Profile'),
         centerTitle: true,
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.settings, color: Colors.black)),
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.logout, color: Colors.black)),
-        ],
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -41,8 +34,7 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             const SPMAvatarBox(
-                diameter: 90,
-                image: AssetImage('assets/images/avatar1.jpg')),
+                diameter: 90, image: AssetImage('assets/images/avatar1.jpg')),
             const SizedBox(height: 10),
             Text(
               'Nguyễn Đức Thiện',
@@ -128,10 +120,10 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
               ],
             ),
             const SizedBox(height: 16),
-            Container(
+            SizedBox(
               height: 340,
               child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
                   shrinkWrap: true,
                   itemCount: 7,
                   itemBuilder: ((context, index) => Container(
@@ -151,7 +143,8 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
                               Expanded(
                                 child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       const Text(
                                         'Anonim 1',
@@ -171,7 +164,8 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
                                           debugPrint('$rating');
                                         },
                                       ),
-                                      const Text('Lorem ipsum dolor Lorem ipsum dolor sit amet'),
+                                      const Text(
+                                          'Lorem ipsum dolor Lorem ipsum dolor sit amet'),
                                       //TODO: Chữ ko tự động xuống dòng được.
                                     ]),
                               )
