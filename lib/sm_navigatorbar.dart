@@ -18,6 +18,29 @@ class _BottomBarPageState extends State<BottomBarPage> {
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
+        // onTap: (value) {
+        //   // debugPrint('On Tap $SPMNewFeedPage()');
+        //   // Get.offAll(SPMNewFeedPage());
+        //   print(value);
+        //   // Navigator.popUntil(context, (route) => false);
+
+        //   if (value == 0) {
+        //     // Navigator.pushAndRemoveUntil(
+        //     //     context,
+        //     //     MaterialPageRoute<void>(
+        //     //         builder: (BuildContext context) => const SPMNewFeedPage()),
+        //     //     (route) => false);
+        //     Navigator.push(
+        //         context,
+        //         CupertinoPageRoute(
+        //           builder: (BuildContext context) => const SPMNewFeedPage(),
+        //         )
+        //         // MaterialPageRoute<void>(
+        //         //   builder: (BuildContext context) => const SPMNewFeedPage(),
+        //         // ),
+        //         );
+        //   }
+        // },
         activeColor: SPMColors.primaryColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home)),

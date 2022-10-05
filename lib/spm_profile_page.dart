@@ -380,7 +380,10 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                                     ],
                                   ),
                                   const Text(
-                                      'You are an amazing player. Its my pleasure to play with you. Hope we can play again some day.'),
+                                    'You are an amazing player. Its my pleasure to play with you. Hope we can play again some day.',
+                                    style: TextStyle(
+                                        overflow: TextOverflow.ellipsis),
+                                  ),
                                 ],
                               ),
                             ),
