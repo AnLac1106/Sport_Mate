@@ -34,7 +34,10 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.grey,
         elevation: 0,
-        title: const Text('My Profile', style: TextStyle(color: SPMColors.primaryColor),),
+        title: const Text(
+          'My Profile',
+          style: TextStyle(color: SPMColors.primaryColor),
+        ),
         centerTitle: true,
         // leading: const Icon(Icons.arrow_back_ios_new),
         actions: [
@@ -71,10 +74,10 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                   ],
                 ),
                 const Positioned(
-                    top: 0,
-                    right: 0,
-                    child: SPMStatusBox(),
-                    ),
+                  top: 0,
+                  right: 0,
+                  child: SPMStatusBox(),
+                ),
               ],
             ),
             const SizedBox(
@@ -274,68 +277,68 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                                   )
                                 // : Container(color: Colors.green,)
                                 : SingleChildScrollView(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 12),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 18,
-                                            height: 18,
-                                            clipBehavior: Clip.hardEdge,
-                                            decoration: const BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: Colors.green,
-                                                    spreadRadius: 1)
-                                              ],
-                                              image: DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/images/football.png'),
-                                                  fit: BoxFit.cover),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 8, horizontal: 12),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: 18,
+                                              height: 18,
+                                              clipBehavior: Clip.hardEdge,
+                                              decoration: const BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color: Colors.green,
+                                                      spreadRadius: 1)
+                                                ],
+                                                image: DecorationImage(
+                                                    image: AssetImage(
+                                                        'assets/images/football.png'),
+                                                    fit: BoxFit.cover),
+                                              ),
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            width: 6,
-                                          ),
-                                          const Text('Mỹ Đình stadium'),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          const SizedBox(
-                                            width: 24,
-                                          ),
-                                          const Text('With: '),
-                                          TextButton(
-                                            onPressed: () {},
-                                            style: TextButton.styleFrom(
-                                              padding: EdgeInsets.zero,
-                                              minimumSize: Size.zero,
-                                              tapTargetSize:
-                                                  MaterialTapTargetSize
-                                                      .shrinkWrap,
+                                            const SizedBox(
+                                              width: 6,
                                             ),
-                                            child: const Text('Neymar JR'),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        children: [
-                                          const SizedBox(
-                                            width: 24,
-                                          ),
-                                          Text(
-                                            DateFormat('dd/MM/yyyy, HH:mm')
-                                                .format(DateTime.now()),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                            const Text('Mỹ Đình stadium'),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 24,
+                                            ),
+                                            const Text('With: '),
+                                            TextButton(
+                                              onPressed: () {},
+                                              style: TextButton.styleFrom(
+                                                padding: EdgeInsets.zero,
+                                                minimumSize: Size.zero,
+                                                tapTargetSize:
+                                                    MaterialTapTargetSize
+                                                        .shrinkWrap,
+                                              ),
+                                              child: const Text('Neymar JR'),
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            const SizedBox(
+                                              width: 24,
+                                            ),
+                                            Text(
+                                              DateFormat('dd/MM/yyyy, HH:mm')
+                                                  .format(DateTime.now()),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
                           ),
                         )),
                   ],

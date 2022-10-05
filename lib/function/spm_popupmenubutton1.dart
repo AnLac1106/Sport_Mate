@@ -75,7 +75,7 @@ class _SPMPopupMenuButton1State extends State<SPMPopupMenuButton1> {
               ],
             ),
           ),
-          Container(
+          SizedBox(
             width: 85,
             height: 25,
             child: PopupMenuButton<Menu>(

@@ -1,11 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
-import 'package:sport_mate/spm_create_game_page.dart';
-import 'common/spm_colors.dart';
 
 class MainHomePageCtrl extends GetxController {
-  final RxInt _selectedIndex = 0.obs;
   final RxInt selectedHomeIndex = 0.obs;
 }
 

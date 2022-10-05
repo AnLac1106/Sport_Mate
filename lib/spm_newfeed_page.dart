@@ -54,7 +54,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
             backgroundColor: Colors.white,
             snap: true,
             floating: true,
-            title: buildAppBar(context),
+            title: appBarTest(),
           ),
         ],
         body: SingleChildScrollView(
@@ -422,7 +422,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
     );
   }
 
-  Widget buildAppBar(context) {
+  Widget appBarTest() {
     return Row(
       children: [
         const SizedBox(
@@ -481,9 +481,14 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
               // ],
               // image: DecorationImage(image: image, fit: BoxFit.cover),
               ),
-          child: IconButton(onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const SPMCreateGamePage()));
-          }, icon: const Icon(Icons.create)),
+          child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SPMCreateGamePage()));
+              },
+              icon: const Icon(Icons.add)),
         ),
       ],
     );
