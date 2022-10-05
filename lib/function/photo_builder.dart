@@ -27,38 +27,53 @@ class PhotoBuilder extends GetView {
         child: Row(
           children: [
             Expanded(
-                child: SPMPhotoBox(
-                    photo: photo[0])),
+                child: SizedBox(
+                  height: Get.width/2,
+                  child: SPMPhotoBox(
+                      photo: photo[0]),
+                )),
             const SizedBox(
               width: 2,
             ),
             Expanded(
-                child: SPMPhotoBox(
-                    photo: photo[1])),
+                child: SizedBox(
+                  height: Get.width/2,
+                  child: SPMPhotoBox(
+                      photo: photo[1]),
+                )),
           ],
         ),
       );
     } else if (photo.length == 3) {
       return SizedBox(
         width: Get.width,
-        height: Get.width/2,
+        height: Get.width/3,
         child: Row(
           children: [
             Expanded(
-                child: SPMPhotoBox(
-                    photo: photo[0])),
+                child: SizedBox(
+                  height: Get.width/3,
+                  child: SPMPhotoBox(
+                      photo: photo[0]),
+                )),
             const SizedBox(
               width: 2,
             ),
             Expanded(
-                child: SPMPhotoBox(
-                    photo: photo[1])),
+                child: SizedBox(
+                  height: Get.width/3,
+                  child: SPMPhotoBox(
+                      photo: photo[1]),
+                )),
             const SizedBox(
               width: 2,
             ),
             Expanded(
-                child: SPMPhotoBox(
-                    photo: photo[2])),
+                child: SizedBox(
+                  height: Get.width/3,
+                  child: SPMPhotoBox(
+                      photo: photo[2]),
+                )),
           ],
         ),
       );

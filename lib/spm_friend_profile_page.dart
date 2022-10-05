@@ -19,17 +19,9 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         elevation: 0.0,
-        title: const Text('My Profile'),
         centerTitle: true,
-        actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.settings, color: Colors.black)),
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.logout, color: Colors.black)),
-        ],
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),

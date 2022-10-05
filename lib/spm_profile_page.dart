@@ -273,71 +273,69 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                                     ),
                                   )
                                 // : Container(color: Colors.green,)
-                                : Container(
-                                    child: SingleChildScrollView(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 8, horizontal: 12),
-                                      child: Column(
+                                : SingleChildScrollView(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 12),
+                                  child: Column(
+                                    children: [
+                                      Row(
                                         children: [
-                                          Row(
-                                            children: [
-                                              Container(
-                                                width: 18,
-                                                height: 18,
-                                                clipBehavior: Clip.hardEdge,
-                                                decoration: const BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                        color: Colors.green,
-                                                        spreadRadius: 1)
-                                                  ],
-                                                  image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/images/football.png'),
-                                                      fit: BoxFit.cover),
-                                                ),
-                                              ),
-                                              const SizedBox(
-                                                width: 6,
-                                              ),
-                                              const Text('Mỹ Đình stadium'),
-                                            ],
+                                          Container(
+                                            width: 18,
+                                            height: 18,
+                                            clipBehavior: Clip.hardEdge,
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: Colors.green,
+                                                    spreadRadius: 1)
+                                              ],
+                                              image: DecorationImage(
+                                                  image: AssetImage(
+                                                      'assets/images/football.png'),
+                                                  fit: BoxFit.cover),
+                                            ),
                                           ),
-                                          Row(
-                                            children: [
-                                              const SizedBox(
-                                                width: 24,
-                                              ),
-                                              const Text('With: '),
-                                              TextButton(
-                                                onPressed: () {},
-                                                style: TextButton.styleFrom(
-                                                  padding: EdgeInsets.zero,
-                                                  minimumSize: Size.zero,
-                                                  tapTargetSize:
-                                                      MaterialTapTargetSize
-                                                          .shrinkWrap,
-                                                ),
-                                                child: const Text('Neymar JR'),
-                                              ),
-                                            ],
+                                          const SizedBox(
+                                            width: 6,
                                           ),
-                                          Row(
-                                            children: [
-                                              const SizedBox(
-                                                width: 24,
-                                              ),
-                                              Text(
-                                                DateFormat('dd/MM/yyyy, HH:mm')
-                                                    .format(DateTime.now()),
-                                              ),
-                                            ],
+                                          const Text('Mỹ Đình stadium'),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          const SizedBox(
+                                            width: 24,
+                                          ),
+                                          const Text('With: '),
+                                          TextButton(
+                                            onPressed: () {},
+                                            style: TextButton.styleFrom(
+                                              padding: EdgeInsets.zero,
+                                              minimumSize: Size.zero,
+                                              tapTargetSize:
+                                                  MaterialTapTargetSize
+                                                      .shrinkWrap,
+                                            ),
+                                            child: const Text('Neymar JR'),
                                           ),
                                         ],
                                       ),
-                                    ),
+                                      Row(
+                                        children: [
+                                          const SizedBox(
+                                            width: 24,
+                                          ),
+                                          Text(
+                                            DateFormat('dd/MM/yyyy, HH:mm')
+                                                .format(DateTime.now()),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
+                                ),
                           ),
                         )),
                   ],

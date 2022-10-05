@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sport_mate/common/spm_avatar_box.dart';
+import 'package:sport_mate/spm_friend_profile_page.dart';
 import 'package:sport_mate/spm_newfeed_page.dart';
 
 class SPMComment extends GetView {
@@ -27,7 +28,7 @@ class SPMComment extends GetView {
           Expanded(
             child: ListView.builder(
               itemBuilder: (buildContext, index) {
-                return buildComment(index);
+                return buildComment(context, index);
               },
               itemCount: itemCount,
               shrinkWrap: true,
@@ -37,13 +38,14 @@ class SPMComment extends GetView {
             ),
           ),
           Container(
-            alignment: Alignment.center,
-            height: 60,
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            alignment: Alignment.topCenter,
+            height: 80,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
             decoration: const BoxDecoration(
                 border: Border.symmetric(
                     horizontal: BorderSide(width: 4, color: Colors.black12))),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SPMAvatarBox(diameter: 32, image: AssetImage('assets/images/avatar2.jpg')),
                 const SizedBox(width: 8,),
@@ -57,10 +59,9 @@ class SPMComment extends GetView {
                     ),
                   ),
                 ),
-                const SizedBox(width: 8,),
                 IconButton(
                   padding: const EdgeInsets.all(0),
-                    onPressed: () {}, icon: const Icon(Icons.arrow_right, size: 50,))
+                    onPressed: () {}, icon: const Icon(Icons.send, size: 30, color: Colors.blueAccent,))
               ],
             ),
           ),
@@ -69,7 +70,7 @@ class SPMComment extends GetView {
     );
   }
 
-  Widget buildComment(commentIndex) {
+  Widget buildComment(context, commentIndex) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -82,33 +83,36 @@ class SPMComment extends GetView {
           child: Column(
             children: [
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10)),
+                      topRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20)),
                   color: Colors.black12,
                 ),
                 child: Column(children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        controller.getData['data'][index]['comment'][commentIndex]['user_name'],
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SPMFriendProfilePage()));
+                        },
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: Size.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        child: Text(
+                          controller.getData['data'][index]['comment'][commentIndex]['user_name'],
+                          style: const TextStyle(color: Colors.black),
+                        ),
                       ),
                       const Icon(Icons.more_vert),
                     ],
-                  ),
-                  Row(children: [
-                    Text(DateFormat('dd/MM/yyyy, HH:mm')
-                        .format(DateTime.fromMillisecondsSinceEpoch(
-                      controller.getData['data'][index]['comment'][commentIndex]['create_at']*1000,
-                    )))
-                  ]),
-                  const SizedBox(
-                    height: 8,
                   ),
                   Row(
                     children: [
@@ -147,6 +151,11 @@ class SPMComment extends GetView {
                     ),
                     child: const Text('Reply'),
                   ),
+                  const Expanded(child: SizedBox()),
+                  Text(DateFormat('dd/MM/yyyy, HH:mm')
+                      .format(DateTime.fromMillisecondsSinceEpoch(
+                    controller.getData['data'][index]['comment'][commentIndex]['create_at']*1000,
+                  )))
                 ],
               ),
               const SizedBox(

@@ -10,8 +10,8 @@ class SPMShimmer extends GetView {
   Widget build(BuildContext context) {
     return Container(
       width: Get.width,
-      height: 500,
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+      height: Get.height,
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
@@ -65,7 +65,7 @@ class SPMShimmer extends GetView {
                     ],
                   ),
                 ),
-                itemCount: 6,
+                itemCount: 16,
               ),
             ),
           ),
