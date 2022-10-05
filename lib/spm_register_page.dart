@@ -159,8 +159,7 @@ class SPMRegisterPage extends GetView {
                                     showDialog(
                                       context: context,
                                       builder: (context) => AlertDialog(
-                                        title: Text('Success!'.toUpperCase(),
-                                            style: textStyleHeading4),
+                                        title: Text('Success!'.toUpperCase()),
                                         content: SizedBox(
                                           height: 50,
                                           child: Column(
@@ -168,8 +167,7 @@ class SPMRegisterPage extends GetView {
                                               Text("Your account have been created!"),
                                               SizedBox(height: 10,),
                                               Text(
-                                                  "Tap 'OK' to return to Login Page",
-                                                  style: textStyleNormal),
+                                                  "Tap 'OK' to return to Login Page"),
                                             ],
                                           ),
                                         ),

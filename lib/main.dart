@@ -16,7 +16,7 @@ class MyApp extends GetView {
         scaffoldBackgroundColor: Colors.white,
         shadowColor: Colors.white,
       ),
-      home: const SPMWelcomePage(),
+      home: const SPMNotificationPage(),
       debugShowCheckedModeBanner: false,
     );
   }

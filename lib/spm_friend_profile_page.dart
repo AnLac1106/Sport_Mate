@@ -21,7 +21,10 @@ class SPMFriendProfilePage extends GetView<SPMFriendProfileCtrl> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0.0,
+<<<<<<< HEAD
         // title: const Text('Friend Profile'),
+=======
+>>>>>>> bb587489b42c22151dea7d7eae308a8fe6689c2e
         centerTitle: true,
       ),
       body: Container(
