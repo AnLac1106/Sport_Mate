@@ -366,20 +366,32 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                     Expanded(
                       child: RawMaterialButton(
                         onPressed: () {
-                          showBarModalBottomSheet(
-                            context: Get.context!,
-                            builder: (context) => SizedBox(
-                                // height: 700,
-                                child: SPMComment(
-                                    itemCount: controller
-                                        .getData['data'][index]['comment']
-                                        .length,
-                                    index: index)),
-                            shape: const RoundedRectangleBorder(
+                          Get.bottomSheet(Container(
+                            height: 700,
+                            decoration: const BoxDecoration(
                                 borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(10))),
-                            bounce: true,
-                          );
+                                    top: Radius.circular(32)),
+                                color: Colors.white),
+                            child: SPMComment(
+                                itemCount: controller
+                                    .getData['data'][index]['comment'].length,
+                                index: index),
+                          ));
+                          // showBarModalBottomSheet(
+                          //   context: Get.context!,
+                          //   builder: (context) =>
+                          // SizedBox(
+                          //       // height: 700,
+                          // child: SPMComment(
+                          //     itemCount: controller
+                          //         .getData['data'][index]['comment']
+                          //         .length,
+                          //     index: index)),
+                          //   shape: const RoundedRectangleBorder(
+                          //       borderRadius: BorderRadius.vertical(
+                          //           top: Radius.circular(10))),
+                          //   bounce: true,
+                          // );
                         },
                         child: Column(
                           children: const [
@@ -488,7 +500,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                     MaterialPageRoute(
                         builder: (context) => const SPMCreateGamePage()));
               },
-              icon: const Icon(Icons.add)),
+              icon: const Icon(Icons.create)),
         ),
       ],
     );

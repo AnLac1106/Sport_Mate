@@ -41,6 +41,7 @@ dependencies:
   syncfusion_flutter_calendar: ^20.3.47
   provider: ^6.0.3
   flutter_clean_calendar: ^1.1.0
+  introduction_screen: ^3.0.2
 
 
 
