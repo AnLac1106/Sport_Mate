@@ -54,7 +54,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
             backgroundColor: Colors.white,
             snap: true,
             floating: true,
-            title: appBarTest(),
+            title: buildAppBar(context),
           ),
         ],
         body: SingleChildScrollView(
@@ -422,7 +422,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
     );
   }
 
-  Widget appBarTest() {
+  Widget buildAppBar(context) {
     return Row(
       children: [
         const SizedBox(
