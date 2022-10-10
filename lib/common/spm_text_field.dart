@@ -33,7 +33,8 @@ class SPMTextField extends StatefulWidget {
       this.suffix,
       this.focusNode,
       this.labelStyle,
-      this.expands = false});
+      this.expands = false,
+      });
 
   @override
   State<SPMTextField> createState() => _SPMTextFieldState();

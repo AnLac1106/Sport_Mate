@@ -21,7 +21,7 @@ class SPMOnBoardingPageState extends State<SPMOnBoardingPage> {
     // );
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (_) => const SPMWelcomePage()),
+        MaterialPageRoute(builder: (_) => SPMWelcomePage()),
         (route) => false);
   }
 
