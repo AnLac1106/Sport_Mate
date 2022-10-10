@@ -9,22 +9,30 @@ import 'package:sport_mate/spm_register_page.dart';
 import 'package:sport_mate/transition/scale_route.dart';
 import 'common/spm_button.dart';
 
-//Page 1
-
-enum SelectedBox { box1, box2, box3 }
 
 class WelcomePageCtrl extends GetxController {
-  Rx<SelectedBox> selectedBox = SelectedBox.box1.obs;
   RxBool isObscure = true.obs;
   FocusNode f1 = FocusNode();
   Rx<FocusNode> f2 = FocusNode().obs;
+  // String inputEmail = '';
+  // String inputPassword = '';
 }
 
 class SPMWelcomePage extends GetView<WelcomePageCtrl> {
-  const SPMWelcomePage({Key? key}) : super(key: key);
+  SPMWelcomePage({Key? key}) : super(key: key);
 
   @override
   WelcomePageCtrl get controller => Get.put<WelcomePageCtrl>(WelcomePageCtrl());
+  RegisterPageCtrl get controller1 =>
+      Get.put<RegisterPageCtrl>(RegisterPageCtrl());
+
+  final TextEditingController emailTextController = TextEditingController();
+  final TextEditingController passwordTextController = TextEditingController();
+
+  void onClose() {
+    emailTextController.dispose();
+    passwordTextController.dispose();
+  }
 
   @override
   Widget build(context) {
@@ -72,7 +80,7 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: const [
-                                Text('Welcome!', style: textStyleHeading4)
+                                Text('Welcome!', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),)
                               ],
                             ),
                             const SizedBox(
@@ -80,32 +88,33 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                             ),
                             Row(
                               children: const [
-                                Text('Please login with your information',
-                                    style: textStyleNormal)
+                                Text('Please login with your information', style: TextStyle(fontSize: 18),)
                               ],
                             ),
                             const SizedBox(
                               height: 32,
                             ),
-                            const SPMTextField(
+                            SPMTextField(
+                              controller: emailTextController,
+                              focusNode: controller.f1,
                               maxLine: 1,
-                              // focusNode: controller.f2.value,
                               labelText: 'Email Address',
-                              // suffixIcon: controller.f2.value.hasFocus
-                              //     ? IconButton(
-                              //         iconSize: 15,
-                              //         onPressed: () {
-                              //           // TextEditingController().clear();
-                              //         },
-                              //         icon: const Icon(Icons.clear),
-                              //       )
-                              //     : null,
+                              suffixIcon: controller.f1.hasFocus
+                                  ? IconButton(
+                                iconSize: 15,
+                                onPressed: () {
+                                  emailTextController.clear();
+                                },
+                                icon: const Icon(Icons.clear),
+                              )
+                                  : null,
                             ),
                             const SizedBox(
                               height: 32,
                             ),
                             Obx(
                               () => SPMTextField(
+                                controller: passwordTextController,
                                   maxLine: 1,
                                   obscureText: controller.isObscure.value,
                                   labelText: 'Password',
@@ -147,19 +156,51 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                                 SPMButton(
                                   borderRadius: 20,
                                   color: SPMColors.secondaryColor,
-                                  // text: 'Login',
                                   textColor: Colors.white,
                                   width: 225,
                                   height: 48,
                                   onPress: () {
-                                    // Get.off(const BottomBarPage());
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        ScaleRoute(page: const BottomBarPage()),
-                                        (route) => false);
-                                    // SlideRightRoute(page: const BottomBarPage());
+                                    if (emailTextController.text ==
+                                            controller1.userEmail &&
+                                        passwordTextController.text ==
+                                            controller1.userPassWord) {
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          ScaleRoute(
+                                              page: const BottomBarPage()),
+                                          (route) => false);
+                                    } else {
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              title:
+                                                  Text('error!'.toUpperCase()),
+                                              content: SizedBox(
+                                                height: 50,
+                                                child: Column(
+                                                  children: const [
+                                                    Text(
+                                                        "Email or Password is not correct"),
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: [
+                                                SPMButton(
+                                                  color:
+                                                      SPMColors.secondaryColor,
+                                                  child: const Text('OK'),
+                                                  // text: 'OK',
+                                                  onPress: () {
+                                                    Get.back();
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          });
+                                    }
                                   },
-                                  child: const Text('Login'),
+                                  child: const Text('Login',style: TextStyle(fontSize: 18),),
                                 ),
                               ],
                             ),
@@ -178,7 +219,7 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                                 ),
                                 TextButton(
                                   onPressed: () {
-                                    Get.to(const SPMRegisterPage());
+                                    Get.to(SPMRegisterPage());
                                   },
                                   child: const Text(
                                     'Register now',

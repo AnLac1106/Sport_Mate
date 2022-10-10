@@ -78,7 +78,7 @@ class SPMNotificationPage extends GetView {
           // key: const ValueKey(1),
           // groupTag: 1,
           endActionPane: ActionPane(
-            extentRatio: 0.2,
+            extentRatio: 0.3,
             motion: const ScrollMotion(),
             // dismissible: DismissiblePane(onDismissed: () {
             //   // controller.list.removeAt(index);

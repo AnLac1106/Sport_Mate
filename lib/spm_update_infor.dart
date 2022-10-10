@@ -228,7 +228,7 @@ class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
                                             // text: 'OK',
                                             onPress: () {
                                               Get.offAll(
-                                                  const SPMWelcomePage());
+                                                  SPMWelcomePage());
                                             },
                                           ),
                                         ],

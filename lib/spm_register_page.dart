@@ -15,13 +15,23 @@ class RegisterPageCtrl extends GetxController {
   FocusNode f1 = FocusNode();
   FocusNode f2 = FocusNode();
   FocusNode f3 = FocusNode();
+  RxBool isIconVisible = false.obs;
+  String userEmail = '';
+  String userPassWord = '';
+  String userRepeatPassWord = '';
 }
 
 class SPMRegisterPage extends GetView {
-  const SPMRegisterPage({Key? key}) : super(key: key);
+  SPMRegisterPage({Key? key}) : super(key: key);
 
   @override
-  RegisterPageCtrl get controller => Get.put(RegisterPageCtrl());
+  RegisterPageCtrl get controller => Get.put(RegisterPageCtrl(), permanent: true);
+
+  final TextEditingController emailTextController = TextEditingController();
+
+  void onClose() {
+    emailTextController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +80,7 @@ class SPMRegisterPage extends GetView {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: const [
-                                Text('Register!', style: textStyleHeading4),
+                                Text('Register!',style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),),
                               ],
                             ),
                             const SizedBox(
@@ -78,25 +88,23 @@ class SPMRegisterPage extends GetView {
                             ),
                             Row(
                               children: const [
-                                Text('Please select the appropriate',
-                                    style: textStyleNormal)
+                                Text('Please select the appropriate',style: TextStyle(fontSize: 18))
                               ],
                             ),
                             const SizedBox(
                               height: 32,
                             ),
                             SPMTextField(
-                              // controller: TextEditingController(),
+                              onChanged: (value) {
+                                controller.userEmail = emailTextController.text;
+                              },
                               focusNode: controller.f1,
+                              controller: emailTextController,
                               labelText: 'Email Address',
-                              // suffix: IconButton(
-                              //   onPressed: () {},
-                              //   icon: Icon(Icons.visibility, size: 18,),
-                              // ),
                               suffixIcon: controller.f1.hasFocus
                                   ? IconButton(
                                       onPressed: () {
-                                        // TextEditingController().clear();
+                                        emailTextController.clear();
                                       },
                                       icon: const Icon(Icons.clear),
                                     )
@@ -107,7 +115,10 @@ class SPMRegisterPage extends GetView {
                             ),
                             Obx(
                               () => SPMTextField(
-                                focusNode: controller.f2,
+                                onChanged: (value) {
+                                  controller.userPassWord = value;
+                                },
+                                // focusNode: controller.f2,
                                 maxLine: 1,
                                 obscureText: controller.isObscure1.value,
                                 labelText: 'Password',
@@ -127,7 +138,10 @@ class SPMRegisterPage extends GetView {
                             ),
                             Obx(
                               () => SPMTextField(
-                                focusNode: controller.f3,
+                                onChanged: (value) {
+                                  controller.userRepeatPassWord = value;
+                                },
+                                // focusNode: controller.f3,
                                 maxLine: 1,
                                 obscureText: controller.isObscure2.value,
                                 labelText: 'Confirm Password',
@@ -156,36 +170,96 @@ class SPMRegisterPage extends GetView {
                                   width: 225,
                                   height: 48,
                                   onPress: () {
+                                    print(controller.userEmail);
+                                    print(controller.userPassWord);
                                     showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: Text('Success!'.toUpperCase()),
-                                        content: SizedBox(
-                                          height: 50,
-                                          child: Column(
-                                            children: const [
-                                              Text("Your account have been created!"),
-                                              SizedBox(height: 10,),
-                                              Text(
-                                                  "Tap 'OK' to return to Login Page"),
+                                        context: context,
+                                        builder: (context) {
+                                          if (emailTextController.text.isEmpty ||
+                                              (controller
+                                                      .userPassWord.isEmpty &&
+                                                  controller.userRepeatPassWord
+                                                      .isEmpty)) {
+                                            return AlertDialog(
+                                              title:
+                                                  Text('error!'.toUpperCase()),
+                                              content: SizedBox(
+                                                height: 50,
+                                                child: Column(
+                                                  children: const [
+                                                    Text(
+                                                        "Requirement field can not be empty!"),
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: [
+                                                SPMButton(
+                                                  color:
+                                                      SPMColors.secondaryColor,
+                                                  child: const Text('OK'),
+                                                  onPress: () {
+                                                    Get.back();
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          } else if (controller.userPassWord !=
+                                              controller.userRepeatPassWord) {
+                                            return AlertDialog(
+                                              title:
+                                                  Text('error!'.toUpperCase()),
+                                              content: SizedBox(
+                                                height: 50,
+                                                child: Column(
+                                                  children: const [
+                                                    Text(
+                                                        "Password is not matched!"),
+                                                  ],
+                                                ),
+                                              ),
+                                              actions: [
+                                                SPMButton(
+                                                  color:
+                                                      SPMColors.secondaryColor,
+                                                  child: const Text('OK'),
+                                                  onPress: () {
+                                                    Get.back();
+                                                  },
+                                                ),
+                                              ],
+                                            );
+                                          }
+                                          return AlertDialog(
+                                            title:
+                                                Text('Success!'.toUpperCase()),
+                                            content: SizedBox(
+                                              height: 50,
+                                              child: Column(
+                                                children: const [
+                                                  Text(
+                                                      "Your account have been created!"),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Text(
+                                                      "Tap 'OK' to return to Login Page"),
+                                                ],
+                                              ),
+                                            ),
+                                            actions: [
+                                              SPMButton(
+                                                color: SPMColors.secondaryColor,
+                                                child: const Text('OK'),
+                                                onPress: () {
+                                                  Get.offAll(
+                                                      SPMWelcomePage());
+                                                },
+                                              ),
                                             ],
-                                          ),
-                                        ),
-                                        actions: [
-                                          SPMButton(
-                                            color: SPMColors.secondaryColor,
-                                            child: const Text('OK'),
-                                            // text: 'OK',
-                                            onPress: () {
-                                              Get.offAll(
-                                                  const SPMWelcomePage());
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    );
+                                          );
+                                        });
                                   },
-                                  child: const Text('Register'),
+                                  child: const Text('Register', style: TextStyle(fontSize: 18),),
                                 ),
                               ],
                             ),

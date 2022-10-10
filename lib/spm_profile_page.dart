@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:sport_mate/common/spm_avatar_box.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_select_box.dart';
+import 'package:sport_mate/function/spm_setting_menu.dart';
 import 'package:sport_mate/function/spm_status_box.dart';
 
 enum Select1 { myGame, rating }
@@ -39,10 +40,8 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
           style: TextStyle(color: SPMColors.primaryColor),
         ),
         centerTitle: true,
-        // leading: const Icon(Icons.arrow_back_ios_new),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.logout)),
+        actions: const [
+          SPMSettingMenu(),
         ],
       ),
       body: Container(
@@ -360,7 +359,7 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                           children: [
                             const SizedBox(width: 20),
                             const SPMAvatarBox(
-                              image: NetworkImage('https://i.pravatar.cc/128'),
+                              image: NetworkImage('https://vnn-imgs-f.vgcloud.vn/2020/04/23/12/messi.jpg'),
                               diameter: 55,
                             ),
                             const SizedBox(width: 20),
@@ -404,7 +403,7 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                           children: [
                             const SizedBox(width: 20),
                             const SPMAvatarBox(
-                              image: NetworkImage('https://i.pravatar.cc/128'),
+                              image: NetworkImage('https://nld.mediacdn.vn/291774122806476800/2022/7/26/hinh-3-16588045625731888728193.jpeg'),
                               diameter: 55,
                             ),
                             const SizedBox(width: 20),
@@ -444,7 +443,7 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                           children: [
                             const SizedBox(width: 20),
                             const SPMAvatarBox(
-                              image: NetworkImage('https://i.pravatar.cc/128'),
+                              image: NetworkImage('https://nld.mediacdn.vn/291774122806476800/2022/7/26/hinh-3-16588045625731888728193.jpeg'),
                               diameter: 55,
                             ),
                             const SizedBox(width: 20),
@@ -484,7 +483,7 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                           children: [
                             const SizedBox(width: 20),
                             const SPMAvatarBox(
-                              image: NetworkImage('https://i.pravatar.cc/128'),
+                              image: NetworkImage('https://nld.mediacdn.vn/291774122806476800/2022/7/26/hinh-3-16588045625731888728193.jpeg'),
                               diameter: 55,
                             ),
                             const SizedBox(width: 20),

@@ -3,21 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:sport_mate/common/spm_avatar_box.dart';
 import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/function/photo_builder.dart';
 import 'package:sport_mate/function/spm_comment.dart';
 import 'package:sport_mate/function/spm_shimmer.dart';
+import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
 import 'package:sport_mate/spm_create_game_page.dart';
 import 'package:sport_mate/spm_friend_profile_page.dart';
+import 'package:sport_mate/spm_profile_page.dart';
 import 'function/post_api.dart';
 
 class NewFeedPageCtrl extends GetxController {
   RxMap getData = {}.obs;
   RxBool isLoading = true.obs;
-
-  // RxInt like = 0.obs;
-  // RxBool isLiked = false.obs;
 
   Future<void> callAPI() async {
     isLoading(true);
@@ -28,7 +28,6 @@ class NewFeedPageCtrl extends GetxController {
     }
     isLoading(false);
   }
-
   @override
   void onInit() {
     callAPI();
@@ -85,8 +84,11 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
   Widget buildItem(BuildContext context, index) {
     RxInt likes = 0.obs;
     likes.value = controller.getData['data'][index]['like'];
+    RxInt commentCount = 0.obs;
+    commentCount.value = controller.getData['data'][index]['comment'].length;
     RxBool isLiked = false.obs;
     isLiked.value = controller.getData['data'][index]['isLike'];
+
     return Column(
       children: [
         Container(
@@ -270,50 +272,39 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                       size: 16,
                     ),
                     Obx(
-                      () => Text(
-                          // '  ${controller.getData['data'][index]['like']}',
-                          // ' ${controller.like}'
-                          ' $likes'),
+                      () => Text(' $likes'),
                     ),
                     const Expanded(child: SizedBox()),
                     TextButton(
                       onPressed: () {
-                        showBarModalBottomSheet(
-                          context: Get.context!,
-                          builder: (context) => SizedBox(
-                              height: 700,
-                              child: SPMComment(
-                                  itemCount: controller
-                                      .getData['data'][index]['comment'].length,
-                                  index: index)),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(10))),
-                          bounce: true,
-                        );
-                        // Get.bottomSheet(
-                        //   Container(
-                        //     height: 700,
-                        //     child: const SPMComment(
-                        //         userAvatar: 'https://vcdn1-dulich.vnecdn.net/2020/09/04/1-Meo-chup-anh-dep-khi-di-bien-9310-1599219010.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=j8THd4HE31ZHWTQhSZx5tQ',
-                        //         userName: 'Thử Nghiệm',
-                        //         createAt: 1664037858,
-                        //         userComment: 'Testtttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt'
-                        //     ),
-                        //   ),
+                        // showBarModalBottomSheet(
+                        //   context: Get.context!,
+                        //   builder: (context) => SizedBox(
+                        //       height: 700,
+                        //       child: SPMComment(
+                        //           itemCount: controller
+                        //               .getData['data'][index]['comment'].length,
+                        //           index: index)),
                         //   shape: const RoundedRectangleBorder(
                         //       borderRadius: BorderRadius.vertical(
                         //           top: Radius.circular(10))),
-                        //   backgroundColor: Colors.white,
-                        //   barrierColor: Colors.blue.withOpacity(0.2),
-                        //   isScrollControlled: true,
-                        //   enableDrag: true,
-                        //   isDismissible: false,
+                        //   bounce: true,
                         // );
+                        Get.bottomSheet(
+                          SPMComment(
+                            // itemCount: commentList.length,
+                              index: index),
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(10))),
+                          backgroundColor: Colors.white,
+                          isScrollControlled: true,
+                          enableDrag: true,
+                        );
                       },
-                      child: Text(
-                        '${controller.getData['data'][index]['comment'].length} comments',
-                      ),
+                      child: Obx(() => Text(
+                        '$commentCount comments',
+                      ),)
                     ),
                   ],
                 ),
@@ -365,17 +356,19 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                     Expanded(
                       child: RawMaterialButton(
                         onPressed: () {
-                          Get.bottomSheet(Container(
-                            height: 700,
-                            decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(32)),
-                                color: Colors.white),
-                            child: SPMComment(
-                                itemCount: controller
-                                    .getData['data'][index]['comment'].length,
-                                index: index),
-                          ));
+                          // Get.bottomSheet(
+                          //   SPMComment(
+                          //       // itemCount: controller
+                          //       //     .getData['data'][index]['comment'].length,
+                          //       index: index),
+                          //   shape: const RoundedRectangleBorder(
+                          //       borderRadius: BorderRadius.vertical(
+                          //           top: Radius.circular(10))),
+                          //   backgroundColor: Colors.white,
+                          //   // barrierColor: Colors.blue.withOpacity(0.2),
+                          //   isScrollControlled: true,
+                          //   enableDrag: true,
+                          // );
                           // showBarModalBottomSheet(
                           //   context: Get.context!,
                           //   builder: (context) =>
@@ -433,21 +426,29 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
     );
   }
 
-  Widget buildAppBar(BuildContext context) {
+  Widget buildAppBar(context) {
     return Row(
       children: [
         const SizedBox(
           width: 0,
         ),
-        Container(
-          width: 40,
-          height: 40,
-          clipBehavior: Clip.hardEdge,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              image: AssetImage('assets/images/avatar1.jpg'),
-              fit: BoxFit.cover,
+        InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                CupertinoPageRoute(
+                    builder: (context) => const SPMProfilePage()));
+          },
+          child: Container(
+            width: 40,
+            height: 40,
+            clipBehavior: Clip.hardEdge,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: AssetImage('assets/images/spm_test_avatar.png'),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),
