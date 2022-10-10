@@ -40,9 +40,7 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
           style: TextStyle(color: SPMColors.primaryColor),
         ),
         centerTitle: true,
-        // leading: const Icon(Icons.arrow_back_ios_new),
         actions: const [
-          // IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
           SPMSettingMenu(),
         ],
       ),
