@@ -1,70 +1,55 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
-// This is the type used by the popup menu below.
-enum Menu { itemOne, itemTwo, itemThree, itemFour }
+void main() => runApp(const CupertinoTabBarApp());
 
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  static const String _title = 'Flutter Code Sample';
+class CupertinoTabBarApp extends StatelessWidget {
+  const CupertinoTabBarApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: _title,
-      home: MyStatefulWidget(),
+    return const CupertinoApp(
+      theme: CupertinoThemeData(brightness: Brightness.light),
+      home: CupertinoTabBarExample(),
     );
   }
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({super.key});
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  String _selectedMenu = '';
+class CupertinoTabBarExample extends StatelessWidget {
+  const CupertinoTabBarExample({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: <Widget>[
-          // This button presents popup menu items.
-          PopupMenuButton<Menu>(
-              // Callback that sets the selected popup menu item.
-              onSelected: (Menu item) {
-                setState(() {
-                  _selectedMenu = item.name;
-                });
-              },
-              itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
-                    const PopupMenuItem<Menu>(
-                      value: Menu.itemOne,
-                      child: Text('Item 1'),
-                    ),
-                    const PopupMenuItem<Menu>(
-                      value: Menu.itemTwo,
-                      child: Text('Item 2'),
-                    ),
-                    const PopupMenuItem<Menu>(
-                      value: Menu.itemThree,
-                      child: Text('Item 3'),
-                    ),
-                    const PopupMenuItem<Menu>(
-                      value: Menu.itemFour,
-                      child: Text('Item 4'),
-                    ),
-                  ]),
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(
+        onTap: (value) {},
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.star_fill),
+            label: 'Favourites',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.clock_solid),
+            label: 'Recents',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.person_alt_circle_fill),
+            label: 'Contacts',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.circle_grid_3x3_fill),
+            label: 'Keypad',
+          ),
         ],
       ),
-      body: Center(
-        child: Text('_selectedMenu: $_selectedMenu'),
-      ),
+      tabBuilder: (BuildContext context, int index) {
+        return CupertinoTabView(
+          builder: (BuildContext context) {
+            return Center(
+              child: Text('Content of tab $index'),
+            );
+          },
+        );
+      },
     );
   }
 }

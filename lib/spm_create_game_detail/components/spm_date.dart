@@ -32,7 +32,7 @@ class SPMDate extends GetView<CreateGameCtrl> {
                   const Text(
                     "Date",
                     style: TextStyle(
-                        fontSize: 14,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   ),

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sport_mate/common/hide_keyboard.dart';
+import 'package:sport_mate/common/spm_avatar_box.dart';
 import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
+import 'package:sport_mate/common/spm_select_box.dart';
+import 'package:sport_mate/common/spm_select_button.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
 import 'package:sport_mate/common/spm_text_style.dart';
+import 'package:sport_mate/spm_profile_page.dart';
 import 'package:sport_mate/spm_register_page.dart';
 import 'package:sport_mate/spm_welcome_page.dart';
+import 'package:sport_mate/transition/scale_route.dart';
 
 class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
   const SPMUpdateInfor({Key? key}) : super(key: key);
@@ -18,24 +23,6 @@ class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // body: Container(
-      //     clipBehavior: Clip.hardEdge,
-      //     height: double.infinity,
-      //     width: double.infinity,
-      //     decoration: BoxDecoration(
-      //       color: Colors.white,
-      //       borderRadius: BorderRadius.circular(50),
-      //     ),
-      //     child: SingleChildScrollView(
-      //       child: Padding(
-      //         padding: const EdgeInsets.only(top: 40),
-      //         child: Column(
-      //           children: <Widget>[],
-      //         ),
-      //       ),
-      //     ),
-      //   ),
-      // );
       body: GestureDetector(
         onTap: () {
           hideKeyBoardAndUnFocus(BuildContext, context);
@@ -44,21 +31,26 @@ class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
         child: Stack(
           children: [
             Container(
+                color: SPMColors.primaryColor,
                 alignment: Alignment.topCenter,
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height,
-                child: Image.asset('assets/images/cover3.jpg')),
-            Positioned(
-              top: 100,
-              left: MediaQuery.of(context).size.width * 0.20,
-              child: Container(
-                width: 250,
-                height: 50,
-                alignment: Alignment.topCenter,
-                // color: Colors.white.withOpacity(0.3),
-                child: Image.asset('assets/images/textlogo1.png'),
-              ),
-            ),
+                child: Padding(
+                    padding: const EdgeInsets.all(56.0),
+                    child: Stack(
+                      children: const [
+                        SPMAvatarBox(
+                            diameter: 100,
+                            image: NetworkImage(
+                                'https://previews.123rf.com/images/deniskot/deniskot1208/deniskot120800040/14747331-login-button-on-keyboard-with-soft-focus.jpg')),
+                        Positioned(
+                          right: 0,
+                          bottom: 0,
+                          child: Icon(Icons.add_a_photo_outlined,
+                              color: Colors.white),
+                        )
+                      ],
+                    ))),
             Column(
               children: [
                 Expanded(
@@ -80,41 +72,29 @@ class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: const [
-                                Text('Register!', style: textStyleHeading4),
+                                Text('Update Profile!',
+                                    style: textStyleHeading4),
                               ],
                             ),
-                            const SizedBox(
-                              height: 16,
-                            ),
+                            const SizedBox(height: 16),
                             Row(
                               children: const [
                                 Text('Please select the appropriate',
                                     style: textStyleNormal)
                               ],
                             ),
-                            const SizedBox(
-                              height: 32,
-                            ),
+                            const SizedBox(height: 32),
                             SPMTextField(
-                              // controller: TextEditingController(),
                               focusNode: controller.f1,
                               labelText: 'Email Address',
-                              // suffix: IconButton(
-                              //   onPressed: () {},
-                              //   icon: Icon(Icons.visibility, size: 18,),
-                              // ),
                               suffixIcon: controller.f1.hasFocus
                                   ? IconButton(
-                                      onPressed: () {
-                                        // TextEditingController().clear();
-                                      },
+                                      onPressed: () {},
                                       icon: const Icon(Icons.clear),
                                     )
                                   : null,
                             ),
-                            const SizedBox(
-                              height: 32,
-                            ),
+                            const SizedBox(height: 32),
                             Obx(
                               () => SPMTextField(
                                 focusNode: controller.f2,
@@ -132,9 +112,7 @@ class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 32,
-                            ),
+                            const SizedBox(height: 32),
                             Obx(
                               () => SPMTextField(
                                 focusNode: controller.f3,
@@ -152,13 +130,70 @@ class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 32,
-                            ),
+                            const SizedBox(height: 32),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 SPMButton(
+                                    color: SPMColors.primaryColor,
+                                    onPress: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          title: Text('Success!'.toUpperCase(),
+                                              style: textStyleHeading4),
+                                          content: SizedBox(
+                                            height: 50,
+                                            child: Column(
+                                              children: const [
+                                                Text(
+                                                    "Your profile have been saved!"),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(
+                                                    "Tap 'OK' to return to Profile Page",
+                                                    style: textStyleNormal),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: [
+                                            SPMButton(
+                                              color: SPMColors.secondaryColor,
+                                              child: const Text('OK'),
+                                              onPress: () {
+                                                Navigator.pushAndRemoveUntil(
+                                                    context,
+                                                    ScaleRoute(
+                                                        page:
+                                                            const SPMProfilePage()),
+                                                    (route) => false);
+                                              },
+                                            ),
+                                            SPMButton(
+                                              color: Colors.white,
+                                              child: const Text('Cancel'),
+                                              onPress: () {
+                                                Get.back();
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                    child: const Text(
+                                      'Save',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    )),
+                                SPMButton(
+                                    color: Colors.white,
+                                    onPress: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: Text('Cancel'))
+                                /*SPMButton(
                                   borderRadius: 20,
                                   color: SPMColors.secondaryColor,
                                   // text: 'Register',
@@ -201,7 +236,7 @@ class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
                                     );
                                   },
                                   child: const Text('Register'),
-                                ),
+                                ), */
                               ],
                             ),
                             const Expanded(

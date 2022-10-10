@@ -38,7 +38,7 @@ class SPMDescription extends GetView<CreateGameCtrl> {
                     ),
                   ),
                   const SPMTextField(
-                    maxLine: 4,
+                    // maxLine: 4,
                     hintText: 'Description about your game',
                     expands: true,
                   )
