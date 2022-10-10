@@ -12,51 +12,60 @@ class SPMHeader extends GetView<CreateGameCtrl> {
 
   @override
   Widget build(BuildContext context) {
+    // String select = 'Select Sport';
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Obx(() => Row(
-                children: [
-                  PopupMenuButton<Menu>(
-                      icon: const Icon(
-                        Icons.menu,
-                        color: SPMColors.primaryColor,
-                        size: 30,
-                      ),
-                      onSelected: (Menu item) {
-                        controller.selectedMenu.value = item.name;
-                      },
-                      itemBuilder: (BuildContext context) =>
-                          <PopupMenuEntry<Menu>>[
-                            const PopupMenuItem<Menu>(
-                              value: Menu.Soccer,
-                              child: Text('Soccer'),
-                            ),
-                            const PopupMenuItem<Menu>(
-                              value: Menu.Hiking,
-                              child: Text('Hiking'),
-                            ),
-                            const PopupMenuItem<Menu>(
-                              value: Menu.Volleyball,
-                              child: Text('Volleyball'),
-                            ),
-                            const PopupMenuItem<Menu>(
-                              value: Menu.Basketball,
-                              child: Text('Basketball'),
-                            ),
-                            const PopupMenuItem<Menu>(
-                              value: Menu.Tennis,
-                              child: Text('Tennis'),
-                            ),
-                          ]),
-                  Text(controller.selectedMenu.value,
-                      style: textStyleHeading4.copyWith(
-                          fontWeight: FontWeight.bold)),
-                ],
-              )),
-        ),
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Row(
+                  children: [
+                    PopupMenuButton(
+                        icon: const Icon(
+                          Icons.fact_check,
+                          color: SPMColors.primaryColor,
+                          size: 30,
+                        ),
+                        onSelected: (value) =>
+                            controller.sportSelect.value = value.toString(),
+                        itemBuilder: (BuildContext context) => [
+                              const PopupMenuItem(
+                                value: 'Soccer',
+                                child: Text('Soccer'),
+                              ),
+                              const PopupMenuItem(
+                                value: 'Hiking',
+                                child: Text('Hiking'),
+                              ),
+                              const PopupMenuItem(
+                                value: 'Volleyball',
+                                child: Text('Volleyball'),
+                              ),
+                              const PopupMenuItem(
+                                value: 'Basketball',
+                                child: Text('Basketball'),
+                              ),
+                              const PopupMenuItem(
+                                value: 'Tennis',
+                                child: Text('Tennis'),
+                              ),
+                              const PopupMenuItem(
+                                value: 'Other',
+                                child: Text('Other'),
+                              ),
+                            ]),
+                    Obx(
+                      () => Text(controller.sportSelect.toString(),
+                          style: textStyleHeading4.copyWith(
+                            fontWeight: FontWeight.bold,
+                          )),
+                    )
+                  ],
+                ),
+              ],
+            )),
         GestureDetector(
           onTap: (() {
             debugPrint('Move to Profife Page');

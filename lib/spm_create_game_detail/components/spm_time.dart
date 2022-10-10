@@ -15,7 +15,7 @@ class SPMTime extends GetView<CreateGameCtrl> {
   Widget build(BuildContext context) {
     return Container(
       width: 350,
-      height: 150,
+      height: 120,
       decoration: BoxDecoration(
         color: const Color(0xFFF1F1F1),
         borderRadius: BorderRadius.circular(20),
@@ -40,97 +40,45 @@ class SPMTime extends GetView<CreateGameCtrl> {
                 color: Colors.black38,
               ),
             ),
-            Obx(() => TextButton(
-                  onPressed: () async {
-                    TimeOfDay? newTime = await showTimePicker(
-                        initialEntryMode: TimePickerEntryMode.input,
-                        context: context,
-                        initialTime: controller.time.value);
-                    if (newTime != null) {
-                      controller.time.value = newTime;
-                    }
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
+            Obx(() => Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () async {
+                        TimeOfDay? newTime = await showTimePicker(
+                            initialEntryMode: TimePickerEntryMode.input,
+                            context: context,
+                            initialTime: controller.time.value);
+                        if (newTime != null) {
+                          controller.time.value = newTime;
+                        }
+                      },
+                      child: Container(
                           alignment: Alignment.center,
                           height: 50,
-                          width: 250,
+                          width: 200,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                  '${controller.time.value.hour.toString()} : ${controller.time.value.minute.ceil()}',
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 35)),
-                              const Icon(
-                                Icons.arrow_drop_down,
-                                color: Colors.black,
-                                size: 35,
-                              )
-                            ],
-                          )
-                          // child: Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          //   crossAxisAlignment: CrossAxisAlignment.center,
-                          //   children: <Widget>[
-                          //     Text(
-                          //       controller.time.value.hour.toString(),
-                          //       style: const TextStyle(
-                          //           fontSize: 35,
-                          //           fontWeight: FontWeight.bold,
-                          //           color: Colors.grey),
-                          //     ),
-                          //     Image.asset(
-                          //       'assets/images/spmsort.png',
-                          //       scale: 4.0,
-                          //     )
-                          //   ],
-                          // ),
-                          ),
-                      // const Text(
-                      //   " : ",
-                      //   style: TextStyle(
-                      //       fontSize: 40,
-                      //       fontWeight: FontWeight.bold,
-                      //       color: Colors.grey),
-                      // ),
-                      // Container(
-                      //   alignment: Alignment.center,
-                      //   height: 50,
-                      //   width: 80,
-                      //   decoration: BoxDecoration(
-                      //     color: Colors.white,
-                      //     borderRadius: BorderRadius.circular(8),
-                      //   ),
-                      //   child: Row(
-                      //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      //     crossAxisAlignment: CrossAxisAlignment.center,
-                      //     children: <Widget>[
-                      //       Text(
-                      //         (controller.time.value.minute.toString()),
-                      //         style: const TextStyle(
-                      //             fontSize: 35,
-                      //             fontWeight: FontWeight.bold,
-                      //             color: Colors.grey),
-                      //       ),
-                      //       Image.asset(
-                      //         'assets/images/spmsort.png',
-                      //         scale: 4.0,
-                      //       )
-                      //     ],
-                      //   ),
-                      // )
-                    ],
-                  ),
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(controller.time.value.format(context),
+                                    // '${controller.time.value.hour.toString()} : ${controller.time.value.minute.ceil()}',
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 30)),
+                                const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Colors.black,
+                                  size: 35,
+                                )
+                              ])),
+                    ),
+                  ],
                 ))
           ],
         ),

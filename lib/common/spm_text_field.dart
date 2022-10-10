@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class SPMTextField extends StatefulWidget {
@@ -45,6 +47,7 @@ class _SPMTextFieldState extends State<SPMTextField> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      selectionHeightStyle: BoxHeightStyle.tight,
       textAlignVertical: TextAlignVertical.top,
       focusNode: widget.focusNode,
       style: const TextStyle(fontSize: 18, height: 1.5),
@@ -64,6 +67,7 @@ class _SPMTextFieldState extends State<SPMTextField> {
         labelText: widget.labelText,
         // labelStyle: Get.textTheme.headline4,
         hintText: widget.hintText,
+
         // border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
         // focusedBorder: OutlineInputBorder(
         //   borderSide: const BorderSide(color: Colors.blue),

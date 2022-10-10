@@ -23,19 +23,48 @@ class SelectButton extends GetView {
               onPress: () {},
               child: TextButton(
                 onPressed: () {
-                  debugPrint('Move to New Feed');
-                  // Get.find<MainHomePageCtrl>().selectedHomeIndex.value =
-                  //     spmNewFeedPageIndex;
-                  // Navigator.push(
-                  //     context,
-                  //     CupertinoPageRoute(
-                  //         builder: (context) => const SPMNewFeedPage()));
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SPMNewFeedPage()),
-                      (route) => false);
+                  Get.dialog(AlertDialog(
+                    title: const Text('Do you want to reate this game?'),
+                    actionsAlignment: MainAxisAlignment.center,
+                    actions: [
+                      SPMButton(
+                        color: SPMColors.primaryColor,
+                        onPress: () {
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const SPMNewFeedPage()),
+                              (route) => false);
+                          Get.back();
+                          Get.snackbar(
+                            'Success!',
+                            'Your game have been created',
+                            backgroundColor: Colors.orange.shade100,
+                            snackPosition: SnackPosition.BOTTOM,
+                            duration: const Duration(seconds: 2),
+                          );
+                        },
+                        borderColor: SPMColors.primaryColor,
+                        child: const Text('OK'),
+                      ),
+                      SPMButton(
+                        color: Colors.white,
+                        onPress: () {
+                          Get.back();
+                        },
+                        child: const Text('Cancel'),
+                      ),
+                    ],
+                  ));
                 },
+                // onPressed: () {
+                //   debugPrint('Move to New Feed');
+                //   Navigator.pushAndRemoveUntil(
+                //       context,
+                //       MaterialPageRoute(
+                //           builder: (context) => const SPMNewFeedPage()),
+                //       (route) => false);
+                // },
                 child: const Text('Create',
                     style: TextStyle(
                         fontSize: 14,

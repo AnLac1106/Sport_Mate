@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sport_mate/common/hide_keyboard.dart';
 import 'package:sport_mate/common/spm_select_button.dart';
+import 'package:sport_mate/spm_create_game_detail/components/spm_add_pic.dart';
 import 'package:sport_mate/spm_create_game_detail/components/spm_date.dart';
 import 'package:sport_mate/spm_create_game_detail/components/spm_description.dart';
 import 'package:sport_mate/spm_create_game_detail/components/spm_header.dart';
@@ -14,15 +15,15 @@ import 'package:sport_mate/spm_create_game_detail/components/spm_time.dart';
 
 enum SelectedBox { box1, box2, box3 }
 
-enum Menu { Soccer, Hiking, Volleyball, Basketball, Tennis }
+enum Menu { Select, Soccer, Hiking, Volleyball, Basketball, Tennis }
 
 class CreateGameCtrl extends GetxController {
   RxString selectedMenu = ''.obs;
   Rx<TimeOfDay> time = TimeOfDay.now().obs;
   Rx<SelectedBox> selectedBox = SelectedBox.box1.obs;
-  Rx<Menu> menu = Menu.Soccer.obs;
   Rx<DateTime> date = DateTime.now().obs;
   RxInt currentPartnersNeeded = 0.obs;
+  RxString sportSelect = 'Select Sport'.obs;
 }
 
 class SPMCreateGameDetail extends GetView<CreateGameCtrl> {
@@ -67,6 +68,8 @@ class SPMCreateGameDetail extends GetView<CreateGameCtrl> {
                   SPMPartners(controller: controller),
                   const SizedBox(height: 20),
                   const SPMDescription(),
+                  const SizedBox(height: 20),
+                  const SPMAddPic(),
                   const SizedBox(height: 20),
                   const SelectButton(),
                   const SizedBox(height: 100),

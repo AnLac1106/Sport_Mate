@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sport_mate/spm_onboarding_page.dart';
+import 'package:sport_mate/spm_update_infor.dart';
 
 void main() {
   runApp(const MyApp());

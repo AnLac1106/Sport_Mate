@@ -104,9 +104,12 @@ class SPMCreateGamePage extends GetView<MainHomePageCtrl> {
                         ),
                       ),
                     ]),
+                const SizedBox(height: 50),
+                Text("Upcoming Games",
+                    textAlign: TextAlign.right,
+                    style: textStyleHeading4.copyWith(
+                        fontWeight: FontWeight.bold)),
                 const SizedBox(height: 30),
-                const Text("Upcoming Games",
-                    textAlign: TextAlign.right, style: textStyleHeading4),
                 inforCard(context),
               ],
             ),
@@ -130,6 +133,12 @@ class SPMCreateGamePage extends GetView<MainHomePageCtrl> {
         ),
       ),
       child: InkWell(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.zero,
+          topRight: Radius.zero,
+          bottomLeft: Radius.circular(50),
+          bottomRight: Radius.zero,
+        ),
         splashColor: SPMColors.primaryColor.withAlpha(80),
         onTap: () {
           debugPrint('Card tapped.');
