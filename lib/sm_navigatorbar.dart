@@ -18,25 +18,6 @@ class _BottomBarPageState extends State<BottomBarPage> {
   Widget build(BuildContext context) {
     return CupertinoTabScaffold(
       tabBar: CupertinoTabBar(
-        onTap: (value) {
-          debugPrint('$value');
-
-          if (value == 0) {
-            Navigator.pushAndRemoveUntil(
-                context,
-                CupertinoPageRoute(
-                  builder: (BuildContext context) => const BottomBarPage(),
-                ),
-                (route) => false);
-          } else if (value == 2) {
-            Navigator.pushAndRemoveUntil(
-                context,
-                CupertinoPageRoute(
-                  builder: (BuildContext context) => const SPMCalendarPage(),
-                ),
-                (route) => false);
-          }
-        },
         activeColor: SPMColors.primaryColor,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home)),

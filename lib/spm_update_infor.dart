@@ -16,9 +16,9 @@ import 'package:sport_mate/transition/scale_route.dart';
 class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
   const SPMUpdateInfor({Key? key}) : super(key: key);
 
-  @override
-  RegisterPageCtrl get controller =>
-      Get.put<RegisterPageCtrl>(RegisterPageCtrl());
+  // @override
+  // RegisterPageCtrl get controller =>
+  //     Get.put<RegisterPageCtrl>(RegisterPageCtrl());
 
   @override
   Widget build(BuildContext context) {
@@ -168,13 +168,14 @@ class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
                                                         page:
                                                             const SPMProfilePage()),
                                                     (route) => false);
+                                                Get.back();
                                               },
                                             ),
                                             SPMButton(
                                               color: Colors.white,
                                               child: const Text('Cancel'),
                                               onPress: () {
-                                                Get.back();
+                                                Navigator.pop(context);
                                               },
                                             ),
                                           ],

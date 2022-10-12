@@ -25,7 +25,6 @@ class SPMComment extends GetView {
     RxList commentList = [].obs;
     commentList.value = controller.getData['data'][index]['comment'];
 
-
     return Container(
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
@@ -46,7 +45,8 @@ class SPMComment extends GetView {
             ),
           ),
           Expanded(
-            child: Obx(() => ListView.builder(
+              child: Obx(
+            () => ListView.builder(
               itemBuilder: (buildContext, index) {
                 return buildComment(context, index);
               },
@@ -55,8 +55,8 @@ class SPMComment extends GetView {
               scrollDirection: Axis.vertical,
               // physics: const ScrollPhysics(),
               padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-            ),)
-          ),
+            ),
+          )),
           Container(
             alignment: Alignment.topCenter,
             height: 80,
@@ -89,15 +89,15 @@ class SPMComment extends GetView {
                     padding: const EdgeInsets.all(0),
                     onPressed: () {
                       if (commentCtrl.text.isNotEmpty) {
-                      commentList.add(
-                          {
-                            "user_name": "Nguyễn Đức Thiện",
-                            "user_avatar":
-                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT2_RbVnuIvAJqyqo-GNU1UTme6kgsVAMhNNALhakpCcpI3IQIohRKMfe4XhmBJA-VxE8&usqp=CAU",
-                            "create_at": DateTime.now().millisecondsSinceEpoch,
-                            "user_comment": commentCtrl.text,
-                          }
-                      );}
+                        commentList.add({
+                          "user_name": "Nguyễn Đức Thiện",
+                          "user_avatar":
+                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT2_RbVnuIvAJqyqo-GNU1UTme6kgsVAMhNNALhakpCcpI3IQIohRKMfe4XhmBJA-VxE8&usqp=CAU",
+                          "create_at": DateTime.now().millisecondsSinceEpoch,
+                          "user_comment": commentCtrl.text,
+                        });
+                      }
+                      commentCtrl.clear();
                     },
                     icon: const Icon(
                       Icons.send,
@@ -114,111 +114,111 @@ class SPMComment extends GetView {
 
   Widget buildComment(context, commentIndex) {
     // return Obx(() {
-      return Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SPMAvatarBox(
-              diameter: 32,
-              image: NetworkImage(controller.getData['data'][index]['comment']
-              [commentIndex]['user_avatar'])),
-          const SizedBox(
-            width: 8,
-          ),
-          Expanded(
-            child: Column(
-              children: [
-                Container(
-                  padding:
-                  const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(20),
-                        bottomLeft: Radius.circular(20)),
-                    color: Colors.black12,
-                  ),
-                  child: Column(children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                    const SPMFriendProfilePage()));
-                          },
-                          style: TextButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            minimumSize: Size.zero,
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                          ),
-                          child: Text(
-                            controller.getData['data'][index]['comment']
-                            [commentIndex]['user_name'],
-                            style: const TextStyle(color: Colors.black),
-                          ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SPMAvatarBox(
+            diameter: 32,
+            image: NetworkImage(controller.getData['data'][index]['comment']
+                [commentIndex]['user_avatar'])),
+        const SizedBox(
+          width: 8,
+        ),
+        Expanded(
+          child: Column(
+            children: [
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(20),
+                      bottomLeft: Radius.circular(20)),
+                  color: Colors.black12,
+                ),
+                child: Column(children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SPMFriendProfilePage()));
+                        },
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: Size.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                         ),
-                        const Icon(Icons.more_vert),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(controller.getData['data'][index]['comment']
-                                [commentIndex]['user_comment'])
-                              ],
-                            ))
-                      ],
-                    ),
-                  ]),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        minimumSize: Size.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        child: Text(
+                          controller.getData['data'][index]['comment']
+                              [commentIndex]['user_name'],
+                          style: const TextStyle(color: Colors.black),
+                        ),
                       ),
-                      child: const Text('Like'),
+                      const Icon(Icons.more_vert),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                          child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(controller.getData['data'][index]['comment']
+                              [commentIndex]['user_comment'])
+                        ],
+                      ))
+                    ],
+                  ),
+                ]),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                children: [
+                  TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
-                    const SizedBox(
-                      width: 15,
+                    child: const Text('Like'),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      minimumSize: Size.zero,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        minimumSize: Size.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      child: const Text('Reply'),
-                    ),
-                    const Expanded(child: SizedBox()),
-                    Text(DateFormat('dd/MM/yyyy, HH:mm')
-                        .format(DateTime.fromMillisecondsSinceEpoch(
-                      controller.getData['data'][index]['comment'][commentIndex]
-                      ['create_at'] *
-                          1000,
-                    )))
-                  ],
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-              ],
-            ),
+                    child: const Text('Reply'),
+                  ),
+                  const Expanded(child: SizedBox()),
+                  Text(DateFormat('dd/MM/yyyy, HH:mm')
+                      .format(DateTime.fromMillisecondsSinceEpoch(
+                    controller.getData['data'][index]['comment'][commentIndex]
+                            ['create_at'] *
+                        1000,
+                  )))
+                ],
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+            ],
           ),
-        ],
-      );
+        ),
+      ],
+    );
     // });
   }
 }
