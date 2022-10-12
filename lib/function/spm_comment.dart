@@ -98,6 +98,7 @@ class SPMComment extends GetView {
                             "user_comment": commentCtrl.text,
                           }
                       );}
+                      commentCtrl.clear();
                     },
                     icon: const Icon(
                       Icons.send,

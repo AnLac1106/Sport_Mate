@@ -170,8 +170,8 @@ class SPMRegisterPage extends GetView {
                                   width: 225,
                                   height: 48,
                                   onPress: () {
-                                    print(controller.userEmail);
-                                    print(controller.userPassWord);
+                                    // print(controller.userEmail);
+                                    // print(controller.userPassWord);
                                     showDialog(
                                         context: context,
                                         builder: (context) {
