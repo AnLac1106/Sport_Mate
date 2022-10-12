@@ -13,6 +13,7 @@ import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
 import 'package:sport_mate/spm_create_game_page.dart';
 import 'package:sport_mate/spm_friend_profile_page.dart';
 import 'package:sport_mate/spm_profile_page.dart';
+import 'package:sport_mate/spm_single_feed_page.dart';
 import 'function/post_api.dart';
 
 class NewFeedPageCtrl extends GetxController {
@@ -175,92 +176,103 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
               const SizedBox(
                 height: 8,
               ),
-              Container(
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => SPMSingleFeedPage(index));
+                  print("OnTap Clicked");
+                },
+                child: Column(
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Place: ${controller.getData['data'][index]['place']}',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'Time: ${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(controller.getData['data'][index]['time'] * 1000)).toString()}',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'Level: ${controller.getData['data'][index]['level']}',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          'Partner needed: ${controller.getData['data'][index]['partner needed']}',
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    SPMButton(
-                        width: 130,
-                        color: SPMColors.primaryColor,
-                        borderColor: SPMColors.primaryColor,
-                        onPress: () {
-                          Get.dialog(AlertDialog(
-                            title: const Text('Send request?'),
-                            content: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Text(
-                                  'Send request to this game?',
-                                  style: TextStyle(fontSize: 16),
-                                ),
-                              ],
-                            ),
-                            actionsAlignment: MainAxisAlignment.center,
-                            actions: [
-                              SPMButton(
-                                color: SPMColors.primaryColor,
-                                onPress: () {
-                                  Get.back();
-                                  Get.snackbar(
-                                    'Success!',
-                                    'Your request have been sent',
-                                    backgroundColor: Colors.orange.shade100,
-                                    snackPosition: SnackPosition.BOTTOM,
-                                    duration: const Duration(seconds: 2),
-                                  );
-                                },
-                                borderColor: SPMColors.primaryColor,
-                                child: const Text('OK'),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Place: ${controller.getData['data'][index]['place']}',
+                                style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
-                              SPMButton(
-                                color: Colors.white,
-                                onPress: () {
-                                  Get.back();
-                                },
-                                child: const Text('Cancel'),
+                              Text(
+                                'Time: ${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(controller.getData['data'][index]['time'] * 1000)).toString()}',
+                                style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'Level: ${controller.getData['data'][index]['level']}',
+                                style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'Partner needed: ${controller.getData['data'][index]['partner needed']}',
+                                style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],
-                          ));
-                        },
-                        child: Text(
-                          'Request game',
-                          style: Get.textTheme.bodyText1,
-                        )),
+                          ),
+                          SPMButton(
+                              width: 130,
+                              color: SPMColors.primaryColor,
+                              borderColor: SPMColors.primaryColor,
+                              onPress: () {
+                                Get.dialog(AlertDialog(
+                                  title: const Text('Send request?'),
+                                  content: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const [
+                                      Text(
+                                        'Send request to this game?',
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ],
+                                  ),
+                                  actionsAlignment: MainAxisAlignment.center,
+                                  actions: [
+                                    SPMButton(
+                                      color: SPMColors.primaryColor,
+                                      onPress: () {
+                                        Get.back();
+                                        Get.snackbar(
+                                          'Success!',
+                                          'Your request have been sent',
+                                          backgroundColor: Colors.orange.shade100,
+                                          snackPosition: SnackPosition.BOTTOM,
+                                          duration: const Duration(seconds: 2),
+                                        );
+                                      },
+                                      borderColor: SPMColors.primaryColor,
+                                      child: const Text('OK'),
+                                    ),
+                                    SPMButton(
+                                      color: Colors.white,
+                                      onPress: () {
+                                        Get.back();
+                                      },
+                                      child: const Text('Cancel'),
+                                    ),
+                                  ],
+                                ));
+                              },
+                              child: Text(
+                                'Request game',
+                                style: Get.textTheme.bodyText1,
+                              )),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        '${controller.getData['data'][index]['last_message']}',
+                      ),
+                    ),
                   ],
                 ),
               ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  '${controller.getData['data'][index]['last_message']}',
-                ),
-              ),
+
               PhotoBuilder(controller.getData['data'][index]['photos']),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -356,19 +368,17 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                     Expanded(
                       child: RawMaterialButton(
                         onPressed: () {
-                          // Get.bottomSheet(
-                          //   SPMComment(
-                          //       // itemCount: controller
-                          //       //     .getData['data'][index]['comment'].length,
-                          //       index: index),
-                          //   shape: const RoundedRectangleBorder(
-                          //       borderRadius: BorderRadius.vertical(
-                          //           top: Radius.circular(10))),
-                          //   backgroundColor: Colors.white,
-                          //   // barrierColor: Colors.blue.withOpacity(0.2),
-                          //   isScrollControlled: true,
-                          //   enableDrag: true,
-                          // );
+                          Get.bottomSheet(
+                            SPMComment(
+                              // itemCount: commentList.length,
+                                index: index),
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(10))),
+                            backgroundColor: Colors.white,
+                            isScrollControlled: true,
+                            enableDrag: true,
+                          );
                           // showBarModalBottomSheet(
                           //   context: Get.context!,
                           //   builder: (context) =>

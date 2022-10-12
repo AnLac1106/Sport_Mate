@@ -89,6 +89,7 @@ class SPMComment extends GetView {
                     padding: const EdgeInsets.all(0),
                     onPressed: () {
                       if (commentCtrl.text.isNotEmpty) {
+<<<<<<< HEAD
                         commentList.add({
                           "user_name": "Nguyễn Đức Thiện",
                           "user_avatar":
@@ -97,6 +98,17 @@ class SPMComment extends GetView {
                           "user_comment": commentCtrl.text,
                         });
                       }
+=======
+                      commentList.add(
+                          {
+                            "user_name": "Nguyễn Đức Thiện",
+                            "user_avatar":
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT2_RbVnuIvAJqyqo-GNU1UTme6kgsVAMhNNALhakpCcpI3IQIohRKMfe4XhmBJA-VxE8&usqp=CAU",
+                            "create_at": DateTime.now().millisecondsSinceEpoch,
+                            "user_comment": commentCtrl.text,
+                          }
+                      );}
+>>>>>>> b2f14c56cbae52bb4c8e035a3b9f35f3be2708b6
                       commentCtrl.clear();
                     },
                     icon: const Icon(
