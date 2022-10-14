@@ -47,7 +47,6 @@ class SPMNotificationPage extends GetView {
             style: TextStyle(color: SPMColors.primaryColor),
           ),
           centerTitle: true,
-          // leading: const Icon(Icons.arrow_back_ios_new),
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
             IconButton(onPressed: () {}, icon: const Icon(Icons.logout)),
@@ -75,15 +74,9 @@ class SPMNotificationPage extends GetView {
     return Column(
       children: [
         Slidable(
-          // key: const ValueKey(1),
-          // groupTag: 1,
           endActionPane: ActionPane(
             extentRatio: 0.3,
             motion: const ScrollMotion(),
-            // dismissible: DismissiblePane(onDismissed: () {
-            //   // controller.list.removeAt(index);
-            //   print(controller.list);
-            // }),
             children: [
               SlidableAction(
                 onPressed: (BuildContext context) {
