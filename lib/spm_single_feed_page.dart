@@ -28,6 +28,7 @@ class SPMSingleFeedPage extends GetView<NewFeedPageCtrl> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: SPMColors.secondaryColor,
         title: SizedBox(
           width: Get.width * 0.8,
           child: Text(

@@ -1,21 +1,21 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sport_mate/common/hide_keyboard.dart';
 import 'package:sport_mate/common/spm_avatar_box.dart';
 import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
+import 'package:sport_mate/common/spm_select_button.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
 import 'package:sport_mate/common/spm_text_style.dart';
+import 'package:sport_mate/spm_create_game_page.dart';
+import 'package:sport_mate/spm_newfeed_page.dart';
 import 'package:sport_mate/spm_profile_page.dart';
 import 'package:sport_mate/spm_register_page.dart';
 import 'package:sport_mate/transition/scale_route.dart';
 
 class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
   const SPMUpdateInfor({Key? key}) : super(key: key);
-
-  // @override
-  // RegisterPageCtrl get controller =>
-  //     Get.put<RegisterPageCtrl>(RegisterPageCtrl());
 
   @override
   Widget build(BuildContext context) {
@@ -129,116 +129,86 @@ class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
                             ),
                             const SizedBox(height: 32),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SPMButton(
-                                    color: SPMColors.primaryColor,
-                                    onPress: () {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                          title: Text('Success!'.toUpperCase(),
-                                              style: textStyleHeading4),
-                                          content: SizedBox(
-                                            height: 50,
-                                            child: Column(
-                                              children: const [
-                                                Text(
-                                                    "Your profile have been saved!"),
-                                                SizedBox(
-                                                  height: 10,
-                                                ),
-                                                Text(
-                                                    "Tap 'OK' to return to Profile Page",
-                                                    style: textStyleNormal),
-                                              ],
-                                            ),
-                                          ),
-                                          actions: [
-                                            SPMButton(
-                                              color: SPMColors.secondaryColor,
-                                              child: const Text('OK'),
-                                              onPress: () {
-                                                Navigator.pushAndRemoveUntil(
-                                                    context,
-                                                    ScaleRoute(
-                                                        page:
-                                                            const SPMProfilePage()),
-                                                    (route) => false);
-                                                Get.back();
-                                              },
-                                            ),
-                                            SPMButton(
-                                              color: Colors.white,
-                                              child: const Text('Cancel'),
-                                              onPress: () {
-                                                Navigator.pop(context);
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                    child: const Text(
-                                      'Save',
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                      ),
-                                    )),
-                                SPMButton(
-                                    color: Colors.white,
-                                    onPress: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('Cancel'))
-                                /*SPMButton(
-                                  borderRadius: 20,
-                                  color: SPMColors.secondaryColor,
-                                  // text: 'Register',
-                                  textColor: Colors.white,
-                                  width: 225,
-                                  height: 48,
-                                  onPress: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: Text('Success!'.toUpperCase(),
-                                            style: textStyleHeading4),
-                                        content: SizedBox(
-                                          height: 50,
-                                          child: Column(
-                                            children: const [
-                                              Text(
-                                                  "Your account have been created!"),
-                                              SizedBox(
-                                                height: 10,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  SPMButton(
+                                      width: 100,
+                                      height: 50,
+                                      color: SPMColors.primaryColor,
+                                      onPress: () {},
+                                      child: TextButton(
+                                        onPressed: () {
+                                          Get.dialog(AlertDialog(
+                                            title: const Text(
+                                                'Do you want to update your profile?'),
+                                            actionsAlignment:
+                                                MainAxisAlignment.center,
+                                            actions: [
+                                              SPMButton(
+                                                color: SPMColors.primaryColor,
+                                                onPress: () {
+                                                  Navigator.pushAndRemoveUntil(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              const SPMProfilePage()),
+                                                      (route) => false);
+                                                  Get.back();
+                                                  Get.snackbar(
+                                                    'Success!',
+                                                    'Your profile have been saved!',
+                                                    backgroundColor:
+                                                        Colors.orange.shade100,
+                                                    snackPosition:
+                                                        SnackPosition.BOTTOM,
+                                                    duration: const Duration(
+                                                        seconds: 2),
+                                                  );
+                                                },
+                                                borderColor:
+                                                    SPMColors.primaryColor,
+                                                child: const Text('OK'),
                                               ),
-                                              Text(
-                                                  "Tap 'OK' to return to Login Page",
-                                                  style: textStyleNormal),
+                                              SPMButton(
+                                                color: Colors.white,
+                                                onPress: () {
+                                                  Get.back();
+                                                },
+                                                child: const Text('Cancel'),
+                                              ),
                                             ],
-                                          ),
-                                        ),
-                                        actions: [
-                                          SPMButton(
-                                            color: SPMColors.secondaryColor,
-                                            child: const Text('OK'),
-                                            // text: 'OK',
-                                            onPress: () {
-                                              Get.offAll(
-                                                  SPMWelcomePage());
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  child: const Text('Register'),
-                                ), */
-                              ],
-                            ),
+                                          ));
+                                        },
+                                        child: const Text('Save',
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white)),
+                                      )),
+                                  SPMButton(
+                                      width: 100,
+                                      height: 50,
+                                      color: Colors.white,
+                                      onPress: () {},
+                                      child: TextButton(
+                                        onPressed: () {
+                                          debugPrint('Back to Update Infor');
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('Cancel',
+                                            style: TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black)),
+                                      )),
+                                ]),
                             const Expanded(
-                              child: SizedBox(),
+                              child: SizedBox(
+                                width: 20,
+                                height: 20,
+                              ),
                             ),
                           ],
                         ),
