@@ -434,10 +434,10 @@ class SPMSingleFeedPage extends GetView<NewFeedPageCtrl> {
             ],
           ),
         ),
-        Container(
-          color: const Color(0xffe9e6e0),
-          height: 5,
-        ),
+        // Container(
+        //   color: const Color(0xffe9e6e0),
+        //   height: 5,
+        // ),
       ],
     );
   }
