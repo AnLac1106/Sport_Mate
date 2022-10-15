@@ -16,13 +16,8 @@ class SPMOnBoardingPageState extends State<SPMOnBoardingPage> {
   final introKey = GlobalKey<IntroductionScreenState>();
 
   void _onIntroEnd(context) {
-    // Navigator.of(context).push(
-    //   MaterialPageRoute(builder: (_) => const SPMWelcomePage()),
-    // );
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(builder: (_) => SPMWelcomePage()),
-        (route) => false);
+    Navigator.pushAndRemoveUntil(context,
+        MaterialPageRoute(builder: (_) => SPMWelcomePage()), (route) => false);
   }
 
   Widget _buildFullscreenImage(String assetName) {
@@ -85,12 +80,6 @@ class SPMOnBoardingPageState extends State<SPMOnBoardingPage> {
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
       ),
-      // dotsContainerDecorator: const ShapeDecoration(
-      //   color: Colors.transparent,
-      //   shape: RoundedRectangleBorder(
-      //     borderRadius: BorderRadius.all(Radius.circular(8.0)),
-      //   ),
-      // ),
     );
   }
 }

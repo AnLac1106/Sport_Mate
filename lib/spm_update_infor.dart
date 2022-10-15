@@ -4,21 +4,18 @@ import 'package:sport_mate/common/hide_keyboard.dart';
 import 'package:sport_mate/common/spm_avatar_box.dart';
 import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
-import 'package:sport_mate/common/spm_select_box.dart';
-import 'package:sport_mate/common/spm_select_button.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
 import 'package:sport_mate/common/spm_text_style.dart';
 import 'package:sport_mate/spm_profile_page.dart';
 import 'package:sport_mate/spm_register_page.dart';
-import 'package:sport_mate/spm_welcome_page.dart';
 import 'package:sport_mate/transition/scale_route.dart';
 
 class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
   const SPMUpdateInfor({Key? key}) : super(key: key);
 
-  @override
-  RegisterPageCtrl get controller =>
-      Get.put<RegisterPageCtrl>(RegisterPageCtrl());
+  // @override
+  // RegisterPageCtrl get controller =>
+  //     Get.put<RegisterPageCtrl>(RegisterPageCtrl());
 
   @override
   Widget build(BuildContext context) {
@@ -168,13 +165,14 @@ class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
                                                         page:
                                                             const SPMProfilePage()),
                                                     (route) => false);
+                                                Get.back();
                                               },
                                             ),
                                             SPMButton(
                                               color: Colors.white,
                                               child: const Text('Cancel'),
                                               onPress: () {
-                                                Get.back();
+                                                Navigator.pop(context);
                                               },
                                             ),
                                           ],
@@ -192,7 +190,7 @@ class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
                                     onPress: () {
                                       Navigator.pop(context);
                                     },
-                                    child: Text('Cancel'))
+                                    child: const Text('Cancel'))
                                 /*SPMButton(
                                   borderRadius: 20,
                                   color: SPMColors.secondaryColor,

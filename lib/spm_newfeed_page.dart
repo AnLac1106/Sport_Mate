@@ -2,14 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:sport_mate/common/spm_avatar_box.dart';
 import 'package:sport_mate/common/spm_button.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/function/photo_builder.dart';
 import 'package:sport_mate/function/spm_comment.dart';
 import 'package:sport_mate/function/spm_shimmer.dart';
-import 'package:sport_mate/spm_create_game_detail/spm_create_game_detail.dart';
 import 'package:sport_mate/spm_create_game_page.dart';
 import 'package:sport_mate/spm_friend_profile_page.dart';
 import 'package:sport_mate/spm_profile_page.dart';
@@ -29,6 +26,7 @@ class NewFeedPageCtrl extends GetxController {
     }
     isLoading(false);
   }
+
   @override
   void onInit() {
     callAPI();
@@ -179,7 +177,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
               GestureDetector(
                 onTap: () {
                   Get.to(() => SPMSingleFeedPage(index));
-                  print("OnTap Clicked");
+                  debugPrint("OnTap Clicked");
                 },
                 child: Column(
                   children: [
@@ -195,19 +193,23 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                             children: [
                               Text(
                                 'Place: ${controller.getData['data'][index]['place']}',
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 'Time: ${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(controller.getData['data'][index]['time'] * 1000)).toString()}',
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 'Level: ${controller.getData['data'][index]['level']}',
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                               Text(
                                 'Partner needed: ${controller.getData['data'][index]['partner needed']}',
-                                style: const TextStyle(fontWeight: FontWeight.bold),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
@@ -236,7 +238,8 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                                         Get.snackbar(
                                           'Success!',
                                           'Your request have been sent',
-                                          backgroundColor: Colors.orange.shade100,
+                                          backgroundColor:
+                                              Colors.orange.shade100,
                                           snackPosition: SnackPosition.BOTTOM,
                                           duration: const Duration(seconds: 2),
                                         );
@@ -262,8 +265,8 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                       ),
                     ),
                     Container(
-                      padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 8),
                       alignment: Alignment.centerLeft,
                       child: Text(
                         '${controller.getData['data'][index]['last_message']}',
@@ -272,7 +275,6 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                   ],
                 ),
               ),
-
               PhotoBuilder(controller.getData['data'][index]['photos']),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -288,36 +290,24 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                     ),
                     const Expanded(child: SizedBox()),
                     TextButton(
-                      onPressed: () {
-                        // showBarModalBottomSheet(
-                        //   context: Get.context!,
-                        //   builder: (context) => SizedBox(
-                        //       height: 700,
-                        //       child: SPMComment(
-                        //           itemCount: controller
-                        //               .getData['data'][index]['comment'].length,
-                        //           index: index)),
-                        //   shape: const RoundedRectangleBorder(
-                        //       borderRadius: BorderRadius.vertical(
-                        //           top: Radius.circular(10))),
-                        //   bounce: true,
-                        // );
-                        Get.bottomSheet(
-                          SPMComment(
-                            // itemCount: commentList.length,
-                              index: index),
-                          shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(10))),
-                          backgroundColor: Colors.white,
-                          isScrollControlled: true,
-                          enableDrag: true,
-                        );
-                      },
-                      child: Obx(() => Text(
-                        '$commentCount comments',
-                      ),)
-                    ),
+                        onPressed: () {
+                          Get.bottomSheet(
+                            SPMComment(
+                                // itemCount: commentList.length,
+                                index: index),
+                            shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(10))),
+                            backgroundColor: Colors.white,
+                            isScrollControlled: true,
+                            enableDrag: true,
+                          );
+                        },
+                        child: Obx(
+                          () => Text(
+                            '$commentCount comments',
+                          ),
+                        )),
                   ],
                 ),
               ),
@@ -370,7 +360,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                         onPressed: () {
                           Get.bottomSheet(
                             SPMComment(
-                              // itemCount: commentList.length,
+                                // itemCount: commentList.length,
                                 index: index),
                             shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.vertical(
@@ -379,21 +369,6 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                             isScrollControlled: true,
                             enableDrag: true,
                           );
-                          // showBarModalBottomSheet(
-                          //   context: Get.context!,
-                          //   builder: (context) =>
-                          // SizedBox(
-                          //       // height: 700,
-                          // child: SPMComment(
-                          //     itemCount: controller
-                          //         .getData['data'][index]['comment']
-                          //         .length,
-                          //     index: index)),
-                          //   shape: const RoundedRectangleBorder(
-                          //       borderRadius: BorderRadius.vertical(
-                          //           top: Radius.circular(10))),
-                          //   bounce: true,
-                          // );
                         },
                         child: Column(
                           children: const [
@@ -407,7 +382,6 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
                     ),
                     Expanded(
                       child: RawMaterialButton(
-                        // alignment: Alignment.center,
                         onPressed: () {},
                         child: Column(
                           children: const [
@@ -496,13 +470,8 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
           height: 40,
           clipBehavior: Clip.hardEdge,
           decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: SPMColors.primaryColor //Color(0xffeff3f7),
-              // boxShadow: [
-              //   BoxShadow(color: boxShadowColor, spreadRadius: spreadRadius)
-              // ],
-              // image: DecorationImage(image: image, fit: BoxFit.cover),
-              ),
+            shape: BoxShape.circle,
+          ),
           child: IconButton(
               onPressed: () {
                 Navigator.push(

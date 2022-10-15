@@ -3,10 +3,7 @@ import 'package:get/get.dart';
 import 'package:sport_mate/common/hide_keyboard.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
-import 'package:sport_mate/common/spm_text_style.dart';
-
 import 'package:sport_mate/spm_welcome_page.dart';
-
 import 'common/spm_button.dart';
 
 class RegisterPageCtrl extends GetxController {
@@ -25,7 +22,8 @@ class SPMRegisterPage extends GetView {
   SPMRegisterPage({Key? key}) : super(key: key);
 
   @override
-  RegisterPageCtrl get controller => Get.put(RegisterPageCtrl(), permanent: true);
+  RegisterPageCtrl get controller =>
+      Get.put(RegisterPageCtrl(), permanent: true);
 
   final TextEditingController emailTextController = TextEditingController();
 
@@ -80,7 +78,12 @@ class SPMRegisterPage extends GetView {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: const [
-                                Text('Register!',style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),),
+                                Text(
+                                  'Register!',
+                                  style: TextStyle(
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ],
                             ),
                             const SizedBox(
@@ -88,7 +91,8 @@ class SPMRegisterPage extends GetView {
                             ),
                             Row(
                               children: const [
-                                Text('Please select the appropriate',style: TextStyle(fontSize: 18))
+                                Text('Please select the appropriate',
+                                    style: TextStyle(fontSize: 18))
                               ],
                             ),
                             const SizedBox(
@@ -175,7 +179,8 @@ class SPMRegisterPage extends GetView {
                                     showDialog(
                                         context: context,
                                         builder: (context) {
-                                          if (emailTextController.text.isEmpty ||
+                                          if (emailTextController
+                                                  .text.isEmpty ||
                                               (controller
                                                       .userPassWord.isEmpty &&
                                                   controller.userRepeatPassWord
@@ -251,15 +256,17 @@ class SPMRegisterPage extends GetView {
                                                 color: SPMColors.secondaryColor,
                                                 child: const Text('OK'),
                                                 onPress: () {
-                                                  Get.offAll(
-                                                      SPMWelcomePage());
+                                                  Get.offAll(SPMWelcomePage());
                                                 },
                                               ),
                                             ],
                                           );
                                         });
                                   },
-                                  child: const Text('Register', style: TextStyle(fontSize: 18),),
+                                  child: const Text(
+                                    'Register',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
                                 ),
                               ],
                             ),

@@ -3,12 +3,10 @@ import 'package:get/get.dart';
 import 'package:sport_mate/common/hide_keyboard.dart';
 import 'package:sport_mate/common/spm_colors.dart';
 import 'package:sport_mate/common/spm_text_field.dart';
-import 'package:sport_mate/common/spm_text_style.dart';
 import 'package:sport_mate/sm_navigatorbar.dart';
 import 'package:sport_mate/spm_register_page.dart';
 import 'package:sport_mate/transition/scale_route.dart';
 import 'common/spm_button.dart';
-
 
 class WelcomePageCtrl extends GetxController {
   RxBool isObscure = true.obs;
@@ -80,7 +78,12 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: const [
-                                Text('Welcome!', style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),)
+                                Text(
+                                  'Welcome!',
+                                  style: TextStyle(
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.bold),
+                                )
                               ],
                             ),
                             const SizedBox(
@@ -88,7 +91,10 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                             ),
                             Row(
                               children: const [
-                                Text('Please login with your information', style: TextStyle(fontSize: 18),)
+                                Text(
+                                  'Please login with your information',
+                                  style: TextStyle(fontSize: 18),
+                                )
                               ],
                             ),
                             const SizedBox(
@@ -101,12 +107,12 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                               labelText: 'Email Address',
                               suffixIcon: controller.f1.hasFocus
                                   ? IconButton(
-                                iconSize: 15,
-                                onPressed: () {
-                                  emailTextController.clear();
-                                },
-                                icon: const Icon(Icons.clear),
-                              )
+                                      iconSize: 15,
+                                      onPressed: () {
+                                        emailTextController.clear();
+                                      },
+                                      icon: const Icon(Icons.clear),
+                                    )
                                   : null,
                             ),
                             const SizedBox(
@@ -114,7 +120,7 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                             ),
                             Obx(
                               () => SPMTextField(
-                                controller: passwordTextController,
+                                  controller: passwordTextController,
                                   maxLine: 1,
                                   obscureText: controller.isObscure.value,
                                   labelText: 'Password',
@@ -200,7 +206,10 @@ class SPMWelcomePage extends GetView<WelcomePageCtrl> {
                                           });
                                     }
                                   },
-                                  child: const Text('Login',style: TextStyle(fontSize: 18),),
+                                  child: const Text(
+                                    'Login',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
                                 ),
                               ],
                             ),
