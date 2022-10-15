@@ -4,11 +4,12 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:sport_mate/common/spm_avatar_box.dart';
 import 'package:sport_mate/function/spm_shimmer_notification.dart';
+import 'package:sport_mate/spm_newfeed_page.dart';
+import 'package:sport_mate/spm_single_feed_page.dart';
 import 'function/post_api.dart';
 import 'common/spm_colors.dart';
 
 class SPMNotificationPageCtrl extends GetxController {
-  RxList list = ['a', 'b', 'c'].obs;
   RxList notificationData = [].obs;
   RxBool isLoading = true.obs;
 
@@ -49,7 +50,6 @@ class SPMNotificationPage extends GetView {
           centerTitle: true,
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.settings)),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.logout)),
           ],
         ),
         body: Obx(() {
@@ -73,94 +73,100 @@ class SPMNotificationPage extends GetView {
   Widget buildNotificationItem(index) {
     return Column(
       children: [
-        Slidable(
-          endActionPane: ActionPane(
-            extentRatio: 0.3,
-            motion: const ScrollMotion(),
-            children: [
-              SlidableAction(
-                onPressed: (BuildContext context) {
-                  controller.notificationData.removeAt(index);
-                  DismissiblePane(onDismissed: () {});
-                },
-                icon: Icons.delete,
-                label: 'Delete',
-                backgroundColor: SPMColors.primaryColor,
-              )
-            ],
-          ),
-          child: Stack(
-            children: [
-              Container(
-                alignment: Alignment.center,
-                width: Get.width,
-                height: 66,
-                decoration: BoxDecoration(
-                  color: const Color(0xffEBEBEB),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    SPMAvatarBox(
-                      diameter: 52,
-                      image: NetworkImage(
-                          controller.notificationData[index]['uer_avatar']),
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              text:
-                                  '${controller.notificationData[index]['user_name']} ',
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                              children: <TextSpan>[
-                                TextSpan(
-                                  text:
-                                      '${controller.notificationData[index]['action']}',
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.normal),
-                                ),
-                                const TextSpan(
-                                  text: ' on your post.',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.normal),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                        ],
+        InkWell(
+          onTap: () {
+            Get.to(const SPMSingleFeedPage(1));
+          },
+          child: Slidable(
+            endActionPane: ActionPane(
+              extentRatio: 0.3,
+              motion: const ScrollMotion(),
+              children: [
+                SlidableAction(
+                  onPressed: (BuildContext context) {
+
+                    controller.notificationData.removeAt(index);
+                    DismissiblePane(onDismissed: () {});
+                  },
+                  icon: Icons.delete,
+                  label: 'Delete',
+                  backgroundColor: SPMColors.primaryColor,
+                )
+              ],
+            ),
+            child: Stack(
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  width: Get.width,
+                  height: 66,
+                  decoration: BoxDecoration(
+                    color: const Color(0xffEBEBEB),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Row(
+                    children: [
+                      const SizedBox(
+                        width: 12,
                       ),
-                    )
-                  ],
+                      SPMAvatarBox(
+                        diameter: 52,
+                        image: NetworkImage(
+                            controller.notificationData[index]['uer_avatar']),
+                      ),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                text:
+                                    '${controller.notificationData[index]['user_name']} ',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text:
+                                        '${controller.notificationData[index]['action']}',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.normal),
+                                  ),
+                                  const TextSpan(
+                                    text: ' on your post.',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.normal),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 15,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              Positioned(
-                bottom: 5,
-                right: 5,
-                child: Text(
-                  DateFormat('dd/MM/yyyy, HH:mm')
-                      .format(DateTime.fromMillisecondsSinceEpoch(
-                          controller.notificationData[index]['action_time'] *
-                              1000))
-                      .toString(),
-                  style: const TextStyle(fontSize: 12),
-                ),
-              )
-            ],
+                Positioned(
+                  bottom: 5,
+                  right: 5,
+                  child: Text(
+                    DateFormat('dd/MM/yyyy, HH:mm')
+                        .format(DateTime.fromMillisecondsSinceEpoch(
+                            controller.notificationData[index]['action_time'] *
+                                1000))
+                        .toString(),
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         const SizedBox(

@@ -430,7 +430,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: AssetImage('assets/images/spm_test_avatar.png'),
+                image: NetworkImage('http://thuvienhinhanh.net/wp-content/uploads/2016/05/anh-avatar-dep-den-chat-cap-cho-facebook-tuong-doc-dao-nhat3.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -471,6 +471,7 @@ class SPMNewFeedPage extends GetView<NewFeedPageCtrl> {
           clipBehavior: Clip.hardEdge,
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
+              color: SPMColors.primaryColor
           ),
           child: IconButton(
               onPressed: () {

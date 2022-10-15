@@ -65,7 +65,8 @@ class SPMProfilePage extends GetView<SPMProfilePageCtrl> {
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
-                                image: AssetImage('assets/images/avatar1.jpg'),
+                                image: NetworkImage(
+                                    'http://thuvienhinhanh.net/wp-content/uploads/2016/05/anh-avatar-dep-den-chat-cap-cho-facebook-tuong-doc-dao-nhat3.jpg'),
                                 fit: BoxFit.cover,
                               ),
                             ),

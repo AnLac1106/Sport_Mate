@@ -69,7 +69,7 @@ class SPMComment extends GetView {
               children: [
                 const SPMAvatarBox(
                     diameter: 32,
-                    image: AssetImage('assets/images/spm_test_avatar.png')),
+                    image: NetworkImage('http://thuvienhinhanh.net/wp-content/uploads/2016/05/anh-avatar-dep-den-chat-cap-cho-facebook-tuong-doc-dao-nhat3.jpg')),
                 const SizedBox(
                   width: 8,
                 ),
@@ -92,7 +92,7 @@ class SPMComment extends GetView {
                         commentList.add({
                           "user_name": "Nguyễn Đức Thiện",
                           "user_avatar":
-                              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT2_RbVnuIvAJqyqo-GNU1UTme6kgsVAMhNNALhakpCcpI3IQIohRKMfe4XhmBJA-VxE8&usqp=CAU",
+                              "http://thuvienhinhanh.net/wp-content/uploads/2016/05/anh-avatar-dep-den-chat-cap-cho-facebook-tuong-doc-dao-nhat3.jpg",
                           "create_at": DateTime.now().millisecondsSinceEpoch,
                           "user_comment": commentCtrl.text,
                         });

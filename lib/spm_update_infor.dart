@@ -39,7 +39,7 @@ class SPMUpdateInfor extends GetView<RegisterPageCtrl> {
                         SPMAvatarBox(
                             diameter: 100,
                             image: NetworkImage(
-                                'https://previews.123rf.com/images/deniskot/deniskot1208/deniskot120800040/14747331-login-button-on-keyboard-with-soft-focus.jpg')),
+                                'http://thuvienhinhanh.net/wp-content/uploads/2016/05/anh-avatar-dep-den-chat-cap-cho-facebook-tuong-doc-dao-nhat3.jpg')),
                         Positioned(
                           right: 0,
                           bottom: 0,
